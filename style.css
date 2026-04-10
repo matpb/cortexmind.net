@@ -170,19 +170,44 @@ main {
 }
 
 /* CTA */
-.badge {
+.cta-button {
   display: inline-block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid var(--accent-dim);
-  padding: 0.5rem 1.5rem;
+  color: var(--bg);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.85rem 2rem;
   border-radius: 100px;
-  background: var(--accent-dim);
-  box-shadow: 0 0 30px rgba(110, 231, 183, 0.1);
+  text-decoration: none;
+  box-shadow: 0 0 40px rgba(110, 231, 183, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.cta-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 60px rgba(110, 231, 183, 0.5);
+  background: #8af0c7;
+}
+
+.cta-fallback {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cta-fallback a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent-dim);
+}
+
+.cta-fallback a:hover {
+  border-bottom-color: var(--accent);
 }
 
 /* Features */
