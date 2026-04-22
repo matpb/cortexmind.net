@@ -53,9 +53,10 @@ header {
 }
 
 .logo-icon {
-  font-size: 1.5rem;
-  color: var(--accent);
-  filter: drop-shadow(0 0 8px var(--accent-glow));
+  width: 32px;
+  height: 32px;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(255, 176, 59, 0.45));
 }
 
 .logo-text {
