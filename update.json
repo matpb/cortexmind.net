@@ -14,6 +14,10 @@
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUMzZIQmY4UnQ5YXAvaStFa0hiUUQ4eEpGeXN0WTQ0eC8zT0hjUFZ5Nk5oZFUvQ0UydlZqbnlKcnEwVUN5azVlSFlJVzJNV0FuOG5kNHlpN2kwSmE0QkN0QU5ORzBtR0FjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2ODI3NjQ1CWZpbGU6Q29ydGV4TWluZF8xLjIuMV94NjQtc2V0dXAuZXhlCjVCS2JHT3Bubmd0a0FTMWNYVFYzdE14Z2xZdFh2UmIrVmIxT3duZFdpNGUyNWxsRnlWU280R2dFYVlZRlVGeXF4NEMrNkc4NDZYYXpmd2F2ZU8zSkN3PT0K",
       "url": "https://github.com/matpb/cortexmind.net/releases/download/v1.2.1/CortexMind_1.2.1_x64-setup.exe"
+    },
+    "linux-x86_64-deb": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUMzZIQmY4UnQ5YWtmckVXYlZSTGdVaUF6NWF2c2k4bC9KOVBnUU9jRHExZnNMcFNnV3liNWVhb3B0NytIZ2REenNsT29xdEtIRUJodTkybWNVS0pmL0UrdGdMdnRjdkFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2ODI3NjQyCWZpbGU6Q29ydGV4TWluZF8xLjIuMV9hbWQ2NC5kZWIKdHdON2RvSXlDSENTM1QyVFAwWER2UDB5WDdQM0dacm1ENi9PRkY4ZXplZzlEZGhNMmU4dEVEa3NXYlhvdy90cTcyc2UxNCs1SEUrZ2ttd2tSSUZHQ2c9PQo=",
+      "url": "https://github.com/matpb/cortexmind.net/releases/download/v1.2.1/CortexMind_1.2.1_amd64.deb"
     }
   }
 }
