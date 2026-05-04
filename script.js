@@ -460,3 +460,16 @@ setTimeout(() => {
   emitMemory();
   scheduleNextMemory();
 }, 600);
+
+// === PLATFORM DETECT — highlight the matching download button ===
+(function detectPlatform() {
+  const ua = (navigator.userAgent || '').toLowerCase();
+  let platform = null;
+  if (ua.includes('mac')) platform = 'mac';
+  else if (ua.includes('win')) platform = 'windows';
+  else if (ua.includes('linux') || ua.includes('x11')) platform = 'linux';
+  if (!platform) return;
+  document.querySelectorAll('.platform-cta[data-platform="' + platform + '"]').forEach(el => {
+    el.classList.add('platform-cta--detected');
+  });
+})();

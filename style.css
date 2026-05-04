@@ -211,6 +211,101 @@ main {
   border-bottom-color: var(--accent);
 }
 
+/* Per-platform downloads */
+.downloads {
+  margin-top: 2.25rem;
+}
+
+.downloads-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+}
+
+.platform-downloads {
+  display: flex;
+  gap: 0.65rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.platform-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.1rem;
+  text-align: left;
+  min-width: 200px;
+  flex: 1 1 200px;
+  max-width: 220px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.platform-cta:hover {
+  border-color: var(--accent-dim);
+  background: rgba(110, 231, 183, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(110, 231, 183, 0.08);
+}
+
+.platform-cta svg {
+  flex-shrink: 0;
+  color: var(--accent);
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+
+.platform-cta .platform-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.platform-cta .platform-name {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.platform-cta .platform-arch {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.platform-cta--detected {
+  border-color: var(--accent);
+  background: rgba(110, 231, 183, 0.06);
+  box-shadow: 0 0 30px rgba(110, 231, 183, 0.15);
+}
+
+.downloads-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 1rem;
+}
+
+.downloads-meta a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent-dim);
+}
+
+.downloads-meta a:hover {
+  border-bottom-color: var(--accent);
+}
+
 /* Features */
 .features {
   display: grid;
@@ -301,5 +396,11 @@ footer {
   .memory-fragment {
     font-size: 0.6rem;
     padding: 0.2rem 0.4rem;
+  }
+
+  .platform-cta {
+    min-width: 0;
+    max-width: none;
+    flex: 1 1 100%;
   }
 }
