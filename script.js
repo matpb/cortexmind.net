@@ -402,21 +402,21 @@ requestAnimationFrame(animateClock);
 // === MEMORY STREAM — fragments triggered by the clock ===
 const clockContainer = document.querySelector('.clock-container');
 const memories = [
-  'entity:user_preference → consolidated',
-  'episode #847,203 → semantic fact',
-  'agent:cortex → heartbeat received',
-  'knowledge graph: +127 new edges',
-  'overseer: triage batch #12,408 complete',
-  'colony: 2.4M episodes indexed',
-  'consolidation: 18,741 facts extracted',
-  'entity:project_alpha → 342 links resolved',
-  'cross-agent synthesis → 89 agents synchronized',
-  'semantic search: 0.97 relevance @ 4ms',
-  'vector index: 1.2M embeddings hot',
-  'graph traversal: 6 hops, 23 entities',
-  'memory consolidation cycle #9,847',
-  'agent:sentinel → 412 new observations',
-  'entity merge: 3 duplicates resolved',
+  'memory_search → 0.92 score @ 18ms',
+  'memory_save → episode #847,203',
+  'agent:cortex → heartbeat ok',
+  'jina-v3 → 1024-d embedding',
+  'rerank: bge-v2-m3 → top-5 @ 22ms',
+  'memory.db → 2.4M episodes indexed',
+  'fts5 + dense → rrf merge',
+  'memory_save_fact → confidence 0.95',
+  'mcp call: memory_recall',
+  'sqlite-vec: 1.2M vectors hot',
+  'embedding worker → tick #9,847',
+  'license heartbeat → 72h grace',
+  'memory_get → episode hydrated',
+  'memory_status → all green',
+  'late-chunked: 12 passages → 1 record',
 ];
 
 let memoryIndex = 0;
