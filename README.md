@@ -14,7 +14,7 @@ It's an MCP server exposing six clean tools (`memory_save`, `memory_save_fact`, 
 
 No LLM in the write path. Your memory never leaves your machine.
 
-- **Source:** [matpb/cortex](https://github.com/matpb/cortex) (proprietary)
+- **Source:** [matpb/cortexmind](https://github.com/matpb/cortexmind) (proprietary)
 - **Downloads:** [latest release](https://github.com/matpb/cortexmind.net/releases/latest)
 - **License:** request one at [info@cortexmind.net](mailto:info@cortexmind.net)
 
