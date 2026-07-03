@@ -1,0 +1,24 @@
+# Local-dev environment variables for `wrangler pages dev`.
+# Copy this file to `.dev.vars` (which is gitignored) and fill in real
+# SANDBOX-mode values. NEVER commit real secrets. NEVER use live keys here.
+#
+#   cp .dev.vars.example .dev.vars
+#
+# The Pages Functions read these as context.env.<NAME>.
+
+# Polar organization access token — used by create-polar-checkout.js to create a
+# hosted checkout, and by get-license-key.js to verify the checkout and mint the
+# customer session that fetches the buyer's license key. Use a SANDBOX token for
+# local dev. Server-side only — never shipped to the browser, never committed.
+POLAR_ACCESS_TOKEN=polar_oat_REPLACE_ME
+
+# Comma-separated allowlist of Polar product UUIDs the checkout will accept:
+# CortexMind (Monthly) + CortexMind (Yearly). These MUST match the
+# data-product values on the buy buttons in index.html. If unset or empty,
+# create-polar-checkout.js rejects with "Checkout not configured".
+# Currently the 2 SANDBOX (MatPB Sandbox org) product UUIDs — swap for prod at go-live.
+POLAR_PRODUCT_IDS=80d839b2-264a-41df-963e-f679b723f6e4,cb0264ed-6079-4f91-845e-24a252eb3dc7
+
+# Polar API base URL. Optional — defaults to https://api.polar.sh (production).
+# For local dev / testing use the sandbox: https://sandbox-api.polar.sh
+POLAR_API_BASE=https://sandbox-api.polar.sh

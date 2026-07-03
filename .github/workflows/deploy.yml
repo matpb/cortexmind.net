@@ -1,30 +1,41 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
+# Deploy the site to Cloudflare Pages production on every push/merge to main.
+# Nothing else triggers a deploy (no PRs, no other branches).
+#
+# This replaced the GitHub Pages deploy in July 2026 (Polar-native licensing
+# migration, Phase 3): the site needs Pages Functions for checkout +
+# license-key delivery, which GitHub Pages can't run. NOTE: the desktop app's
+# auto-updater pulls update-v2.json from raw.githubusercontent.com, NOT from
+# this host — the hosting move does not touch the updater path.
 on:
   push:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    name: Deploy to Cloudflare Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@v5
+      - name: Strip non-public files from the deploy
+        # The CI checkout is ephemeral; remove internal docs/config so they are
+        # never served as public site assets. (Secrets like .dev.vars are
+        # gitignored and never in the repo to begin with.)
+        run: |
+          rm -rf .github
+          rm -f README.md .dev.vars.example .gitignore CNAME
+      - name: Publish
+        uses: cloudflare/wrangler-action@v3
         with:
-          path: .
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Production deploy (project's production branch is `main`).
+          command: pages deploy . --project-name=cortexmind-net --branch=main

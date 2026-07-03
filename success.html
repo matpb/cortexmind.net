@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Welcome to CortexMind</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="status-body">
+  <div class="overlay">
+    <header>
+      <div class="logo">
+        <a href="/" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none">
+          <img class="logo-icon" src="/logo.png" alt="CortexMind logo" width="32" height="32">
+          <span class="logo-text">CortexMind</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="status-main">
+      <div class="status-card">
+        <h1 class="status-title">Your agents are about to <span class="accent-text">remember</span>.</h1>
+        <p class="status-lead">
+          Payment received — thanks for backing local-first memory. Your
+          license key is below; paste it into the app and you're done.
+        </p>
+
+        <!-- Delivery state: pending → key / error. Filled by script. -->
+        <div id="keyPending" class="key-pending">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>Fetching your license key…</span>
+        </div>
+
+        <!-- Key + steps (revealed once the key is fetched). -->
+        <div id="keyView" hidden>
+          <div class="key-block">
+            <span class="key-label">Your license key</span>
+            <div class="key-row" id="keyRow">
+              <code class="key-value" id="keyValue">CMND-…</code>
+              <button class="key-copy" id="copyKey" type="button" aria-label="Copy license key">Copy</button>
+            </div>
+            <p class="key-note">
+              Keep it handy — you can always find it again in your
+              <a href="#" id="portalKeyLink">customer portal</a>.
+            </p>
+          </div>
+
+          <ol class="key-steps">
+            <li>
+              <strong>Download CortexMind</strong> for your platform:
+              <div class="step-downloads">
+                <a href="https://github.com/matpb/cortexmind.net/releases/download/v2.2.2/CortexMind_2.2.2_aarch64.dmg">macOS (Apple Silicon)</a>
+                <a href="https://github.com/matpb/cortexmind.net/releases/download/v2.2.2/CortexMind_2.2.2_x64-setup.exe">Windows (x64)</a>
+                <a href="https://github.com/matpb/cortexmind.net/releases/download/v2.2.2/CortexMind.AppImage">Linux (AppImage)</a>
+              </div>
+            </li>
+            <li>
+              <strong>Open the app</strong> and paste the license key above when
+              asked. That's the whole activation — the app validates it and
+              brings your hosted tunnel online automatically.
+            </li>
+            <li>
+              <strong>Connect your agents.</strong> The app's tray menu gives
+              you a ready-made MCP config snippet for Claude Code, Claude
+              Desktop, or claude.ai.
+            </li>
+          </ol>
+
+          <p class="key-note">
+            Manage or cancel your subscription anytime in your
+            <a href="#" id="portalManageLink">customer portal</a> — the link is
+            also in your receipt email. Your key keeps working until your
+            subscription ends.
+          </p>
+        </div>
+
+        <!-- Error / fallback. -->
+        <div id="keyError" hidden>
+          <p class="key-note" id="keyErrorMsg">
+            We couldn't fetch your license key automatically. It's waiting in
+            your <a href="https://polar.sh/matpb/portal/request">customer
+            portal</a> (sign in with your checkout email) — or reply to your
+            receipt email and we'll get you set up right away.
+          </p>
+        </div>
+
+        <p class="status-ref" id="sessionRef"></p>
+        <p class="status-back"><a href="/">&larr; Back to CortexMind</a></p>
+      </div>
+    </main>
+
+    <footer>
+      <p class="footer-text">&copy; 2026 <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a></p>
+    </footer>
+  </div>
+
+  <script>
+    /* Success-page license-key delivery.
+       1. Read checkout_id from the URL (Polar appends it on redirect).
+       2. POST it to /api/get-license-key. The Function verifies the checkout
+          succeeded with Polar and fetches the buyer's CMND- key
+          (customer-scoped) plus a billing-portal URL.
+       3. Render the key + steps, or poll briefly while Polar finishes issuing
+          the key (202 pending), or show the portal fallback. */
+    (function () {
+      'use strict';
+
+      var KEY_ENDPOINT = '/api/get-license-key';
+      var MAX_POLLS = 6;
+      var POLL_DELAY_MS = 3000;
+
+      var pendingEl = document.getElementById('keyPending');
+      var keyView = document.getElementById('keyView');
+      var keyValue = document.getElementById('keyValue');
+      var keyError = document.getElementById('keyError');
+      var keyErrorMsg = document.getElementById('keyErrorMsg');
+      var copyBtn = document.getElementById('copyKey');
+      var keyRow = document.getElementById('keyRow');
+      var sessionRef = document.getElementById('sessionRef');
+      var portalKeyLink = document.getElementById('portalKeyLink');
+      var portalManageLink = document.getElementById('portalManageLink');
+
+      var FALLBACK_PORTAL = 'https://polar.sh/matpb/portal/request';
+      if (portalKeyLink) portalKeyLink.href = FALLBACK_PORTAL;
+      if (portalManageLink) portalManageLink.href = FALLBACK_PORTAL;
+
+      var checkoutId = null;
+      try {
+        checkoutId = new URLSearchParams(window.location.search).get('checkout_id');
+      } catch (e) { checkoutId = null; }
+
+      if (checkoutId && sessionRef) {
+        sessionRef.textContent = 'Reference: ' + checkoutId;
+      }
+
+      function hidePending() {
+        if (!pendingEl) return;
+        pendingEl.hidden = true;
+        pendingEl.style.display = 'none';
+      }
+
+      function showError(msg) {
+        hidePending();
+        if (msg && keyErrorMsg) keyErrorMsg.textContent = msg;
+        if (keyError) keyError.hidden = false;
+      }
+
+      function showKey(data) {
+        hidePending();
+        if (keyValue) keyValue.textContent = data.key;
+        // The session-scoped portal URL lands the buyer straight in their
+        // portal (no email sign-in) — use it while it's fresh.
+        if (data.portal_url) {
+          if (portalKeyLink) portalKeyLink.href = data.portal_url;
+          if (portalManageLink) portalManageLink.href = data.portal_url;
+        }
+        if (keyView) keyView.hidden = false;
+      }
+
+      /* Copy with a real fallback and honest failure feedback. */
+      function flashCopy(text) {
+        if (!copyBtn) return;
+        var original = 'Copy';
+        copyBtn.textContent = text;
+        setTimeout(function () { copyBtn.textContent = original; }, 1600);
+      }
+      function legacyCopy(text) {
+        try {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch (e) { return false; }
+      }
+      function selectKey() {
+        try {
+          var r = document.createRange();
+          r.selectNodeContents(keyValue);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(r);
+        } catch (e) { /* no-op */ }
+      }
+      function copyKey() {
+        var text = keyValue ? keyValue.textContent.trim() : '';
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            flashCopy('Copied!');
+          }).catch(function () {
+            if (legacyCopy(text)) { flashCopy('Copied!'); }
+            else { flashCopy('Select + copy'); selectKey(); }
+          });
+        } else if (legacyCopy(text)) {
+          flashCopy('Copied!');
+        } else {
+          flashCopy('Select + copy');
+          selectKey();
+        }
+      }
+      if (copyBtn) copyBtn.addEventListener('click', copyKey);
+      if (keyRow) {
+        keyRow.style.cursor = 'pointer';
+        keyRow.addEventListener('click', function (e) {
+          if (e.target.closest('#copyKey')) return;
+          copyKey();
+        });
+      }
+
+      if (!checkoutId) {
+        showError('No checkout reference found. Your license key is in your customer portal — sign in with your checkout email.');
+        return;
+      }
+
+      var attempts = 0;
+      function fetchKey() {
+        attempts += 1;
+        fetch(KEY_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ checkout_id: checkoutId })
+        })
+          .then(function (r) {
+            return r.json().then(function (data) {
+              return { status: r.status, data: data || {} };
+            }).catch(function () {
+              return { status: r.status, data: {} };
+            });
+          })
+          .then(function (res) {
+            if (res.status === 200 && res.data.key) {
+              showKey(res.data);
+              return;
+            }
+            if ((res.status === 202 || res.data.pending) && attempts < MAX_POLLS) {
+              setTimeout(fetchKey, POLL_DELAY_MS);
+              return;
+            }
+            if (res.status === 202 || res.data.pending) {
+              showError('Your license key is still being issued. Refresh in a minute — it will also appear in your customer portal.');
+              return;
+            }
+            if (res.status === 410) {
+              showError('This checkout was not completed, so no license key was issued. If you believe you were charged, reply to your receipt email.');
+              return;
+            }
+            showError();
+          })
+          .catch(function () {
+            if (attempts < MAX_POLLS) {
+              setTimeout(fetchKey, POLL_DELAY_MS);
+            } else {
+              showError();
+            }
+          });
+      }
+
+      fetchKey();
+    })();
+  </script>
+</body>
+</html>

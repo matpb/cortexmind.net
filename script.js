@@ -473,3 +473,57 @@ setTimeout(() => {
     el.classList.add('platform-cta--detected');
   });
 })();
+
+// === POLAR CHECKOUT ===
+// Self-serve, email-only. A buy button POSTs just { product_id } to the Pages
+// Function, which creates a Polar.sh Checkout (Polar collects the email + card
+// and is Merchant of Record) and returns the hosted-checkout url. Polar then
+// auto-issues the CMND- license key on payment; the success page fetches and
+// shows it, and the buyer pastes it into the app.
+(function () {
+  'use strict';
+
+  var CHECKOUT_ENDPOINT = '/api/create-polar-checkout';
+
+  function startCheckout(btn, productId) {
+    var original = btn.textContent;
+    btn.setAttribute('aria-busy', 'true');
+    btn.textContent = 'Opening checkout…';
+
+    var restore = function () {
+      btn.removeAttribute('aria-busy');
+      btn.textContent = original;
+    };
+
+    fetch(CHECKOUT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ product_id: productId })
+    })
+      .then(function (r) {
+        return r.json().then(function (data) { return { ok: r.ok, data: data }; });
+      })
+      .then(function (res) {
+        if (res.ok && res.data && res.data.url) {
+          window.location.href = res.data.url;
+          return;
+        }
+        restore();
+        alert((res.data && (res.data.message || res.data.error)) || 'Could not start checkout. Please try again.');
+      })
+      .catch(function () {
+        restore();
+        alert('Could not start checkout. Please try again.');
+      });
+  }
+
+  document.querySelectorAll('.checkout-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.getAttribute('aria-busy')) return;
+      var card = btn.closest('.price-card');
+      var productId = card && card.dataset.product;
+      if (!productId) return;
+      startCheckout(btn, productId);
+    });
+  });
+})();

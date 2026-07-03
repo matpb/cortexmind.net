@@ -36,8 +36,33 @@
           Persistent, local-first memory your AI agents can actually find.
         </p>
         <div class="cta">
-          <a class="cta-button" href="mailto:info@cortexmind.net?subject=License%20Request&body=I%27d%20like%20to%20request%20a%20CortexMind%20license.">Request a License</a>
-          <p class="cta-fallback">Or email <a href="mailto:info@cortexmind.net">info@cortexmind.net</a> directly.</p>
+          <!-- =============================================================
+               POLAR PRODUCT IDS — SANDBOX (MatPB Sandbox org, afb1a423-…).
+               data-product holds the Polar product UUID; the same 2 UUIDs are
+               listed in the POLAR_PRODUCT_IDS env var (server-side allowlist
+               in /api/create-polar-checkout). Swap BOTH to the production
+               UUIDs (and real pricing) at Phase-4 go-live — they must stay
+               in sync.
+          ============================================================== -->
+          <div class="pricing" id="pricing">
+            <div class="price-card" data-product="80d839b2-264a-41df-963e-f679b723f6e4">
+              <div class="price-period">Monthly</div>
+              <div class="price-amount">$10<span class="price-unit">/mo</span></div>
+              <button class="cta-button checkout-btn" type="button">Get CortexMind</button>
+            </div>
+            <div class="price-card featured" data-product="cb0264ed-6079-4f91-845e-24a252eb3dc7">
+              <div class="price-period">Yearly <span class="price-pill">2 months free</span></div>
+              <div class="price-amount">$100<span class="price-unit">/yr</span></div>
+              <button class="cta-button checkout-btn" type="button">Get CortexMind</button>
+            </div>
+          </div>
+          <p class="cta-fallback">
+            One license, one machine, everything included — the bundled hosted
+            tunnel exposes your memory to claude.ai securely. Cancel anytime in
+            your <a href="https://polar.sh/matpb/portal/request">customer portal</a>,
+            where your license key also lives.
+            Questions? <a href="mailto:info@cortexmind.net">info@cortexmind.net</a>
+          </p>
 
           <div class="downloads">
             <p class="downloads-label">Already have a license? Download for your platform:</p>

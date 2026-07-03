@@ -1,0 +1,12 @@
+# Cloudflare Pages config for cortexmind.net.
+# NON-SECRET configuration only. NEVER put POLAR_ACCESS_TOKEN (or any secret)
+# here — secrets live in the Pages dashboard ("Encrypt") or are set with
+#   npx wrangler pages secret put POLAR_ACCESS_TOKEN --project-name cortexmind-net
+# and locally in .dev.vars (gitignored).
+
+name = "cortexmind-net"
+compatibility_date = "2024-11-01"
+
+# Static site served from the repo root (index.html lives at root).
+# Functions are auto-discovered from ./functions.
+pages_build_output_dir = "."

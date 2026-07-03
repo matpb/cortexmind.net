@@ -16,18 +16,40 @@ No LLM in the write path. Your memory never leaves your machine.
 
 - **Source:** [matpb/cortexmind](https://github.com/matpb/cortexmind) (proprietary)
 - **Downloads:** [latest release](https://github.com/matpb/cortexmind.net/releases/latest)
-- **License:** request one at [info@cortexmind.net](mailto:info@cortexmind.net)
+- **License:** buy on [cortexmind.net](https://cortexmind.net) — Polar.sh checkout, license key delivered on the success page
 
 ## This repo
 
-Static site for `cortexmind.net` — `index.html`, `style.css`, `script.js`. Served via GitHub Pages with a custom domain (`CNAME`). Also hosts the signed release artifacts and the auto-update manifest (`update-v2.json`) the desktop app polls.
+Site for `cortexmind.net` — `index.html`, `style.css`, `script.js`, plus two
+Cloudflare Pages Functions for the self-serve purchase flow:
+
+```
+functions/api/create-polar-checkout.js   POST /api/create-polar-checkout  (Polar.sh)
+functions/api/get-license-key.js         POST /api/get-license-key  ({checkout_id})
+success.html                             checkout redirect target — shows the CMND- key
+```
+
+Served via **Cloudflare Pages** (project `cortexmind-net`; deployed by the
+GitHub Action on push to `main`). Also hosts the signed release artifacts and
+the auto-update manifest (`update-v2.json`) the desktop app polls — note the
+updater pulls it from `raw.githubusercontent.com`, independent of the site
+host.
+
+Env vars (Pages project, never committed): `POLAR_ACCESS_TOKEN`,
+`POLAR_PRODUCT_IDS` (the 2 CortexMind product UUIDs, must match the
+`data-product` values in `index.html`), optional `POLAR_API_BASE`
+(sandbox: `https://sandbox-api.polar.sh`).
 
 ## Local preview
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+cp .dev.vars.example .dev.vars   # fill in sandbox values
+npx wrangler pages dev .
+# open http://localhost:8788 — static site + Functions
 ```
+
+(Plain `python3 -m http.server` still works for styling, but checkout will 404
+without the Functions runtime.)
 
 ## License
 

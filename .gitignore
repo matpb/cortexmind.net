@@ -1,0 +1,9 @@
+# Local dev secrets for `wrangler pages dev` — never committed.
+.dev.vars
+
+# wrangler cache/state
+.wrangler/
+
+# local tooling noise
+.dev-server.pid
+.dev-server.log
