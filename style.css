@@ -760,3 +760,11 @@ footer {
     padding: 1.5rem;
   }
 }
+
+.requirements-note {
+  margin: 0.85rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  opacity: 0.85;
+}
