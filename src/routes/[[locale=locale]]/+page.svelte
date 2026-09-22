@@ -322,6 +322,7 @@
       <details><summary>{$t('home.faq.q6')}</summary><p>{$t('home.faq.a6')}</p></details>
       <details><summary>{$t('home.faq.q7')}</summary><p>{$t('home.faq.a7')}</p></details>
       <details><summary>{$t('home.faq.q8')}</summary><p>{$t('home.faq.a8')}</p></details>
+      <details><summary>{$t('home.faq.q9')}</summary><p>{$t('home.faq.a9')}</p></details>
     </div>
   </div>
 </section>
