@@ -17,6 +17,13 @@ function check(name, ok) {
   if (!ok) failed = true;
 }
 
+// Relative luminance (WCAG) from a "rgb(r, g, b)" / "rgba(r, g, b, a)" computed color string.
+function luminance(rgbString) {
+  const [r, g, b] = rgbString.match(/[\d.]+/g).map(Number).map((v) => v / 255);
+  const lin = (c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+}
+
 mkdirSync(OUT_DIR, { recursive: true });
 
 const server = createBuildServer();
@@ -80,6 +87,9 @@ try {
     }
     check(`${viewport.name}: three download links carry version ${updateInfo.version}`, versionOk);
 
+    const platformSvgCount = await page.locator('.platforms a.platform svg').count();
+    check(`${viewport.name}: three platform icons render as svg`, platformSvgCount === 3);
+
     const firstDetails = page.locator('details').first();
     await firstDetails.locator('summary').click();
     const isOpen = await firstDetails.evaluate((el) => el.open);
@@ -95,6 +105,22 @@ try {
     check(`${viewport.name}: no horizontal overflow (light)`, overflowLight);
     const lightBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     check(`${viewport.name}: dark and light screenshots render visibly different backgrounds`, darkBg !== lightBg);
+
+    const heroH1Color = await page.evaluate(() => getComputedStyle(document.querySelector('.hero h1')).color);
+    check(`${viewport.name}: hero h1 readable in light theme (luminance > 0.7)`, luminance(heroH1Color) > 0.7);
+    if (viewport.name === '1440') {
+      const headerNavColor = await page.evaluate(() => getComputedStyle(document.querySelector('.site-header.over-hero nav a:not(.button)')).color);
+      check(`${viewport.name}: header nav over hero readable in light theme (luminance > 0.4)`, luminance(headerNavColor) > 0.4);
+    }
+
+    if (viewport.name === '390') {
+      const frame = page.locator('.dashboard-frame');
+      const scrolls = await frame.evaluate((el) => el.scrollWidth > el.clientWidth);
+      check('390: dashboard frame scrolls horizontally on phone', scrolls);
+      const dashboardLink = await page.locator('a.dashboard-scroll[href="/media/dashboard-1440.png"]').count();
+      check('390: dashboard image links to full-size PNG', dashboardLink === 1);
+    }
+
     await page.screenshot({ path: `${OUT_DIR}home-${viewport.name}-light.png`, fullPage: true });
 
     await context.close();

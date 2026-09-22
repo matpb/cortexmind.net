@@ -1,8 +1,10 @@
 <script lang="ts">
   import { t } from '$lib/i18n';
   import { macUrl, windowsUrl, linuxUrl, version } from '$lib/releases';
+  import { installPrompt, seedPrompt } from '$lib/prompts';
 
   const navItems = [
+    ['ai-install', 'docs.nav.ai'],
     ['install', 'docs.nav.install'],
     ['connect', 'docs.nav.connect'],
     ['protocol', 'docs.nav.protocol'],
@@ -37,6 +39,20 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
   function copy(text: string) {
     navigator.clipboard.writeText(text);
   }
+
+  let copiedPrompt1 = false;
+  let copiedPrompt2 = false;
+
+  function copyPrompt(which: 1 | 2) {
+    copy(which === 1 ? installPrompt : seedPrompt);
+    if (which === 1) {
+      copiedPrompt1 = true;
+      setTimeout(() => (copiedPrompt1 = false), 1600);
+    } else {
+      copiedPrompt2 = true;
+      setTimeout(() => (copiedPrompt2 = false), 1600);
+    }
+  }
 </script>
 
 {#snippet codeBlock(code: string)}
@@ -65,6 +81,38 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
 
   <div class="docs-content">
     <img src="/media/desk.jpg" alt="" class="docs-hero" loading="lazy" />
+
+    <section id="ai-install">
+      <h2>{$t('docs.ai.title')}</h2>
+      <p>{$t('docs.ai.lead')}</p>
+      <p>{$t('docs.ai.p1')}</p>
+
+      <div class="prompt-card">
+        <div class="prompt-card-head">
+          <span class="code-label">{$t('docs.ai.prompt1_label')}</span>
+          <button type="button" class="button small" on:click={() => copyPrompt(1)}>
+            {copiedPrompt1 ? $t('docs.ai.copied') : $t('docs.ai.copy')}
+          </button>
+        </div>
+        <pre class="prompt-body">{installPrompt}</pre>
+      </div>
+
+      <p>{$t('docs.ai.p2')}</p>
+
+      <div class="prompt-card">
+        <div class="prompt-card-head">
+          <span class="code-label">{$t('docs.ai.prompt2_label')}</span>
+          <button type="button" class="button small" on:click={() => copyPrompt(2)}>
+            {copiedPrompt2 ? $t('docs.ai.copied') : $t('docs.ai.copy')}
+          </button>
+        </div>
+        <pre class="prompt-body">{seedPrompt}</pre>
+      </div>
+
+      <p>{$t('docs.ai.manual')}</p>
+    </section>
+
+    <h2 id="manual" class="manual-heading">{$t('docs.manual.title')}</h2>
 
     <section id="install">
       <h2>{$t('docs.install.title')}</h2>
@@ -222,3 +270,42 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
     </section>
   </div>
 </div>
+
+<style>
+  .manual-heading {
+    font-size: 28px;
+    margin: 0 0 32px;
+    border-top: 1px solid var(--line);
+    padding-top: 48px;
+  }
+
+  .prompt-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--code-bg);
+    margin: 0 0 16px;
+    overflow: hidden;
+  }
+
+  .prompt-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .prompt-body {
+    margin: 0;
+    padding: 14px 16px;
+    max-height: 320px;
+    overflow: auto;
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 12.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: var(--code-text);
+  }
+</style>

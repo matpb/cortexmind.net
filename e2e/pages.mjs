@@ -89,6 +89,30 @@ try {
       navHrefs
     );
     check('docs: every side-nav anchor resolves to an existing id', navHrefs.length > 0 && allResolve);
+    check('docs: nav first link targets #ai-install', navHrefs[0] === '#ai-install');
+
+    const aiInstallExists = await page.locator('#ai-install').count();
+    check('docs: #ai-install section exists', aiInstallExists > 0);
+    const aiBeforeInstall = await page.evaluate(() => {
+      const ai = document.getElementById('ai-install');
+      const install = document.getElementById('install');
+      if (!ai || !install) return false;
+      return !!(ai.compareDocumentPosition(install) & Node.DOCUMENT_POSITION_FOLLOWING);
+    });
+    check('docs: #ai-install comes before #install in DOM order', aiBeforeInstall);
+
+    const promptButtons = page.locator('#ai-install .prompt-card .button.small');
+    await promptButtons.nth(0).click();
+    await promptButtons.nth(1).click();
+    const copiedPrompts = await page.evaluate(() => window.__copied);
+    check(
+      'docs: prompt 1 button copies the install prompt',
+      copiedPrompts.some((c) => c.includes('hdiutil attach') && c.includes('claude mcp add'))
+    );
+    check(
+      'docs: prompt 2 button copies the seed prompt',
+      copiedPrompts.some((c) => c.includes('Seed my memory'))
+    );
 
     const copyButtonIndex = await page.$$eval('.code-block', (blocks) =>
       blocks.findIndex((b) => b.textContent?.includes('localhost:14200'))

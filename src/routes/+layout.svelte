@@ -32,7 +32,7 @@
           { '@type': 'Offer', price: '10', priceCurrency: 'USD', name: 'Monthly' },
           { '@type': 'Offer', price: '99', priceCurrency: 'USD', name: 'Yearly' }
         ],
-        author: { '@type': 'Organization', name: 'Both Hands', url: 'https://both-hands.com' }
+        author: { '@type': 'Person', name: 'Mathieu-Philippe Bourgeois', url: 'https://matpb.com' }
       }
     : null;
 
@@ -117,9 +117,8 @@
     <a href={$href('/terms')}>{$t('layout.footer.terms')}</a>
     <a href="mailto:info@cortexmind.net">{$t('layout.footer.contact')}</a>
     <a href="https://github.com/matpb/cortexmind.net/releases">{$t('layout.footer.releases')}</a>
-    <a class="both-hands-link" href="https://both-hands.com">
-      <img src="/brand/both-hands-mark.svg" alt="" />
-      {$t('layout.footer.both_hands')}
+    <a class="credit-link" href="https://matpb.com" target="_blank" rel="noopener">
+      {$t('layout.footer.copyright')}
     </a>
   </nav>
 </footer>

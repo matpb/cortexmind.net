@@ -1,7 +1,7 @@
 # cortexmind.net design plan
 
 Reference sites: both-hands.com (parent brand) and lantern.both-hands.com (sibling product).
-CortexMind is the Both Hands product. It shares the parent's palette and type, and keeps its own imagery.
+CortexMind is Mathieu-Philippe Bourgeois's product; the palette and type are borrowed from both-hands.com by choice.
 
 ## Subject, audience, job
 
