@@ -6,6 +6,15 @@ import { fileURLToPath } from 'node:url';
 
 const OUT = fileURLToPath(new URL('../src/lib/data/releases.json', import.meta.url));
 const API_URL = 'https://api.github.com/repos/matpb/cortexmind.net/releases?per_page=50';
+// The public changelog starts at 4.0.0; older releases stay on GitHub only.
+const CHANGELOG_SINCE = [4, 0, 0];
+const atLeast = (tag) => {
+  const v = (tag || '').replace(/^v/, '').split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    if ((v[i] || 0) !== CHANGELOG_SINCE[i]) return (v[i] || 0) > CHANGELOG_SINCE[i];
+  }
+  return true;
+};
 
 async function main() {
   const headers = { Accept: 'application/vnd.github+json' };
@@ -18,7 +27,7 @@ async function main() {
   if (!Array.isArray(raw)) throw new Error('unexpected GitHub API response shape');
 
   const releases = raw
-    .filter((r) => !r.draft)
+    .filter((r) => !r.draft && atLeast(r.tag_name))
     .map((r) => ({
       tag_name: r.tag_name,
       name: r.name,
