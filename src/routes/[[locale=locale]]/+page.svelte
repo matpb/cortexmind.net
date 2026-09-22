@@ -34,13 +34,6 @@
     }
   }
 
-  // Splits a "{#link}text{/link}" marker string into leading/link/trailing parts.
-  function splitLink(source: string): { pre: string; link: string; post: string } {
-    const m = /^(.*)\{#link\}(.*)\{\/link\}(.*)$/s.exec(source);
-    if (!m) return { pre: source, link: '', post: '' };
-    return { pre: m[1], link: m[2], post: m[3] };
-  }
-
   let detected: 'mac' | 'windows' | 'linux' | null = null;
   if (typeof navigator !== 'undefined') {
     const ua = navigator.userAgent;
@@ -48,9 +41,6 @@
     else if (/Windows/.test(ua)) detected = 'windows';
     else if (/Linux/.test(ua)) detected = 'linux';
   }
-
-  $: fine = splitLink($t('home.pricing.fine'));
-  $: aiLine = splitLink($t('home.how.ai_line'));
 </script>
 
 <svelte:head>
@@ -129,7 +119,11 @@
       <p>{$t('home.how.step3.body')}</p>
     </div>
   </div>
-  <p class="wrap ai-line">{aiLine.pre}<a href={$href('/docs') + '#ai-install'}>{aiLine.link}</a>{aiLine.post}</p>
+  <div class="wrap ai-cta">
+    <h3>{$t('home.how.ai_title')}</h3>
+    <p>{$t('home.how.ai_body')}</p>
+    <a class="button" href={$href('/docs') + '#ai-install'}>{$t('home.how.ai_button')}</a>
+  </div>
 </section>
 
 <section class="retrieval">
@@ -274,7 +268,7 @@
     {#if checkoutError}
       <p class="pricing-error">{$t('home.pricing.error')}{#if serverError} ({serverError}){/if}</p>
     {/if}
-    <p class="fine muted">{fine.pre}<a href="https://polar.sh/matpb/portal/request">{fine.link}</a>{fine.post}</p>
+    <p class="fine muted">{$t('home.pricing.fine_pre')}<a href="https://polar.sh/matpb/portal/request">{$t('home.pricing.fine_link')}</a>{$t('home.pricing.fine_post')}</p>
   </div>
 </section>
 
@@ -414,8 +408,16 @@
   .step h3 { margin: 10px 0 8px; }
   .step p { color: var(--text-2); }
 
-  .ai-line { margin-top: 40px; font-size: 15px; color: var(--text-2); }
-  .ai-line a { color: var(--gold-text); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+  .ai-cta {
+    margin-top: 48px;
+    padding: 32px;
+    border: 1px solid var(--gold-line);
+    background: var(--gold-soft);
+    border-radius: 12px;
+  }
+  .ai-cta h3 { font-size: 28px; }
+  .ai-cta p { color: var(--text-2); max-width: 60ch; margin-top: 10px; }
+  .ai-cta .button { margin-top: 20px; min-height: 48px; font-size: 16px; }
 
   /* Retrieval feature split */
   .retrieval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }

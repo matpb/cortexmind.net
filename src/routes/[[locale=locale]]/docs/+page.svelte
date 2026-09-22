@@ -1,7 +1,7 @@
 <script lang="ts">
   import { t } from '$lib/i18n';
   import { macUrl, windowsUrl, linuxUrl, version } from '$lib/releases';
-  import { installPrompt, seedPrompt } from '$lib/prompts';
+  import { installPrompt } from '$lib/prompts';
 
   const navItems = [
     ['ai-install', 'docs.nav.ai'],
@@ -40,18 +40,12 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
     navigator.clipboard.writeText(text);
   }
 
-  let copiedPrompt1 = false;
-  let copiedPrompt2 = false;
+  let copiedPrompt = false;
 
-  function copyPrompt(which: 1 | 2) {
-    copy(which === 1 ? installPrompt : seedPrompt);
-    if (which === 1) {
-      copiedPrompt1 = true;
-      setTimeout(() => (copiedPrompt1 = false), 1600);
-    } else {
-      copiedPrompt2 = true;
-      setTimeout(() => (copiedPrompt2 = false), 1600);
-    }
+  function copyPrompt() {
+    copy(installPrompt);
+    copiedPrompt = true;
+    setTimeout(() => (copiedPrompt = false), 1600);
   }
 </script>
 
@@ -89,24 +83,12 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
 
       <div class="prompt-card">
         <div class="prompt-card-head">
-          <span class="code-label">{$t('docs.ai.prompt1_label')}</span>
-          <button type="button" class="button small" on:click={() => copyPrompt(1)}>
-            {copiedPrompt1 ? $t('docs.ai.copied') : $t('docs.ai.copy')}
+          <span class="code-label">{$t('docs.ai.prompt_label')}</span>
+          <button type="button" class="button small" on:click={copyPrompt}>
+            {copiedPrompt ? $t('docs.ai.copied') : $t('docs.ai.copy')}
           </button>
         </div>
         <pre class="prompt-body">{installPrompt}</pre>
-      </div>
-
-      <p>{$t('docs.ai.p2')}</p>
-
-      <div class="prompt-card">
-        <div class="prompt-card-head">
-          <span class="code-label">{$t('docs.ai.prompt2_label')}</span>
-          <button type="button" class="button small" on:click={() => copyPrompt(2)}>
-            {copiedPrompt2 ? $t('docs.ai.copied') : $t('docs.ai.copy')}
-          </button>
-        </div>
-        <pre class="prompt-body">{seedPrompt}</pre>
       </div>
 
       <p>{$t('docs.ai.manual')}</p>

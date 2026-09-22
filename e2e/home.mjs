@@ -90,6 +90,16 @@ try {
     const platformSvgCount = await page.locator('.platforms a.platform svg').count();
     check(`${viewport.name}: three platform icons render as svg`, platformSvgCount === 3);
 
+    const aiCtaButton = page.locator('.ai-cta a.button');
+    check(`${viewport.name}: .ai-cta a.button exists`, (await aiCtaButton.count()) === 1);
+    check(`${viewport.name}: .ai-cta a.button is visible`, await aiCtaButton.isVisible());
+    const aiCtaHref = await aiCtaButton.getAttribute('href');
+    check(`${viewport.name}: .ai-cta a.button href ends with /docs#ai-install`, !!aiCtaHref && aiCtaHref.endsWith('/docs#ai-install'));
+
+    const fineLink = page.locator('.pricing .fine a');
+    const fineLinkText = (await fineLink.textContent())?.trim() ?? '';
+    check(`${viewport.name}: pricing fine print anchor text is "customer portal"`, fineLinkText === 'customer portal');
+
     const firstDetails = page.locator('details').first();
     await firstDetails.locator('summary').click();
     const isOpen = await firstDetails.evaluate((el) => el.open);

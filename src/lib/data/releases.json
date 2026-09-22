@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.0.0",
+    "name": "CortexMind v4.0.0",
+    "published_at": "2026-09-22T12:55:36Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.0.0",
+    "body": "## CortexMind 4.0.0\n\n**GPU acceleration everywhere.** Memory search now runs on the GPU on every platform: Metal on Apple Silicon, and any Vulkan-capable card on Linux and Windows, including NVIDIA, AMD and Intel Arc. Nothing extra to download: the inference engine ships inside the app.\n\n**Picks the right device on its own.** On first launch CortexMind times your CPU against every GPU it can see and keeps the fastest. A GPU that would be slower than your CPU is never used. `memory_status` shows exactly which device each model is running on.\n\n**Lighter on your machine.** About 2 GB of GPU memory when a GPU is in use, the reranker runs at full precision, and the first launch after upgrading removes the old model files, freeing several gigabytes of disk.\n\n**Faster on Apple Silicon.** Memory search on an M-series Mac is roughly twice as fast as in 3.8.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v3.8.1",
     "name": "CortexMind v3.8.1",
     "published_at": "2026-09-16T17:14:05Z",

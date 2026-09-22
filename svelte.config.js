@@ -5,7 +5,9 @@ export default {
   preprocess: vitePreprocess(),
   kit: {
     adapter: adapter({ fallback: '200.html' }),
-    prerender: { entries: ['*', '/fr', '/fr/docs', '/fr/changelog', '/fr/privacy', '/fr/terms'] },
+    prerender: {
+      entries: ['*', '/fr', '/fr/docs', '/fr/changelog', '/fr/privacy', '/fr/terms', '/downloads.json', '/llms.txt']
+    },
     csp: {
       mode: 'hash',
       directives: {

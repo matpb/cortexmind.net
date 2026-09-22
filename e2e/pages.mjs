@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // Self-contained: serves build/ locally, drives it with Playwright, checks
 // the docs/changelog/privacy/terms pages for overflow, h1, and page-specific behavior.
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { createBuildServer } from './serve-build.mjs';
+import updateInfo from '../update-v2.json' with { type: 'json' };
 
 const PORT = Number(process.env.E2E_PORT) || 4181;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const OUT_DIR = new URL('../e2e-out/', import.meta.url);
+const BUILD_DOWNLOADS_PATH = new URL('../build/downloads.json', import.meta.url);
 
 let failed = false;
 function check(name, ok) {
@@ -101,17 +103,17 @@ try {
     });
     check('docs: #ai-install comes before #install in DOM order', aiBeforeInstall);
 
+    const promptCards = page.locator('#ai-install .prompt-card');
+    check('docs: exactly one .prompt-card', (await promptCards.count()) === 1);
+
     const promptButtons = page.locator('#ai-install .prompt-card .button.small');
     await promptButtons.nth(0).click();
-    await promptButtons.nth(1).click();
     const copiedPrompts = await page.evaluate(() => window.__copied);
     check(
-      'docs: prompt 1 button copies the install prompt',
-      copiedPrompts.some((c) => c.includes('hdiutil attach') && c.includes('claude mcp add'))
-    );
-    check(
-      'docs: prompt 2 button copies the seed prompt',
-      copiedPrompts.some((c) => c.includes('Seed my memory'))
+      'docs: prompt button copies text with downloads.json, Part B and memory_search',
+      copiedPrompts.some(
+        (c) => c.includes('downloads.json') && c.includes('Part B') && c.includes('memory_search')
+      )
     );
 
     const copyButtonIndex = await page.$$eval('.code-block', (blocks) =>
@@ -131,6 +133,27 @@ try {
     check('docs: theme toggle switches to light', themeAttr === 'light');
 
     await context.close();
+  }
+
+  // downloads.json and llms.txt: static endpoints, checked directly.
+  try {
+    const raw = await readFile(BUILD_DOWNLOADS_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    check('build/downloads.json parses as JSON', true);
+    check(
+      `build/downloads.json version equals update-v2.json (${updateInfo.version})`,
+      parsed.version === updateInfo.version
+    );
+  } catch {
+    check('build/downloads.json parses as JSON', false);
+  }
+
+  {
+    const res = await fetch(BASE_URL + '/llms.txt');
+    const text = await res.text();
+    check('/llms.txt returns 200 text/plain', res.ok);
+    check(`/llms.txt contains version ${updateInfo.version}`, text.includes(updateInfo.version));
+    check('/llms.txt mentions downloads.json', text.includes('downloads.json'));
   }
 
   // 320px overflow check, home and docs only.
