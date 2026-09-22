@@ -73,6 +73,12 @@
 
   onMount(() => {
     checkoutId = $page.url.searchParams.get('checkout_id');
+    // ?checkout_id=preview renders the delivered state without a purchase.
+    if (checkoutId === 'preview') {
+      key = 'CMND-PREVIEW-0000-0000-0000-000000000000';
+      status = 'ok';
+      return;
+    }
     if (!checkoutId) {
       errorMsg = 'No checkout reference found. Your license key is in your customer portal — sign in with your checkout email.';
       status = 'error';
