@@ -314,5 +314,13 @@
   "home.faq.a10": "Seulement tant que vous voulez que la mémoire soit disponible. Pour la plupart des gens, CortexMind tourne sur l’ordinateur de travail et démarre avec la session, donc il n’y a rien à gérer. Si vous voulez que claude.ai, ChatGPT ou les applications mobiles atteignent votre mémoire à toute heure, la machine qui fait tourner CortexMind doit être allumée et joignable à ce moment-là : laissez un ordinateur de la maison allumé, ou installez CortexMind sur un petit serveur virtuel dans le nuage pour qu’il reste toujours en ligne.",
   "home.faq.q11": "Comment les applications web et mobiles y accèdent-elles ?",
   "home.faq.a11": "Par le tunnel hébergé. Activez-le dans l’application et CortexMind obtient une adresse HTTPS que claude.ai, ChatGPT ou tout client MCP distant peut ajouter comme connecteur, avec une connexion OAuth. Le tunnel est EtherTunnel, un produit distinct : votre licence CortexMind inclut une licence EtherTunnel gratuite avec un tunnel.",
-  "home.faq.a11_link": "Découvrir EtherTunnel"
+  "home.faq.a11_link": "Découvrir EtherTunnel",
+  "home.compound.title": "Votre IA s’améliore chaque semaine.",
+  "home.compound.lead": "Avec une vraie mémoire, le modèle compte moins et ce qu’elle sait de vous compte plus. Chaque conversation la laisse un peu plus affûtée, et l’amélioration se cumule.",
+  "home.compound.col1.title": "Dites-le, et c’est une règle",
+  "home.compound.col1.body": "Aucun fichier de consignes à modifier, aucune invite à réécrire. Dites « rappelle-toi que je veux des descriptions de PR de moins de 100 mots » et c’est une règle permanente dès la conversation suivante.",
+  "home.compound.col2.title": "Le modèle compte moins",
+  "home.compound.col2.body": "Changez de modèle, changez d’outil, gardez la mémoire. Ce qui rend votre agent bon, c’est ce qu’il a accumulé sur vous et votre travail, et cela reste à vous.",
+  "home.compound.col3.title": "Envoyez-la apprendre",
+  "home.compound.col3.body": "Pointez-la vers un sujet, un dépôt de code ou une pile de documents et laissez-la lire. Ce qu’elle enregistre est là pour chaque agent, chaque conversation, dès lors."
 }

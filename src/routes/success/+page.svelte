@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { macUrl, windowsUrl, linuxUrl } from '$lib/releases';
+  import PromptCard from '$lib/PromptCard.svelte';
+  import { installPrompt } from '$lib/prompts';
 
   const KEY_ENDPOINT = '/api/get-license-key';
   const MAX_POLLS = 6;
@@ -103,9 +105,16 @@
       <p class="muted">Keep it handy — you can always find it again in your <a href={portalUrl}>customer portal</a>.</p>
     </div>
 
+    <div class="ai-install">
+      <h2>Next: let your AI install it</h2>
+      <p class="muted">Copy this prompt into Claude Code, Codex, Cursor or any agent that can run commands on your machine. It will ask for the key above, download and install CortexMind, connect itself, move over what it already remembers, and interview you to seed the memory.</p>
+      <PromptCard label="Setup prompt" prompt={installPrompt} copyLabel="Copy prompt" copiedLabel="Copied" />
+      <p class="muted">Prefer to do it by hand? <a class="text-link" href="/docs#manual">Follow the manual steps</a>.</p>
+    </div>
+
     <ol>
       <li>
-        <strong>Download CortexMind</strong> for your platform:
+        <strong>Or install manually:</strong> download CortexMind for your platform:
         <div class="step-downloads">
           <a class="button secondary small" href={macUrl}>Download for macOS</a>
           <a class="button secondary small" href={windowsUrl}>Download for Windows</a>
@@ -136,6 +145,7 @@
 <style>
   .success-wrap { padding: 64px 0 96px; max-width: 620px; }
   .key-block { margin: 32px 0; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+  .ai-install { margin: 32px 0; }
   .key-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
   .key-row code { background: var(--code-bg); color: var(--code-text); padding: 8px 12px; border-radius: 6px; flex: 1; overflow-wrap: anywhere; }
   ol { padding-left: 20px; display: grid; gap: 16px; }

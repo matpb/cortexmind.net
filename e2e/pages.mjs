@@ -135,6 +135,60 @@ try {
     await context.close();
   }
 
+  // Success page AI-install section: prompt card, dark mode, both viewports.
+  for (const viewport of VIEWPORTS) {
+    const context = await browser.newContext({ viewport, colorScheme: 'dark' });
+    const page = await context.newPage();
+    await page.addInitScript(() => {
+      window.__copied = [];
+      navigator.clipboard.writeText = (t) => {
+        window.__copied.push(t);
+        return Promise.resolve();
+      };
+    });
+    await page.route('**/api/get-license-key', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          key: 'CMND-TEST-1234',
+          display_key: 'CMND-…1234',
+          portal_url: 'https://polar.sh/matpb/portal/request'
+        })
+      })
+    );
+    await page.goto(BASE_URL + '/success?checkout_id=abc', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(150);
+
+    const keyVisible = await page.locator('.key-row code').filter({ hasText: 'CMND-TEST-1234' }).count();
+    check(`success @ ${viewport.width}px: license key shown`, keyVisible > 0);
+
+    const aiHeading = await page.locator('h2', { hasText: 'Next: let your AI install it' }).count();
+    check(`success @ ${viewport.width}px: AI install heading exists`, aiHeading === 1);
+
+    const successPromptCards = page.locator('.prompt-card');
+    check(`success @ ${viewport.width}px: exactly one .prompt-card`, (await successPromptCards.count()) === 1);
+
+    await page.locator('.prompt-card .button.small').click();
+    const successCopied = await page.evaluate(() => window.__copied);
+    check(
+      `success @ ${viewport.width}px: copy button copies prompt with downloads.json and Part C`,
+      successCopied.some((c) => c.includes('downloads.json') && c.includes('Part C'))
+    );
+
+    const manualLinkHref = await page
+      .locator('a', { hasText: 'Follow the manual steps' })
+      .getAttribute('href');
+    check(`success @ ${viewport.width}px: manual steps link points to /docs#manual`, !!manualLinkHref && manualLinkHref.endsWith('/docs#manual'));
+
+    const successOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    );
+    check(`success @ ${viewport.width}px: no horizontal overflow`, successOverflow);
+
+    await context.close();
+  }
+
   // downloads.json and llms.txt: static endpoints, checked directly.
   try {
     const raw = await readFile(BUILD_DOWNLOADS_PATH, 'utf8');

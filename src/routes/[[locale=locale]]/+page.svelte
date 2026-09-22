@@ -179,6 +179,27 @@
   </div>
 </section>
 
+<section class="local compound" id="compound">
+  <div class="wrap">
+    <h2>{$t('home.compound.title')}</h2>
+    <p class="compound-lead">{$t('home.compound.lead')}</p>
+    <div class="local-grid">
+      <div class="local-col">
+        <h3>{$t('home.compound.col1.title')}</h3>
+        <p>{$t('home.compound.col1.body')}</p>
+      </div>
+      <div class="local-col">
+        <h3>{$t('home.compound.col2.title')}</h3>
+        <p>{$t('home.compound.col2.body')}</p>
+      </div>
+      <div class="local-col">
+        <h3>{$t('home.compound.col3.title')}</h3>
+        <p>{$t('home.compound.col3.body')}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="dashboard">
   <div class="wrap">
     <div class="dashboard-frame">
@@ -461,6 +482,8 @@
 
   /* Local */
   .local h2 { margin-bottom: 40px; }
+  .compound h2 { margin-bottom: 16px; }
+  .compound-lead { color: var(--text-2); font-size: 17px; max-width: 60ch; margin-bottom: 40px; }
   .local-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
   .local-col { border-left: 1px solid var(--line); padding: 0 32px; }
   .local-col:first-child { border-left: none; padding-left: 0; }

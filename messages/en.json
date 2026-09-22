@@ -314,5 +314,13 @@
   "home.faq.a10": "Only while you want the memory available. For most people CortexMind runs on the computer they are working on and starts with the session, so there is nothing to think about. If you want claude.ai, ChatGPT or the phone apps to reach your memory at any hour, the machine running CortexMind has to be on and reachable at that moment: leave a home computer running, or install CortexMind on a small VPS in the cloud so it is always online.",
   "home.faq.q11": "How do web and phone apps reach it?",
   "home.faq.a11": "Through the hosted tunnel. Turn it on in the app and CortexMind gets an HTTPS address that claude.ai, ChatGPT or any remote MCP client can add as a connector, signing in with OAuth. The tunnel is EtherTunnel, a separate product: your CortexMind license includes a free EtherTunnel license with one tunnel.",
-  "home.faq.a11_link": "Discover EtherTunnel"
+  "home.faq.a11_link": "Discover EtherTunnel",
+  "home.compound.title": "Your AI gets better every week.",
+  "home.compound.lead": "With a real memory, the model matters less and what it knows about you matters more. Every conversation leaves it a little sharper, and the improvement compounds.",
+  "home.compound.col1.title": "Tell it, and it is a rule",
+  "home.compound.col1.body": "No instructions file to edit, no prompt to rewrite. Say \"remember that I want PR descriptions under 100 words\" and it is a standing rule from the next conversation on.",
+  "home.compound.col2.title": "The model matters less",
+  "home.compound.col2.body": "Switch models, switch tools, keep the memory. What makes your agent good is what it has accumulated about you and your work, and that stays yours.",
+  "home.compound.col3.title": "Send it to learn",
+  "home.compound.col3.body": "Point it at a topic, a codebase or a pile of documents and let it read. What it saves is there for every agent, every conversation, from then on."
 }
