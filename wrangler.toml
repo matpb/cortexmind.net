@@ -7,6 +7,6 @@
 name = "cortexmind-net"
 compatibility_date = "2024-11-01"
 
-# Static site served from the repo root (index.html lives at root).
-# Functions are auto-discovered from ./functions.
-pages_build_output_dir = "."
+# Static site built by SvelteKit's adapter-static into build/.
+# Functions are auto-discovered from ./functions regardless of this setting.
+pages_build_output_dir = "build"

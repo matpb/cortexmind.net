@@ -25,17 +25,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Strip non-public files from the deploy
-        # The CI checkout is ephemeral; remove internal docs/config so they are
-        # never served as public site assets. (Secrets like .dev.vars are
-        # gitignored and never in the repo to begin with.)
-        run: |
-          rm -rf .github
-          rm -f README.md .dev.vars.example .gitignore CNAME
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # Production deploy (project's production branch is `main`).
-          command: pages deploy . --project-name=cortexmind-net --branch=main
+          command: pages deploy build --project-name=cortexmind-net --branch=main

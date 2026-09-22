@@ -20,13 +20,13 @@ No LLM in the write path. Your memory never leaves your machine.
 
 ## This repo
 
-Site for `cortexmind.net` — `index.html`, `style.css`, `script.js`, plus two
-Cloudflare Pages Functions for the self-serve purchase flow:
+SvelteKit 2 + Svelte 5 static site (adapter-static, EN/FR via Paraglide JS 2),
+plus two Cloudflare Pages Functions for the self-serve purchase flow:
 
 ```
 functions/api/create-polar-checkout.js   POST /api/create-polar-checkout  (Polar.sh)
 functions/api/get-license-key.js         POST /api/get-license-key  ({checkout_id})
-success.html                             checkout redirect target — shows the CMND- key
+src/routes/success/+page.svelte          checkout redirect target — shows the CMND- key
 ```
 
 Served via **Cloudflare Pages** (project `cortexmind-net`; deployed by the
@@ -43,13 +43,20 @@ Env vars (Pages project, never committed): `POLAR_ACCESS_TOKEN`,
 ## Local preview
 
 ```bash
-cp .dev.vars.example .dev.vars   # fill in sandbox values
-npx wrangler pages dev .
-# open http://localhost:8788 — static site + Functions
+npm install
+npm run dev            # vite dev server
+npm run build           # outputs to build/
+npm run check           # svelte-check
 ```
 
-(Plain `python3 -m http.server` still works for styling, but checkout will 404
-without the Functions runtime.)
+To test Pages Functions locally against the built output:
+
+```bash
+cp .dev.vars.example .dev.vars   # fill in sandbox values
+npm run build
+npx wrangler pages dev build
+# open http://localhost:8788 — static site + Functions
+```
 
 ## License
 

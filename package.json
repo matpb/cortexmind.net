@@ -1,0 +1,27 @@
+{
+  "name": "cortexmind-net",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && vite dev --host 127.0.0.1",
+    "build": "node scripts/fetch-releases.mjs && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@fontsource-variable/fraunces": "^5.2.6",
+    "@fontsource-variable/jetbrains-mono": "^5.2.6",
+    "@fontsource-variable/space-grotesk": "^5.2.6",
+    "@inlang/paraglide-js": "^2.25.2",
+    "@sveltejs/adapter-static": "^3.0.9",
+    "@sveltejs/kit": "^2.37.0",
+    "@sveltejs/vite-plugin-svelte": "^6.2.0",
+    "marked": "^15.0.12",
+    "playwright": "^1.59.1",
+    "svelte": "^5.38.0",
+    "svelte-check": "^4.3.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5"
+  }
+}

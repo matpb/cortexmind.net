@@ -7,3 +7,10 @@
 # local tooling noise
 .dev-server.pid
 .dev-server.log
+
+# SvelteKit build
+node_modules/
+build/
+.svelte-kit/
+src/lib/paraglide/
+e2e-out/

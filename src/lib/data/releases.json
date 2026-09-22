@@ -1,0 +1,378 @@
+[
+  {
+    "tag_name": "v3.8.1",
+    "name": "CortexMind v3.8.1",
+    "published_at": "2026-09-16T17:14:05Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.8.1",
+    "body": "CortexMind 3.8.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.8.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.7.1",
+    "name": "CortexMind v3.7.1",
+    "published_at": "2026-09-09T03:08:23Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.7.1",
+    "body": "CortexMind 3.7.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.7.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.7.0",
+    "name": "CortexMind v3.7.0",
+    "published_at": "2026-09-02T03:50:00Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.7.0",
+    "body": "CortexMind 3.7.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.7.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.6.0",
+    "name": "CortexMind v3.6.0",
+    "published_at": "2026-08-24T04:46:06Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.6.0",
+    "body": "**Search stops silently losing its dense half.** A record longer than the embedder's forward-pass window could exhaust the GPU memory arena, and the arena stayed exhausted for the rest of the session. Every search after that ran on keyword matching alone, with nothing in the log to say so. Fixed three ways: a smaller forward-pass window, a session that rebuilds itself when a pass fails, and that window finally applying to query embeddings as well as documents. GPU memory now plateaus instead of climbing.\n\n**One MCP tool surface.** The public and local listeners were two implementations that had drifted apart. They are now one, and the instruction text your agent reads on every connection is 63 percent smaller.\n\n**memory_status tells the truth about the GPU.** It reported the device your config asked for, not the one the model actually bound. It now reports what happened, keeps the configured value beside it, and says \"degraded\" when the embedder falls back to CPU without being asked to.\n\nSigned updater artifacts are attached. Existing installs auto-update from this manifest. Bundled cortex-etun sidecar built from ethertunnel a3e46a92.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.6.0) for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.5.1",
+    "name": "CortexMind v3.5.1",
+    "published_at": "2026-08-24T01:20:42Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.5.1",
+    "body": "CortexMind 3.5.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.5.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.5.0",
+    "name": "CortexMind v3.5.0",
+    "published_at": "2026-08-24T00:28:16Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.5.0",
+    "body": "CortexMind 3.5.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.5.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.4.0",
+    "name": "CortexMind v3.4.0",
+    "published_at": "2026-08-21T13:19:12Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.4.0",
+    "body": "CortexMind 3.4.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.4.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.3.0",
+    "name": "CortexMind v3.3.0",
+    "published_at": "2026-08-20T02:58:16Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.3.0",
+    "body": "CortexMind 3.3.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.3.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.2.0",
+    "name": "CortexMind v3.2.0",
+    "published_at": "2026-08-20T01:00:01Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.2.0",
+    "body": "CortexMind 3.2.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a3e46a92a9ac62af10c16a27cfc9b3fe39fc1e62.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.2.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.1.0",
+    "name": "CortexMind v3.1.0",
+    "published_at": "2026-08-18T20:53:18Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.1.0",
+    "body": "CortexMind 3.1.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.1.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v3.0.0",
+    "name": "CortexMind v3.0.0",
+    "published_at": "2026-08-17T21:01:49Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v3.0.0",
+    "body": "CortexMind 3.0.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a952c4aaf185eab8c8d9c9b0759d059228782ce7.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v3.0.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.5.9",
+    "name": "CortexMind v2.5.9",
+    "published_at": "2026-08-04T02:08:42Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.5.9",
+    "body": "CortexMind 2.5.9\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.5.9)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.5.6",
+    "name": "CortexMind v2.5.6",
+    "published_at": "2026-07-27T13:15:16Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.5.6",
+    "body": "CortexMind 2.5.6\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a952c4aaf185eab8c8d9c9b0759d059228782ce7.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.5.6)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.5.1",
+    "name": "CortexMind v2.5.1",
+    "published_at": "2026-07-24T00:10:13Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.5.1",
+    "body": "CortexMind 2.5.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a952c4aaf185eab8c8d9c9b0759d059228782ce7.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.5.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.5.0",
+    "name": "CortexMind v2.5.0",
+    "published_at": "2026-07-11T04:55:07Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.5.0",
+    "body": "CortexMind 2.5.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nBundled cortex-etun sidecar built from ethertunnel a952c4aaf185eab8c8d9c9b0759d059228782ce7.\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.5.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.4.1",
+    "name": "CortexMind v2.4.1",
+    "published_at": "2026-07-06T20:06:31Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.4.1",
+    "body": "CortexMind 2.4.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.4.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.4.0",
+    "name": "CortexMind v2.4.0",
+    "published_at": "2026-07-04T02:59:50Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.4.0",
+    "body": "CortexMind 2.4.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.4.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.3.0",
+    "name": "CortexMind v2.3.0",
+    "published_at": "2026-07-04T00:26:07Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.3.0",
+    "body": "CortexMind 2.3.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.3.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.2.2",
+    "name": "CortexMind v2.2.2",
+    "published_at": "2026-07-03T17:01:48Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.2.2",
+    "body": "CortexMind 2.2.2\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortexmind/commits/v2.2.2)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.2.1",
+    "name": "CortexMind v2.2.1",
+    "published_at": "2026-05-29T13:41:28Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.2.1",
+    "body": "CortexMind 2.2.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v2.2.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.2.0",
+    "name": "CortexMind v2.2.0",
+    "published_at": "2026-05-26T03:05:05Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.2.0",
+    "body": "CortexMind 2.2.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v2.2.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.1.0",
+    "name": "CortexMind v2.1.0",
+    "published_at": "2026-05-20T18:24:23Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.1.0",
+    "body": "CortexMind 2.1.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v2.1.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v2.0.0",
+    "name": "CortexMind v2.0.0",
+    "published_at": "2026-05-18T16:44:01Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v2.0.0",
+    "body": "CortexMind 2.0.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update-v2.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v2.0.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.8",
+    "name": "CortexMind v1.8.8",
+    "published_at": "2026-05-13T18:54:48Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.8",
+    "body": "CortexMind 1.8.8\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.8)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.7",
+    "name": "CortexMind v1.8.7",
+    "published_at": "2026-05-12T01:32:12Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.7",
+    "body": "CortexMind 1.8.7\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.7)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.6",
+    "name": "CortexMind v1.8.6",
+    "published_at": "2026-05-07T19:12:48Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.6",
+    "body": "CortexMind 1.8.6\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.6)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.5",
+    "name": "CortexMind v1.8.5",
+    "published_at": "2026-05-06T04:11:25Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.5",
+    "body": "CortexMind 1.8.5\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.5)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.4",
+    "name": "CortexMind v1.8.4",
+    "published_at": "2026-05-06T03:58:34Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.4",
+    "body": "CortexMind 1.8.4\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.4)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.3",
+    "name": "CortexMind v1.8.3",
+    "published_at": "2026-05-06T02:24:08Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.3",
+    "body": "CortexMind 1.8.3\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.3)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.2",
+    "name": "CortexMind v1.8.2",
+    "published_at": "2026-05-04T21:10:03Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.2",
+    "body": "CortexMind 1.8.2\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.2)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.1",
+    "name": "CortexMind v1.8.1",
+    "published_at": "2026-05-04T20:19:04Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.1",
+    "body": "CortexMind 1.8.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.8.0",
+    "name": "CortexMind v1.8.0",
+    "published_at": "2026-05-01T14:04:38Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.8.0",
+    "body": "CortexMind 1.8.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.8.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.7.5",
+    "name": "CortexMind v1.7.5",
+    "published_at": "2026-04-29T03:04:22Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.7.5",
+    "body": "CortexMind 1.7.5\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.7.5)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.7.0",
+    "name": "CortexMind v1.7.0",
+    "published_at": "2026-04-28T00:42:45Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.7.0",
+    "body": "CortexMind 1.7.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.7.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.6.2",
+    "name": "CortexMind v1.6.2",
+    "published_at": "2026-04-27T13:29:30Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.6.2",
+    "body": "CortexMind 1.6.2\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.6.2)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.6.1",
+    "name": "CortexMind v1.6.1",
+    "published_at": "2026-04-25T14:01:51Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.6.1",
+    "body": "CortexMind 1.6.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex/commits/v1.6.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.6.0",
+    "name": "CortexMind v1.6.0",
+    "published_at": "2026-04-25T02:35:48Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.6.0",
+    "body": "CortexMind 1.6.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.6.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.5.2",
+    "name": "CortexMind v1.5.2",
+    "published_at": "2026-04-25T00:11:23Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.5.2",
+    "body": "CortexMind 1.5.2\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.5.2)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.5.1",
+    "name": "CortexMind v1.5.1",
+    "published_at": "2026-04-24T23:53:54Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.5.1",
+    "body": "CortexMind 1.5.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.5.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.5.0",
+    "name": "CortexMind v1.5.0",
+    "published_at": "2026-04-24T21:07:42Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.5.0",
+    "body": "CortexMind 1.5.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.5.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.4.0",
+    "name": "CortexMind v1.4.0",
+    "published_at": "2026-04-24T18:44:23Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.4.0",
+    "body": "CortexMind 1.4.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.4.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.3.0",
+    "name": "CortexMind v1.3.0",
+    "published_at": "2026-04-23T17:52:42Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.3.0",
+    "body": "CortexMind 1.3.0\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.3.0)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.2.4",
+    "name": "CortexMind v1.2.4",
+    "published_at": "2026-04-22T04:15:56Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.2.4",
+    "body": "CortexMind 1.2.4\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.2.4)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.2.3",
+    "name": "CortexMind v1.2.3",
+    "published_at": "2026-04-22T03:54:28Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.2.3",
+    "body": "CortexMind 1.2.3\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.2.3)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.2.2",
+    "name": "CortexMind v1.2.2",
+    "published_at": "2026-04-22T03:28:06Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.2.2",
+    "body": "CortexMind 1.2.2\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.2.2)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.2.1",
+    "name": "CortexMind v1.2.1",
+    "published_at": "2026-04-22T03:14:11Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.2.1",
+    "body": "CortexMind 1.2.1\n\nSigned updater artifacts are attached. End users on v1.2.1+ will auto-update\nfrom this manifest (update.json on matpb/cortexmind.net main branch).\n\nSee [the commit log](https://github.com/matpb/cortex-hivemind/commits/v1.2.1)\nin the main repo for the full changeset.\n",
+    "prerelease": false
+  },
+  {
+    "tag_name": "v1.1.0",
+    "name": "CortexMind v1.1.0",
+    "published_at": "2026-04-16T02:55:04Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v1.1.0",
+    "body": "## Downloads\n\n- **macOS (Apple Silicon)**: `CortexMind_1.1.0_aarch64.dmg`\n- **Linux**: `CortexMind_1.1.0_amd64.deb` or `CortexMind_1.1.0_amd64.AppImage`\n- **Windows**: `CortexMind_1.1.0_x64-setup.exe`",
+    "prerelease": false
+  }
+]
