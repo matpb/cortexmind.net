@@ -13,11 +13,6 @@
   $: s9 = withMailto($t('terms.s9'));
 </script>
 
-<svelte:head>
-  <title>{$t('terms.meta.page_title')}</title>
-  <meta name="description" content={$t('terms.meta.description')} />
-</svelte:head>
-
 <div class="wrap page-head prose-measure">
   <h1>{$t('terms.title')}</h1>
   <p class="muted">{$t('terms.updated')}</p>

@@ -12,11 +12,6 @@
   $: s6 = withMailto($t('privacy.s6'));
 </script>
 
-<svelte:head>
-  <title>{$t('privacy.meta.page_title')}</title>
-  <meta name="description" content={$t('privacy.meta.description')} />
-</svelte:head>
-
 <div class="wrap page-head prose-measure">
   <h1>{$t('privacy.title')}</h1>
   <p class="muted">{$t('privacy.updated')}</p>

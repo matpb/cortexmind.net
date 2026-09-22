@@ -5,7 +5,7 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { theme, toggleTheme, watchSystem } from '$lib/theme';
-  import { href, locale, localizePath, LOCALES, preferredLocale, selectLocale, splitLocalePath, t, type Locale } from '$lib/i18n';
+  import { href, locale, localizePath, LOCALES, preferredLocale, selectLocale, splitLocalePath, t, type Locale, type MessageKey } from '$lib/i18n';
   import { jsonLdTag } from '$lib/seo';
 
   const SITE = 'https://cortexmind.net';
@@ -19,6 +19,17 @@
   $: frUrl = SITE + localizePath(base, 'fr');
   $: isLight = $theme === 'light';
   $: isHome = base === '/';
+
+  $: metaPrefix =
+    base === '/' ? 'home' :
+    base === '/docs' ? 'docs' :
+    base === '/changelog' ? 'changelog' :
+    base === '/privacy' ? 'privacy' :
+    base === '/terms' ? 'terms' :
+    'layout';
+  $: pageTitle = $t(`${metaPrefix}.meta.page_title` as MessageKey);
+  $: pageDescription = $t(`${metaPrefix}.meta.description` as MessageKey);
+  $: ogImage = SITE + ($locale === 'fr' ? '/og-fr.jpg' : '/og.jpg');
 
   $: structuredData = isHome
     ? {
@@ -49,12 +60,27 @@
 </script>
 
 <svelte:head>
-  <title>{$t('layout.meta.page_title')}</title>
-  <meta name="description" content={$t('layout.meta.description')} />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
   <link rel="canonical" href={canonical} />
   <link rel="alternate" hreflang="en" href={enUrl} />
   <link rel="alternate" hreflang="fr" href={frUrl} />
   <link rel="alternate" hreflang="x-default" href={enUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CortexMind" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={$t('home.hero.title_line1') + ' ' + $t('home.hero.title_line2')} />
+  <meta property="og:locale" content={$locale === 'fr' ? 'fr_CA' : 'en_US'} />
+  <meta property="og:locale:alternate" content={$locale === 'fr' ? 'en_US' : 'fr_CA'} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content={ogImage} />
   {#if structuredData}
     {@html jsonLdTag(structuredData)}
   {/if}

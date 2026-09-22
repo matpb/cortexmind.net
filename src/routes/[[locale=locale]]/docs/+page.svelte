@@ -56,11 +56,6 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
   </div>
 {/snippet}
 
-<svelte:head>
-  <title>{$t('docs.meta.page_title')}</title>
-  <meta name="description" content={$t('docs.meta.description')} />
-</svelte:head>
-
 <div class="wrap page-head">
   <h1>{$t('docs.title')}</h1>
   <p class="muted">{$t('docs.lead')}</p>

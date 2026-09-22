@@ -10,11 +10,6 @@
   }
 </script>
 
-<svelte:head>
-  <title>{$t('changelog.meta.page_title')}</title>
-  <meta name="description" content={$t('changelog.meta.description')} />
-</svelte:head>
-
 <div class="wrap page-head">
   <h1>{$t('changelog.title')}</h1>
   <p class="muted">{$t('changelog.lead')}</p>

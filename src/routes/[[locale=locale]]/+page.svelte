@@ -43,11 +43,6 @@
   }
 </script>
 
-<svelte:head>
-  <title>{$t('home.meta.page_title')}</title>
-  <meta name="description" content={$t('home.meta.description')} />
-</svelte:head>
-
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <img src="/media/hero-poster.jpg" alt="" class="hero-poster" />
@@ -323,6 +318,8 @@
       <details><summary>{$t('home.faq.q7')}</summary><p>{$t('home.faq.a7')}</p></details>
       <details><summary>{$t('home.faq.q8')}</summary><p>{$t('home.faq.a8')}</p></details>
       <details><summary>{$t('home.faq.q9')}</summary><p>{$t('home.faq.a9')}</p></details>
+      <details><summary>{$t('home.faq.q10')}</summary><p>{$t('home.faq.a10')}</p></details>
+      <details><summary>{$t('home.faq.q11')}</summary><p>{$t('home.faq.a11')} <a class="text-link" href="https://ethertunnel.com" target="_blank" rel="noopener">{$t('home.faq.a11_link')}</a></p></details>
     </div>
   </div>
 </section>

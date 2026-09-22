@@ -309,5 +309,10 @@
   "home.pricing.fine_post": ".",
   "docs.ai.prompt_label": "The prompt: install, connect, seed",
   "home.faq.q9": "What about the memory my AI already has?",
-  "home.faq.a9": "The setup prompt has the agent read through whatever it already remembers, memory files on disk or a built-in memory feature, and save each durable fact into CortexMind. Once that is done it asks you to switch the built-in memory off, so there is one memory, not two competing ones."
+  "home.faq.a9": "The setup prompt has the agent read through whatever it already remembers, memory files on disk or a built-in memory feature, and save each durable fact into CortexMind. Once that is done it asks you to switch the built-in memory off, so there is one memory, not two competing ones.",
+  "home.faq.q10": "Does my computer need to stay on?",
+  "home.faq.a10": "Only while you want the memory available. For most people CortexMind runs on the computer they are working on and starts with the session, so there is nothing to think about. If you want claude.ai, ChatGPT or the phone apps to reach your memory at any hour, the machine running CortexMind has to be on and reachable at that moment: leave a home computer running, or install CortexMind on a small VPS in the cloud so it is always online.",
+  "home.faq.q11": "How do web and phone apps reach it?",
+  "home.faq.a11": "Through the hosted tunnel. Turn it on in the app and CortexMind gets an HTTPS address that claude.ai, ChatGPT or any remote MCP client can add as a connector, signing in with OAuth. The tunnel is EtherTunnel, a separate product: your CortexMind license includes a free EtherTunnel license with one tunnel.",
+  "home.faq.a11_link": "Discover EtherTunnel"
 }

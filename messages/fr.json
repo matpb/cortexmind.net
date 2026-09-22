@@ -309,5 +309,10 @@
   "home.pricing.fine_post": ".",
   "docs.ai.prompt_label": "L’invite : installer, connecter, amorcer",
   "home.faq.q9": "Et la mémoire que mon IA possède déjà ?",
-  "home.faq.a9": "L’invite d’installation demande à l’agent de relire tout ce dont il se souvient déjà, fichiers de mémoire sur disque ou fonction de mémoire intégrée, et d’enregistrer chaque fait durable dans CortexMind. Une fois cela fait, il vous demande de désactiver la mémoire intégrée, pour qu’il n’y ait qu’une seule mémoire plutôt que deux en concurrence."
+  "home.faq.a9": "L’invite d’installation demande à l’agent de relire tout ce dont il se souvient déjà, fichiers de mémoire sur disque ou fonction de mémoire intégrée, et d’enregistrer chaque fait durable dans CortexMind. Une fois cela fait, il vous demande de désactiver la mémoire intégrée, pour qu’il n’y ait qu’une seule mémoire plutôt que deux en concurrence.",
+  "home.faq.q10": "Mon ordinateur doit-il rester allumé ?",
+  "home.faq.a10": "Seulement tant que vous voulez que la mémoire soit disponible. Pour la plupart des gens, CortexMind tourne sur l’ordinateur de travail et démarre avec la session, donc il n’y a rien à gérer. Si vous voulez que claude.ai, ChatGPT ou les applications mobiles atteignent votre mémoire à toute heure, la machine qui fait tourner CortexMind doit être allumée et joignable à ce moment-là : laissez un ordinateur de la maison allumé, ou installez CortexMind sur un petit serveur virtuel dans le nuage pour qu’il reste toujours en ligne.",
+  "home.faq.q11": "Comment les applications web et mobiles y accèdent-elles ?",
+  "home.faq.a11": "Par le tunnel hébergé. Activez-le dans l’application et CortexMind obtient une adresse HTTPS que claude.ai, ChatGPT ou tout client MCP distant peut ajouter comme connecteur, avec une connexion OAuth. Le tunnel est EtherTunnel, un produit distinct : votre licence CortexMind inclut une licence EtherTunnel gratuite avec un tunnel.",
+  "home.faq.a11_link": "Découvrir EtherTunnel"
 }

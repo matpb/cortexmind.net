@@ -7,7 +7,8 @@
     "dev": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && vite dev --host 127.0.0.1",
     "build": "node scripts/fetch-releases.mjs && paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "check": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "check": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy baseLocale --emit-ts-declarations && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "og": "node scripts/render-og.mjs"
   },
   "devDependencies": {
     "@fontsource-variable/fraunces": "^5.2.6",

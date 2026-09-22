@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Self-contained: serves build/ locally, drives it with Playwright, checks
 // the docs/changelog/privacy/terms pages for overflow, h1, and page-specific behavior.
-import { mkdir, readFile } from 'node:fs/promises';
+import { mkdir, readFile, stat } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { createBuildServer } from './serve-build.mjs';
 import updateInfo from '../update-v2.json' with { type: 'json' };
@@ -170,6 +170,52 @@ try {
       check(`${path} @ 320px: no horizontal overflow`, overflow);
     } finally {
       await context.close();
+    }
+  }
+
+  // Open Graph / Twitter card meta, home and docs, both locales.
+  const OG_PAGES = [
+    { path: '/', imageSuffix: '/og.jpg' },
+    { path: '/fr', imageSuffix: '/og-fr.jpg' },
+    { path: '/docs', imageSuffix: '/og.jpg' },
+    { path: '/fr/docs', imageSuffix: '/og-fr.jpg' }
+  ];
+  let homeTitle = null;
+  let docsTitle = null;
+  for (const { path, imageSuffix } of OG_PAGES) {
+    const context = await browser.newContext({ viewport: VIEWPORTS[0] });
+    const page = await context.newPage();
+    try {
+      await page.goto(BASE_URL + path, { waitUntil: 'networkidle' });
+
+      const getContent = (selector) => page.locator(selector).getAttribute('content');
+      const ogTitle = await getContent('meta[property="og:title"]');
+      const ogDescription = await getContent('meta[property="og:description"]');
+      const ogImage = await getContent('meta[property="og:image"]');
+      const ogUrl = await getContent('meta[property="og:url"]');
+      const twitterCard = await getContent('meta[name="twitter:card"]');
+
+      check(`${path}: og:title present`, !!ogTitle);
+      check(`${path}: og:description present`, !!ogDescription);
+      check(`${path}: og:image present`, !!ogImage);
+      check(`${path}: og:url present`, !!ogUrl);
+      check(`${path}: twitter:card present`, !!twitterCard);
+      check(`${path}: og:image ends with ${imageSuffix}`, !!ogImage && ogImage.endsWith(imageSuffix));
+
+      if (path === '/') homeTitle = await page.title();
+      if (path === '/docs') docsTitle = await page.title();
+    } finally {
+      await context.close();
+    }
+  }
+  check('/docs <title> differs from / <title>', !!homeTitle && !!docsTitle && homeTitle !== docsTitle);
+
+  for (const name of ['og.jpg', 'og-fr.jpg']) {
+    try {
+      const { size } = await stat(new URL(`../build/${name}`, import.meta.url));
+      check(`build/${name} exists and is > 30 KB`, size > 30000);
+    } catch {
+      check(`build/${name} exists and is > 30 KB`, false);
     }
   }
 } finally {
