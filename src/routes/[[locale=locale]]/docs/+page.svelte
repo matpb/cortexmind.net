@@ -1,8 +1,9 @@
 <script lang="ts">
   import { t } from '$lib/i18n';
   import { macUrl, windowsUrl, linuxUrl, version } from '$lib/releases';
-  import { installPrompt } from '$lib/prompts';
+  import { installPromptFor } from '$lib/prompts';
   import PromptCard from '$lib/PromptCard.svelte';
+  import { locale } from '$lib/i18n';
 
   const navItems = [
     ['ai-install', 'docs.nav.ai'],
@@ -33,7 +34,7 @@
     '{ "mcpServers": { "cortexmind": { "url": "http://localhost:14200/mcp", "headers": { "Authorization": "Bearer <token>" } } } }';
   const codexConfig = `[mcp_servers.cortexmind]
 url = "http://localhost:14200/mcp"
-bearer_token_env_var = "CORTEXMIND_TOKEN"`;
+http_headers = { "Authorization" = "Bearer <token>" }`;
   const tunnelAddress = 'https://<label>.ethertunnel.com/mcp';
   const dataDir = '~/.cortexmind/';
 
@@ -68,10 +69,11 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
       <h2>{$t('docs.ai.title')}</h2>
       <p>{$t('docs.ai.lead')}</p>
       <p>{$t('docs.ai.p1')}</p>
+      <p class="model-note">{$t('docs.ai.model_note')}</p>
 
       <PromptCard
         label={$t('docs.ai.prompt_label')}
-        prompt={installPrompt}
+        prompt={installPromptFor($locale)}
         copyLabel={$t('docs.ai.copy')}
         copiedLabel={$t('docs.ai.copied')}
       />
@@ -239,6 +241,16 @@ bearer_token_env_var = "CORTEXMIND_TOKEN"`;
 </div>
 
 <style>
+  .model-note {
+    font-size: 13px;
+    color: var(--gold-text);
+    background: var(--gold-soft);
+    border: 1px solid var(--gold-line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    max-width: none;
+  }
+
   .manual-heading {
     font-size: 28px;
     margin: 0 0 32px;

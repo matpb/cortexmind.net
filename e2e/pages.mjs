@@ -106,6 +106,9 @@ try {
     const promptCards = page.locator('#ai-install .prompt-card');
     check('docs: exactly one .prompt-card', (await promptCards.count()) === 1);
 
+    const modelNote = await page.locator('.model-note').first().textContent();
+    check('docs: model note is shown above the prompt card', !!modelNote && modelNote.includes('Sonnet 5'));
+
     const promptButtons = page.locator('#ai-install .prompt-card .button.small');
     await promptButtons.nth(0).click();
     const copiedPrompts = await page.evaluate(() => window.__copied);
@@ -114,6 +117,10 @@ try {
       copiedPrompts.some(
         (c) => c.includes('downloads.json') && c.includes('Part B') && c.includes('memory_search')
       )
+    );
+    check(
+      'docs: English prompt contains "Part C" and not "Partie C"',
+      copiedPrompts.some((c) => c.includes('Part C')) && !copiedPrompts.some((c) => c.includes('Partie C'))
     );
 
     const copyButtonIndex = await page.$$eval('.code-block', (blocks) =>
@@ -131,6 +138,32 @@ try {
     await page.waitForTimeout(100);
     const themeAttr = await page.evaluate(() => document.documentElement.dataset.theme);
     check('docs: theme toggle switches to light', themeAttr === 'light');
+
+    await context.close();
+  }
+
+  // /fr/docs: French prompt and model note.
+  {
+    const context = await browser.newContext({ viewport: VIEWPORTS[0], colorScheme: 'dark' });
+    const page = await context.newPage();
+    await page.addInitScript(() => {
+      window.__copied = [];
+      navigator.clipboard.writeText = (t) => {
+        window.__copied.push(t);
+        return Promise.resolve();
+      };
+    });
+    await page.goto(BASE_URL + '/fr/docs', { waitUntil: 'networkidle' });
+
+    const frModelNote = await page.locator('.model-note').first().textContent();
+    check('fr/docs: model note is shown above the prompt card', !!frModelNote && frModelNote.includes('Sonnet 5'));
+
+    await page.locator('#ai-install .prompt-card .button.small').nth(0).click();
+    const frCopiedPrompts = await page.evaluate(() => window.__copied);
+    check(
+      'fr/docs: French prompt contains "Partie C" and not "Part C"',
+      frCopiedPrompts.some((c) => c.includes('Partie C')) && !frCopiedPrompts.some((c) => c.includes('Part C'))
+    );
 
     await context.close();
   }
@@ -181,10 +214,51 @@ try {
       .getAttribute('href');
     check(`success @ ${viewport.width}px: manual steps link points to /docs#manual`, !!manualLinkHref && manualLinkHref.endsWith('/docs#manual'));
 
+    const successModelNote = await page.locator('.model-note').first().textContent();
+    check(`success @ ${viewport.width}px: model note is shown above the prompt card`, !!successModelNote && successModelNote.includes('Sonnet 5'));
+
     const successOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth
     );
     check(`success @ ${viewport.width}px: no horizontal overflow`, successOverflow);
+
+    await context.close();
+  }
+
+  // /success and /fr/success with ?checkout_id=preview: locale renders the right copy.
+  {
+    const context = await browser.newContext({ viewport: VIEWPORTS[0], colorScheme: 'dark' });
+    const page = await context.newPage();
+    await page.addInitScript(() => {
+      window.__copied = [];
+      navigator.clipboard.writeText = (t) => {
+        window.__copied.push(t);
+        return Promise.resolve();
+      };
+    });
+
+    await page.goto(BASE_URL + '/success?checkout_id=preview', { waitUntil: 'networkidle' });
+    const enTitle = await page.locator('h1').first().textContent();
+    check('success (preview, en): renders the English title', enTitle === 'Your agents are about to remember.');
+    await page.locator('.prompt-card .button.small').click();
+    const enPreviewCopied = await page.evaluate(() => window.__copied);
+    check(
+      'success (preview, en): prompt is English (Part C, not Partie C)',
+      enPreviewCopied.some((c) => c.includes('Part C')) && !enPreviewCopied.some((c) => c.includes('Partie C'))
+    );
+
+    await page.evaluate(() => { window.__copied = []; });
+    await page.goto(BASE_URL + '/fr/success?checkout_id=preview', { waitUntil: 'networkidle' });
+    const frTitle = await page.locator('h1').first().textContent();
+    check('success (preview, fr): renders the French title', frTitle === 'Vos agents sont sur le point de se souvenir.');
+    const frModelNote = await page.locator('.model-note').first().textContent();
+    check('success (preview, fr): model note is shown above the prompt card', !!frModelNote && frModelNote.includes('Sonnet 5'));
+    await page.locator('.prompt-card .button.small').click();
+    const frPreviewCopied = await page.evaluate(() => window.__copied);
+    check(
+      'success (preview, fr): prompt is French (Partie C, not Part C)',
+      frPreviewCopied.some((c) => c.includes('Partie C')) && !frPreviewCopied.some((c) => c.includes('Part C'))
+    );
 
     await context.close();
   }

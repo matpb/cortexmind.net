@@ -14,8 +14,8 @@ POLAR_ACCESS_TOKEN=polar_oat_REPLACE_ME
 
 # Comma-separated allowlist of Polar product UUIDs the checkout will accept:
 # CortexMind (Monthly) + CortexMind (Yearly). These MUST match the
-# data-product values on the buy buttons in index.html. If unset or empty,
-# create-polar-checkout.js rejects with "Checkout not configured".
+# data-product values on the buy buttons in src/routes/[[locale=locale]]/+page.svelte.
+# If unset or empty, create-polar-checkout.js rejects with "Checkout not configured".
 # Currently the 2 SANDBOX (MatPB Sandbox org) product UUIDs — swap for prod at go-live.
 POLAR_PRODUCT_IDS=80d839b2-264a-41df-963e-f679b723f6e4,cb0264ed-6079-4f91-845e-24a252eb3dc7
 

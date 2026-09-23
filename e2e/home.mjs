@@ -75,7 +75,7 @@ try {
     await page.locator(`[data-product="${YEARLY_ID}"]`).click();
     await page.waitForURL(/\/success\?checkout_id=test$/);
     check(`${viewport.name}: exactly one POST to create-polar-checkout`, checkoutCalls === 1);
-    check(`${viewport.name}: checkout body has correct product_id`, checkoutBody === JSON.stringify({ product_id: YEARLY_ID }));
+    check(`${viewport.name}: checkout body has correct product_id`, checkoutBody === JSON.stringify({ product_id: YEARLY_ID, locale: 'en' }));
     check(`${viewport.name}: navigated to /success?checkout_id=test`, /\/success\?checkout_id=test$/.test(new URL(page.url()).pathname + new URL(page.url()).search));
 
     await page.goto(BASE_URL + '/', { waitUntil: 'networkidle' });

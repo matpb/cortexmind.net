@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { t, fmtDate, href } from '$lib/i18n';
+  import { t, fmtDate, href, locale } from '$lib/i18n';
+  import { get } from 'svelte/store';
   import { macUrl, windowsUrl, linuxUrl, version, pubDate } from '$lib/releases';
 
   const MONTHLY_ID = '1dc6a2ec-ca63-4db9-b2c8-2dfa4c8de64b';
@@ -18,7 +19,7 @@
       const res = await fetch('/api/create-polar-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product_id: productId })
+        body: JSON.stringify({ product_id: productId, locale: get(locale) })
       });
       const data = await res.json().catch(() => null);
       if (res.ok && data && data.url) {

@@ -22,8 +22,7 @@ const initialLocale: Locale = browser ? (valid(document.documentElement.lang) ??
 export const locale = writable<Locale>(initialLocale);
 
 const STORAGE_KEY = 'cortexmind-locale';
-// success/ is not localized: it lives outside the [[locale]] route group.
-const UNLOCALIZED = ['/success'];
+const UNLOCALIZED: string[] = [];
 
 export function preferredLocale(): Locale {
   if (!browser) return 'en';

@@ -79,16 +79,14 @@ export async function onRequestPost(context) {
     return json({ error: 'Unknown product' }, 400);
   }
 
-  // 4. Build the Checkout create request. success_url uses Polar's
-  //    {CHECKOUT_ID} placeholder, which Polar substitutes on redirect. The
-  //    success page uses that id to fetch the issued license key.
-  //    Extensionless clean URLs (Cloudflare Pages serves success.html at
-  //    /success) avoid a 308 .html→clean redirect hop.
+  // {CHECKOUT_ID} is Polar's placeholder, substituted on redirect.
+  // Only 'fr' means French; anything else, including unset, is English.
+  const isFrench = payload.locale === 'fr';
   const origin = new URL(request.url).origin;
   const base = (env && env.POLAR_API_BASE) || DEFAULT_POLAR_API_BASE;
   const body = {
     products: [productId],
-    success_url: origin + '/success?checkout_id={CHECKOUT_ID}',
+    success_url: origin + (isFrench ? '/fr' : '') + '/success?checkout_id={CHECKOUT_ID}',
   };
 
   let polarRes;

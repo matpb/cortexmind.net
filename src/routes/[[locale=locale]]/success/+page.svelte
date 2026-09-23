@@ -3,7 +3,8 @@
   import { page } from '$app/stores';
   import { macUrl, windowsUrl, linuxUrl } from '$lib/releases';
   import PromptCard from '$lib/PromptCard.svelte';
-  import { installPrompt } from '$lib/prompts';
+  import { installPromptFor } from '$lib/prompts';
+  import { t, tr, href, locale } from '$lib/i18n';
 
   const KEY_ENDPOINT = '/api/get-license-key';
   const MAX_POLLS = 6;
@@ -15,7 +16,7 @@
   let key = '';
   let portalUrl = FALLBACK_PORTAL;
   let errorMsg = '';
-  let copyLabel = 'Copy';
+  let keyCopied = false;
   let attempts = 0;
 
   async function fetchKey() {
@@ -39,22 +40,22 @@
         return;
       }
       if (res.status === 202 || data.pending) {
-        errorMsg = 'Your license key is still being issued. Refresh in a minute — it will also appear in your customer portal.';
+        errorMsg = tr('success.error_pending', {}, $locale);
         status = 'error';
         return;
       }
       if (res.status === 410) {
-        errorMsg = 'This checkout was not completed, so no license key was issued. If you believe you were charged, reply to your receipt email.';
+        errorMsg = tr('success.error_not_completed', {}, $locale);
         status = 'error';
         return;
       }
-      errorMsg = "We couldn't fetch your license key automatically.";
+      errorMsg = tr('success.error_generic', {}, $locale);
       status = 'error';
     } catch {
       if (attempts < MAX_POLLS) {
         setTimeout(fetchKey, POLL_DELAY_MS);
       } else {
-        errorMsg = "We couldn't fetch your license key automatically.";
+        errorMsg = tr('success.error_generic', {}, $locale);
         status = 'error';
       }
     }
@@ -65,8 +66,8 @@
     navigator.clipboard
       ?.writeText(key)
       .then(() => {
-        copyLabel = 'Copied!';
-        setTimeout(() => (copyLabel = 'Copy'), 1600);
+        keyCopied = true;
+        setTimeout(() => (keyCopied = false), 1600);
       })
       .catch(() => {});
   }
@@ -80,7 +81,7 @@
       return;
     }
     if (!checkoutId) {
-      errorMsg = 'No checkout reference found. Your license key is in your customer portal — sign in with your checkout email.';
+      errorMsg = tr('success.no_checkout', {}, $locale);
       status = 'error';
       return;
     }
@@ -89,69 +90,87 @@
 </script>
 
 <svelte:head>
-  <title>Welcome to CortexMind</title>
+  <title>{$t('success.meta_title')}</title>
   <meta name="robots" content="noindex" />
 </svelte:head>
 
 <div class="wrap success-wrap">
-  <h1>Your agents are about to remember.</h1>
-  <p class="muted">
-    You're in — thanks for backing local-first memory. Your license key is below; paste it into the app and you're done.
-  </p>
+  <h1>{$t('success.title')}</h1>
+  <p class="muted">{$t('success.lead')}</p>
 
   {#if status === 'pending'}
-    <p class="muted">Fetching your license key…</p>
+    <p class="muted">{$t('success.pending')}</p>
   {:else if status === 'ok'}
     <div class="key-block">
-      <span class="muted">Your license key</span>
+      <span class="muted">{$t('success.key_label')}</span>
       <div class="key-row">
         <code>{key}</code>
-        <button type="button" class="button small" on:click={copyKey}>{copyLabel}</button>
+        <button type="button" class="button small" on:click={copyKey}>{keyCopied ? $t('success.copied') : $t('success.copy')}</button>
       </div>
-      <p class="muted">Keep it handy — you can always find it again in your <a href={portalUrl}>customer portal</a>.</p>
+      <p class="muted">
+        {$t('success.key_hint_pre')}<a href={portalUrl}>{$t('success.key_hint_link')}</a>{$t('success.key_hint_post')}
+      </p>
+      <p class="muted key-saved">{$t('success.key_saved')}</p>
     </div>
 
     <div class="ai-install">
-      <h2>Next: let your AI install it</h2>
-      <p class="muted">Copy this prompt into Claude Code, Codex, Cursor or any agent that can run commands on your machine. It will ask for the key above, download and install CortexMind, connect itself, move over what it already remembers, and interview you to seed the memory.</p>
-      <PromptCard label="Setup prompt" prompt={installPrompt} copyLabel="Copy prompt" copiedLabel="Copied" />
-      <p class="muted">Prefer to do it by hand? <a class="text-link" href="/docs#manual">Follow the manual steps</a>.</p>
+      <h2>{$t('success.ai_heading')}</h2>
+      <p class="muted">{$t('success.ai_lead')}</p>
+      <p class="model-note">{$t('docs.ai.model_note')}</p>
+      <PromptCard
+        label={$t('success.prompt_label')}
+        prompt={installPromptFor($locale)}
+        copyLabel={$t('success.prompt_copy')}
+        copiedLabel={$t('success.prompt_copied')}
+      />
+      <p class="muted">
+        {$t('success.manual_pre')}<a class="text-link" href={$href('/docs') + '#manual'}>{$t('success.manual_link')}</a>{$t('success.manual_post')}
+      </p>
     </div>
 
     <ol>
       <li>
-        <strong>Or install manually:</strong> download CortexMind for your platform:
+        <strong>{$t('success.manual_step_strong')}</strong> {$t('success.manual_step_lead')}
         <div class="step-downloads">
-          <a class="button secondary small" href={macUrl}>Download for macOS</a>
-          <a class="button secondary small" href={windowsUrl}>Download for Windows</a>
-          <a class="button secondary small" href={linuxUrl}>Download for Linux</a>
+          <a class="button secondary small" href={macUrl}>{$t('success.download_mac')}</a>
+          <a class="button secondary small" href={windowsUrl}>{$t('success.download_windows')}</a>
+          <a class="button secondary small" href={linuxUrl}>{$t('success.download_linux')}</a>
         </div>
       </li>
-      <li><strong>Open the app</strong> and paste the license key above when asked.</li>
-      <li><strong>Connect your agents.</strong> The app's tray menu gives you a ready-made MCP config snippet.</li>
+      <li><strong>{$t('success.step_open_strong')}</strong> {$t('success.step_open_rest')}</li>
+      <li><strong>{$t('success.step_connect_strong')}</strong> {$t('success.step_connect_rest')}</li>
     </ol>
 
     <p class="muted">
-      Manage or cancel your subscription anytime in your <a href={portalUrl}>customer portal</a>.
+      {$t('success.manage_pre')}<a href={portalUrl}>{$t('success.manage_link')}</a>{$t('success.manage_post')}
     </p>
   {:else}
     <p class="muted">
-      {errorMsg} It's waiting in your <a href={FALLBACK_PORTAL}>customer portal</a> (sign in with your checkout email) — or
-      reply to your receipt email and we'll get you set up right away.
+      {errorMsg} {$t('success.error_fallback_pre')}<a href={FALLBACK_PORTAL}>{$t('success.error_fallback_link')}</a>{$t('success.error_fallback_post')}
     </p>
   {/if}
 
   {#if checkoutId}
-    <p class="muted">Reference: {checkoutId}</p>
+    <p class="muted">{$t('success.reference', { id: checkoutId })}</p>
   {/if}
 
-  <p><a href="/">&larr; Back to CortexMind</a></p>
+  <p><a href={$href('/')}>{$t('success.back')}</a></p>
 </div>
 
 <style>
   .success-wrap { padding: 64px 0 96px; max-width: 620px; }
   .key-block { margin: 32px 0; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+  .key-saved { margin-top: 10px; }
   .ai-install { margin: 32px 0; }
+  .model-note {
+    font-size: 13px;
+    color: var(--gold-text);
+    background: var(--gold-soft);
+    border: 1px solid var(--gold-line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    max-width: none;
+  }
   .key-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
   .key-row code { background: var(--code-bg); color: var(--code-text); padding: 8px 12px; border-radius: 6px; flex: 1; overflow-wrap: anywhere; }
   ol { padding-left: 20px; display: grid; gap: 16px; }
