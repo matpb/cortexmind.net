@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.1.0",
+    "name": "CortexMind v4.1.0",
+    "published_at": "2026-09-23T02:05:45Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.1.0",
+    "body": "## CortexMind 4.1.0\n\n**AI instructions that fit ChatGPT.** The memory instructions in Settings are now about half as long, so they paste straight into ChatGPT's custom instructions with room to spare for your own.\n\n**En français aussi.** The AI instructions now come in English and French. Pick the language right above the Copy button; CortexMind remembers your choice and defaults to your system language.\n\n**Clearer next steps.** Under the instructions, the app now tells you where to paste them and how to check they work: open a new chat and ask \"What do you know about me?\"\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.0.0",
     "name": "CortexMind v4.0.0",
     "published_at": "2026-09-22T12:55:36Z",
