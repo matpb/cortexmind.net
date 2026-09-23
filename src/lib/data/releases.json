@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.2.0",
+    "name": "CortexMind v4.2.0",
+    "published_at": "2026-09-23T20:07:10Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.2.0",
+    "body": "## CortexMind 4.2.0\n\n**En français.** The whole app now speaks English and French: settings, the menu bar and the memory dashboard. It starts in your system's language, and you can switch any time with the EN/FR toggle. Change it in one place and everything follows.\n\n**A fresh look.** Settings and the dashboard now share the cortexmind.net design, in dark and light, and the dashboard works on a phone-sized window.\n\n**Settings, reorganized.** Everything sits in four tabs: Connect, Instructions, General and Advanced. Your connection details come first, and you only restart when you change your license key.\n\n**See the time left.** During the first-run model download, CortexMind measures your connection and shows the speed and the time remaining.\n\n**Seed your memory in French.** The interview prompt that fills your memory on day one now comes in French too.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.1.1",
     "name": "CortexMind v4.1.1",
     "published_at": "2026-09-23T14:31:03Z",
