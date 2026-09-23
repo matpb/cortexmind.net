@@ -45,7 +45,7 @@ CortexMind opens a setup window. Ask me to paste the license key there; the app 
 
 ## 4. Connect yourself
 
-The daemon's config file is ~/.cortexmind/config.toml (Windows: %USERPROFILE%\.cortexmind\config.toml). Read the value of `mcp_bearer_token` from it. This is the same value the app shows as "CortexMind Password" in its Settings. Then register the MCP server on yourself, using exactly the line for the agent you are:
+The daemon's config file is ~/.cortexmind/config.toml (Windows: %USERPROFILE%\.cortexmind\config.toml). Read the value of `mcp_bearer_token` from it. This is the same value the app shows as "CortexMind password" on the Connect tab of its settings. Then register the MCP server on yourself, using exactly the line for the agent you are:
 
 - Claude Code: run `claude mcp add --transport http --scope user cortexmind http://localhost:14200/mcp --header "Authorization: Bearer <token>"`
 - Codex (the CLI, or Codex inside the ChatGPT desktop app; both read the same file): add this block to ~/.codex/config.toml, creating the file if needed, with the token written in place:
@@ -87,10 +87,10 @@ Without the save, the conversation is lost.
 
 If I also use ChatGPT on the web or on my phone, claude.ai or Claude Desktop, they can reach the same memory through the CortexMind app's public address. Tell me, do not do it yourself:
 
-1. In the CortexMind app, open Settings. Under "Your CortexMind Endpoint", copy the "Public URL" (it looks like https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp).
+1. In the CortexMind app, open the settings (Settings... in the tray menu). On the Connect tab, copy the "Public URL" (it looks like https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp).
 2. In the other app, add a custom connector named CortexMind with that URL. In ChatGPT on the web, custom connectors first need Developer mode: Settings, then Apps (or Connectors), then Advanced, then turn on Developer mode.
-3. If the connector asks for a password, access token or API key, paste the "CortexMind Password" from the same Settings page.
-4. Then paste the "AI Instructions" from the app's Settings (Copy button) into that app's custom instructions, and open a new conversation to test it by asking "What do you know about me?". The first time, it asks permission to use CortexMind: allow it.
+3. If the connector asks for a password, access token or API key, paste the "CortexMind password" from the same tab.
+4. Then paste the "AI instructions" from the Instructions tab of the app's settings (Copy button) into that app's custom instructions, and open a new conversation to test it by asking "What do you know about me?". The first time, it asks permission to use CortexMind: allow it.
 
 ## 7. Load the new server
 
@@ -200,6 +200,6 @@ Tell me:
 
 > "We're done. I've saved your identity, the people in your life, your current work, and how you want me to show up, both as durable facts (so they rank first on every future query) and as the conversation that surfaced them (so the texture is recoverable).
 >
-> If you want to spot-check what landed, open the CortexMind dashboard: in the menu bar or tray icon, choose Open Dashboard, and sign in with the CortexMind Password from Settings."
+> If you want to spot-check what landed, open the CortexMind dashboard: in the menu bar or tray icon, choose Open Dashboard, and sign in with the CortexMind password from the Connect tab of the settings."
 
 Sign off warmly. You don't need to save a final summary: you already saved as you went.

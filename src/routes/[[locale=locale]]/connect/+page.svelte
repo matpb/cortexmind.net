@@ -2,7 +2,7 @@
   import { t, href } from '$lib/i18n';
 
   const TUNNEL_URL = 'https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp';
-  const STRONG_TERMS = ['CortexMind Password', 'Public URL', 'Local URL', 'Bearer', 'Developer mode', 'mode développeur', 'CortexMind'];
+  const STRONG_TERMS = ['mot de passe CortexMind', 'CortexMind password', 'URL publique', 'URL locale', 'Public URL', 'Local URL', 'Bearer', 'Developer mode', 'mode développeur', 'CortexMind'];
   const STRONG_RE = new RegExp(STRONG_TERMS.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'g');
 
   function escapeHtml(text: string): string {

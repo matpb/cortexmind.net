@@ -45,7 +45,7 @@ CortexMind ouvre une fenêtre de configuration. Demande-moi d’y coller la clé
 
 ## 4. Te connecter
 
-Le fichier de configuration du service est ~/.cortexmind/config.toml (Windows : %USERPROFILE%\.cortexmind\config.toml). Lis-y la valeur de `mcp_bearer_token`. C’est la même valeur que l’application affiche sous « CortexMind Password » dans ses réglages (Settings). Enregistre ensuite le serveur MCP chez toi, en utilisant exactement la ligne qui correspond à ton agent :
+Le fichier de configuration du service est ~/.cortexmind/config.toml (Windows : %USERPROFILE%\.cortexmind\config.toml). Lis-y la valeur de `mcp_bearer_token`. C’est la même valeur que l’application affiche sous « Mot de passe CortexMind », dans l’onglet Connexion de ses réglages. Enregistre ensuite le serveur MCP chez toi, en utilisant exactement la ligne qui correspond à ton agent :
 
 - Claude Code : exécute `claude mcp add --transport http --scope user cortexmind http://localhost:14200/mcp --header "Authorization: Bearer <token>"`
 - Codex (en ligne de commande, ou Codex dans l’application de bureau ChatGPT ; les deux lisent le même fichier) : ajoute ce bloc à ~/.codex/config.toml, en créant le fichier au besoin, avec le jeton écrit à sa place :
@@ -87,10 +87,10 @@ Sans cette sauvegarde, la conversation est perdue.
 
 Si j’utilise aussi ChatGPT sur le Web ou sur mon téléphone, claude.ai ou Claude Desktop, ils peuvent accéder à la même mémoire par l’adresse publique de l’application CortexMind. Explique-moi la marche à suivre, ne le fais pas toi-même :
 
-1. Dans l’application CortexMind, ouvre les réglages (Settings). Sous « Your CortexMind Endpoint », copie la « Public URL » (elle ressemble à https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp).
+1. Dans l’application CortexMind, ouvre les réglages (Réglages… dans le menu de l’icône). Dans l’onglet Connexion, copie l’« URL publique » (elle ressemble à https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp).
 2. Dans l’autre application, ajoute un connecteur personnalisé nommé CortexMind avec cette URL. Dans ChatGPT sur le Web, les connecteurs personnalisés exigent d’abord le mode développeur : Paramètres, puis Applications (ou Connecteurs), puis Paramètres avancés, puis active le mode développeur.
-3. Si le connecteur demande un mot de passe, un jeton d’accès ou une clé d’API, colle le « CortexMind Password » de la même page de réglages.
-4. Colle ensuite les « AI Instructions » des réglages de l’application (bouton Copy) dans les instructions personnalisées de cette application, puis ouvre une nouvelle conversation pour vérifier en demandant « Qu’est-ce que tu sais de moi ? ». La première fois, elle demande la permission d’utiliser CortexMind : accorde-la.
+3. Si le connecteur demande un mot de passe, un jeton d’accès ou une clé d’API, colle le « Mot de passe CortexMind » du même onglet.
+4. Colle ensuite les « Instructions pour l’IA » de l’onglet Instructions des réglages (bouton Copier) dans les instructions personnalisées de cette application, puis ouvre une nouvelle conversation pour vérifier en demandant « Qu’est-ce que tu sais de moi ? ». La première fois, elle demande la permission d’utiliser CortexMind : accorde-la.
 
 ## 7. Charger le nouveau serveur
 
@@ -200,6 +200,6 @@ Dis-moi :
 
 > « C’est terminé. J’ai enregistré ton identité, les gens de ta vie, ton travail en cours et la façon dont tu veux que je me présente, à la fois comme faits durables (pour qu’ils passent en premier dans chaque requête future) et comme la conversation qui les a fait ressortir (pour que la texture puisse être retrouvée).
 >
-> Si tu veux vérifier ce qui a été enregistré, ouvre le tableau de bord de CortexMind : dans l’icône de la barre des menus ou de la zone de notification, choisis « Open Dashboard », puis connecte-toi avec le « CortexMind Password » des réglages. »
+> Si tu veux vérifier ce qui a été enregistré, ouvre le tableau de bord de CortexMind : dans l’icône de la barre des menus ou de la zone de notification, choisis « Ouvrir le tableau de bord », puis connecte-toi avec le « Mot de passe CortexMind » de l’onglet Connexion des réglages. »
 
 Termine sur une note chaleureuse. Pas besoin d’enregistrer un résumé final : tu as déjà tout enregistré au fur et à mesure.
