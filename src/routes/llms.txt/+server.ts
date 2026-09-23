@@ -28,6 +28,8 @@ CortexMind exposes an MCP endpoint at http://localhost:14200/mcp, authenticated 
 
 The docs page at https://cortexmind.net/docs#ai-install holds a copy-paste prompt that an agentic AI with shell access can run to install CortexMind, connect itself over MCP, and seed the memory by interviewing the user.
 
+Connecting ChatGPT or Claude on the web (custom connector, Public URL + CortexMind Password): https://cortexmind.net/connect
+
 ## Pricing
 
 ${m['home.pricing.monthly.price']()} USD per month (${m['home.pricing.monthly.tag']()}), or ${m['home.pricing.yearly.price']()} USD per year.

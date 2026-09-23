@@ -6,7 +6,7 @@ export default {
   kit: {
     adapter: adapter({ fallback: '200.html' }),
     prerender: {
-      entries: ['*', '/fr', '/fr/docs', '/fr/changelog', '/fr/privacy', '/fr/terms', '/fr/success', '/downloads.json', '/llms.txt']
+      entries: ['*', '/fr', '/fr/docs', '/fr/changelog', '/fr/privacy', '/fr/terms', '/fr/success', '/connect', '/fr/connect', '/downloads.json', '/llms.txt']
     },
     csp: {
       mode: 'hash',

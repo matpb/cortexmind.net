@@ -108,6 +108,7 @@
       <span class="step-number">{$t('home.how.step2.number')}</span>
       <h3>{$t('home.how.step2.title')}</h3>
       <p>{$t('home.how.step2.body')}</p>
+      <p><a class="text-link" href={$href('/connect')}>{$t('home.how.step2_link')}</a></p>
     </div>
     <div class="step">
       <span class="step-number">{$t('home.how.step3.number')}</span>
@@ -333,7 +334,7 @@
     <div class="faq-list">
       <details><summary>{$t('home.faq.q1')}</summary><p>{$t('home.faq.a1')}</p></details>
       <details><summary>{$t('home.faq.q2')}</summary><p>{$t('home.faq.a2')}</p></details>
-      <details><summary>{$t('home.faq.q3')}</summary><p>{$t('home.faq.a3')}</p></details>
+      <details><summary>{$t('home.faq.q3')}</summary><p>{$t('home.faq.a3')}</p><p><a class="text-link" href={$href('/connect')}>{$t('home.how.step2_link')}</a></p></details>
       <details><summary>{$t('home.faq.q4')}</summary><p>{$t('home.faq.a4')}</p></details>
       <details><summary>{$t('home.faq.q5')}</summary><p>{$t('home.faq.a5')}</p></details>
       <details><summary>{$t('home.faq.q6')}</summary><p>{$t('home.faq.a6')}</p></details>

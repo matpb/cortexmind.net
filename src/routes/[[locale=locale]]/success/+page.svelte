@@ -123,6 +123,7 @@
         copyLabel={$t('success.prompt_copy')}
         copiedLabel={$t('success.prompt_copied')}
       />
+      <p class="muted"><a class="text-link" href={$href('/connect')}>{$t('success.connect_link')}</a></p>
       <p class="muted">
         {$t('success.manual_pre')}<a class="text-link" href={$href('/docs') + '#manual'}>{$t('success.manual_link')}</a>{$t('success.manual_post')}
       </p>
@@ -158,7 +159,8 @@
 </div>
 
 <style>
-  .success-wrap { padding: 64px 0 96px; max-width: 620px; }
+  /* vertical padding only so .wrap keeps its side gutters; 716 = 620 content + 2x48 gutter */
+  .success-wrap { padding-top: 64px; padding-bottom: 96px; max-width: 716px; }
   .key-block { margin: 32px 0; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
   .key-saved { margin-top: 10px; }
   .ai-install { margin: 32px 0; }

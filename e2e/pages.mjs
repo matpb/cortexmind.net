@@ -23,7 +23,9 @@ const PAGES = [
   { path: '/privacy', name: 'privacy' },
   { path: '/terms', name: 'terms' },
   { path: '/fr/docs', name: null },
-  { path: '/success?checkout_id=abc', name: null }
+  { path: '/success?checkout_id=abc', name: null },
+  { path: '/connect', name: 'connect' },
+  { path: '/fr/connect', name: null }
 ];
 const VIEWPORTS = [
   { width: 1440, height: 900 },
@@ -61,9 +63,9 @@ try {
 
         if (viewport.width === 390) {
           const brandVisible = await page.locator('.site-header .brand').first().isVisible();
-          const toggleVisible = await page.locator('.theme-toggle').first().isVisible();
+          const gearVisible = await page.locator('.site-header .gear-toggle').first().isVisible();
           const startVisible = await page.locator('.site-header .button').first().isVisible();
-          check(`${path} @ 390px: header brand/toggle/start visible`, brandVisible && toggleVisible && startVisible);
+          check(`${path} @ 390px: header brand/gear/start visible`, brandVisible && gearVisible && startVisible);
         }
       } finally {
         await context.close();
@@ -134,10 +136,18 @@ try {
       copied.some((c) => c.includes('localhost:14200'))
     );
 
+    await page.locator('button.gear-toggle').click();
+    await page.locator('#site-prefs').waitFor({ state: 'visible' });
     await page.click('.theme-toggle');
     await page.waitForTimeout(100);
     const themeAttr = await page.evaluate(() => document.documentElement.dataset.theme);
     check('docs: theme toggle switches to light', themeAttr === 'light');
+
+    const docsConnectLink = await page.locator('.docs-nav a[href="/connect"]').count();
+    check('docs: side nav contains a link to /connect', docsConnectLink > 0);
+
+    const calloutLink = await page.locator('#connect a.text-link[href="/connect"]').count();
+    check('docs: connect section callout links to /connect', calloutLink > 0);
 
     await context.close();
   }
@@ -158,12 +168,108 @@ try {
     const frModelNote = await page.locator('.model-note').first().textContent();
     check('fr/docs: model note is shown above the prompt card', !!frModelNote && frModelNote.includes('Sonnet 5'));
 
+    const frDocsConnectLink = await page.locator('.docs-nav a[href="/fr/connect"]').count();
+    check('fr/docs: side nav contains a link to /fr/connect', frDocsConnectLink > 0);
+
     await page.locator('#ai-install .prompt-card .button.small').nth(0).click();
     const frCopiedPrompts = await page.evaluate(() => window.__copied);
     check(
       'fr/docs: French prompt contains "Partie C" and not "Part C"',
       frCopiedPrompts.some((c) => c.includes('Partie C')) && !frCopiedPrompts.some((c) => c.includes('Part C'))
     );
+
+    await context.close();
+  }
+
+  // /connect: headings, anchors, and the French copy check.
+  {
+    const context = await browser.newContext({ viewport: VIEWPORTS[0] });
+    const page = await context.newPage();
+    await page.goto(BASE_URL + '/connect', { waitUntil: 'networkidle' });
+
+    const chatgptHeading = await page.locator('h2', { hasText: 'ChatGPT' }).count();
+    check('connect: a heading mentions ChatGPT', chatgptHeading > 0);
+    const claudeHeading = await page.locator('h2', { hasText: 'Claude' }).count();
+    check('connect: a heading mentions Claude', claudeHeading > 0);
+    check('connect: #chatgpt anchor exists', (await page.locator('#chatgpt').count()) > 0);
+    check('connect: #claude anchor exists', (await page.locator('#claude').count()) > 0);
+
+    await page.goto(BASE_URL + '/fr/connect', { waitUntil: 'networkidle' });
+    const frBody = await page.locator('body').textContent();
+    check('fr/connect: contains "Avant de commencer"', !!frBody && frBody.includes('Avant de commencer'));
+
+    await context.close();
+  }
+
+  // Header nav: zero links to /connect or /changelog (moved to footer only), localized per locale.
+  {
+    const context = await browser.newContext({ viewport: VIEWPORTS[0] });
+    const page = await context.newPage();
+
+    await page.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
+    const enHeaderConnectLinks = await page.locator('.site-header nav a[href="/connect"]').count();
+    check('/: header nav has zero links to /connect', enHeaderConnectLinks === 0);
+    const enHeaderChangelogLinks = await page.locator('.site-header nav a[href="/changelog"]').count();
+    check('/: header nav has zero links to /changelog', enHeaderChangelogLinks === 0);
+    const enFooterConnectLinks = await page.locator('.site-footer a[href="/connect"]').count();
+    check('/: footer has exactly one link to /connect', enFooterConnectLinks === 1);
+    const enFooterChangelogLinks = await page.locator('.site-footer a[href="/changelog"]').count();
+    check('/: footer has exactly one link to /changelog', enFooterChangelogLinks === 1);
+    const enHomeConnectLinks = await page.locator('a[href="/connect"]').count();
+    check('/: home page contains a link to /connect', enHomeConnectLinks > 0);
+
+    await page.goto(BASE_URL + '/fr', { waitUntil: 'networkidle' });
+    const frHeaderConnectLinks = await page.locator('.site-header nav a[href="/fr/connect"]').count();
+    check('/fr: header nav has zero links to /fr/connect', frHeaderConnectLinks === 0);
+    const frHeaderChangelogLinks = await page.locator('.site-header nav a[href="/fr/changelog"]').count();
+    check('/fr: header nav has zero links to /fr/changelog', frHeaderChangelogLinks === 0);
+    const frFooterConnectLinks = await page.locator('.site-footer a[href="/fr/connect"]').count();
+    check('/fr: footer has exactly one link to /fr/connect', frFooterConnectLinks === 1);
+    const frFooterChangelogLinks = await page.locator('.site-footer a[href="/fr/changelog"]').count();
+    check('/fr: footer has exactly one link to /fr/changelog', frFooterChangelogLinks === 1);
+
+    await page.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
+    await page.locator('button.gear-toggle').click();
+    await page.locator('#site-prefs').waitFor({ state: 'visible' });
+    check('/: clicking gear-toggle shows #site-prefs', await page.locator('#site-prefs').isVisible());
+    await page.keyboard.press('Escape');
+    await page.locator('#site-prefs').waitFor({ state: 'hidden' });
+    check('/: pressing Escape hides #site-prefs', (await page.locator('#site-prefs').count()) === 0);
+
+    await context.close();
+  }
+
+  // /connect at 390px: no horizontal overflow, in both dark and light theme.
+  {
+    const context = await browser.newContext({ viewport: VIEWPORTS[1], colorScheme: 'dark' });
+    const page = await context.newPage();
+    await page.goto(BASE_URL + '/connect', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(150);
+
+    const darkOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    );
+    check('/connect @ 390px dark: no horizontal overflow', darkOverflow);
+
+    await page.locator('button.gear-toggle').click();
+    await page.locator('#site-prefs').waitFor({ state: 'visible' });
+    const popoverOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    );
+    check('/connect @ 390px dark: popover open causes no horizontal overflow', popoverOverflow);
+
+    await page.click('.theme-toggle');
+    await page.waitForTimeout(100);
+    const themeAttr = await page.evaluate(() => document.documentElement.dataset.theme);
+    check('/connect @ 390px: theme toggle switches to light', themeAttr === 'light');
+
+    await page.keyboard.press('Escape');
+    await page.locator('#site-prefs').waitFor({ state: 'hidden' });
+
+    const lightOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    );
+    check('/connect @ 390px light: no horizontal overflow', lightOverflow);
 
     await context.close();
   }
@@ -298,6 +404,28 @@ try {
       check(`${path} @ 320px: no horizontal overflow`, overflow);
     } finally {
       await context.close();
+    }
+  }
+
+  // Phone side gutters: a scoped `padding:` shorthand once wiped .wrap's gutters on /connect and /success.
+  for (const path of ['/', '/docs', '/connect', '/changelog', '/privacy', '/terms', '/success?checkout_id=preview']) {
+    for (const url of [path, path === '/' ? '/fr' : '/fr' + path]) {
+      const context = await browser.newContext({ viewport: { width: 390, height: 900 } });
+      const page = await context.newPage();
+      try {
+        await page.goto(BASE_URL + url, { waitUntil: 'networkidle' });
+        const offenders = await page.evaluate(() =>
+          [...document.querySelectorAll('main h1, main h2, main h3, main p, main li, main details, main pre')]
+            .filter((e) => {
+              const r = e.getBoundingClientRect();
+              return r.width > 0 && r.height > 0 && (r.left < 16 || window.innerWidth - r.right < 16);
+            })
+            .map((e) => e.tagName + ' ' + e.textContent.trim().slice(0, 30))
+        );
+        check(`${url}: every text block keeps >= 16px side gutters at 390px${offenders.length ? ' (' + offenders.slice(0, 2).join(' | ') + ')' : ''}`, offenders.length === 0);
+      } finally {
+        await context.close();
+      }
     }
   }
 

@@ -15,6 +15,13 @@ function check(name, ok) {
   if (!ok) failed = true;
 }
 
+async function openPrefsPopover(page) {
+  const gear = page.locator('button.gear-toggle');
+  const expanded = await gear.getAttribute('aria-expanded');
+  if (expanded !== 'true') await gear.click();
+  await page.locator('#site-prefs').waitFor({ state: 'visible' });
+}
+
 const server = createBuildServer();
 await new Promise((resolve) => server.listen(PORT, '127.0.0.1', resolve));
 
@@ -30,6 +37,7 @@ try {
   const initialBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   check('default theme is dark (no data-theme attr, dark --bg)', initialTheme === undefined && initialBg === DARK_BG);
 
+  await openPrefsPopover(page);
   await page.click('.theme-toggle');
   await page.waitForTimeout(100);
   const toggledTheme = await page.evaluate(() => document.documentElement.dataset.theme);
@@ -41,10 +49,12 @@ try {
   const persistedBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   check('theme persists across reload (localStorage)', persistedTheme === 'light' && persistedBg === LIGHT_BG);
 
+  await openPrefsPopover(page);
   await page.selectOption('#locale-select', 'fr');
   await page.waitForURL(/\/fr\/?$/);
   check('locale select navigates to /fr', /\/fr\/?$/.test(new URL(page.url()).pathname));
 
+  await openPrefsPopover(page);
   await page.selectOption('#locale-select', 'en');
   await page.waitForURL((url) => !/\/fr\/?$/.test(url.pathname));
   check('locale select back to English returns to /', new URL(page.url()).pathname === '/');

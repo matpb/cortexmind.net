@@ -1,21 +1,22 @@
 <script lang="ts">
-  import { t } from '$lib/i18n';
+  import { t, href } from '$lib/i18n';
   import { macUrl, windowsUrl, linuxUrl, version } from '$lib/releases';
   import { installPromptFor } from '$lib/prompts';
   import PromptCard from '$lib/PromptCard.svelte';
   import { locale } from '$lib/i18n';
 
   const navItems = [
-    ['ai-install', 'docs.nav.ai'],
-    ['install', 'docs.nav.install'],
-    ['connect', 'docs.nav.connect'],
-    ['protocol', 'docs.nav.protocol'],
-    ['seed', 'docs.nav.seed'],
-    ['remote', 'docs.nav.remote'],
-    ['tools', 'docs.nav.tools'],
-    ['data', 'docs.nav.data'],
-    ['troubleshooting', 'docs.nav.troubleshooting'],
-    ['uninstall', 'docs.nav.uninstall']
+    ['ai-install', 'docs.nav.ai', 'anchor'],
+    ['install', 'docs.nav.install', 'anchor'],
+    ['connect', 'docs.nav.connect', 'anchor'],
+    ['web-apps', 'docs.nav.web_apps', 'page'],
+    ['protocol', 'docs.nav.protocol', 'anchor'],
+    ['seed', 'docs.nav.seed', 'anchor'],
+    ['remote', 'docs.nav.remote', 'anchor'],
+    ['tools', 'docs.nav.tools', 'anchor'],
+    ['data', 'docs.nav.data', 'anchor'],
+    ['troubleshooting', 'docs.nav.troubleshooting', 'anchor'],
+    ['uninstall', 'docs.nav.uninstall', 'anchor']
   ] as const;
 
   const licenseKeySample = 'CMND-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX';
@@ -57,8 +58,12 @@ http_headers = { "Authorization" = "Bearer <token>" }`;
 
 <div class="docs-grid">
   <nav class="docs-nav" aria-label={$t('docs.title')}>
-    {#each navItems as [id, key] (id)}
-      <a href={'#' + id}>{$t(key)}</a>
+    {#each navItems as [id, key, kind] (id)}
+      {#if kind === 'page'}
+        <a href={$href('/connect')}>{$t(key)}</a>
+      {:else}
+        <a href={'#' + id}>{$t(key)}</a>
+      {/if}
     {/each}
   </nav>
 
@@ -103,6 +108,7 @@ http_headers = { "Authorization" = "Bearer <token>" }`;
 
     <section id="connect">
       <h2>{$t('docs.connect.title')}</h2>
+      <p>{$t('docs.connect.web_callout')} <a class="text-link" href={$href('/connect')}>{$t('docs.remote.connect_link')}</a></p>
       <p>{$t('docs.connect.p1')}</p>
 
       <p class="code-label">{$t('docs.connect.generic_label')}</p>
@@ -149,6 +155,7 @@ http_headers = { "Authorization" = "Bearer <token>" }`;
       {@render codeBlock(tunnelAddress)}
       <p>{$t('docs.remote.p2')}</p>
       <p>{$t('docs.remote.p3')}</p>
+      <p><a class="text-link" href={$href('/connect')}>{$t('docs.remote.connect_link')}</a></p>
     </section>
 
     <section id="tools">
