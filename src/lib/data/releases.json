@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.2.2",
+    "name": "CortexMind v4.2.2",
+    "published_at": "2026-09-26T22:32:55Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.2.2",
+    "body": "## CortexMind 4.2.2\n\n**Steadier on Windows.** If one of CortexMind's search engines stops unexpectedly, it restarts on its own and your search keeps its full quality, without taking the other one down with it.\n\n**Better diagnostics.** When a startup check or engine launch fails, CortexMind now logs the full reason, so support can pinpoint it faster.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.2.1",
     "name": "CortexMind v4.2.1",
     "published_at": "2026-09-26T21:40:41Z",
