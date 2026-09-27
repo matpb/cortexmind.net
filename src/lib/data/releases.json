@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.2.4",
+    "name": "CortexMind v4.2.4",
+    "published_at": "2026-09-27T03:33:58Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.2.4",
+    "body": "## CortexMind 4.2.4\n\n**Easier to set up with Claude.** The Instructions tab now takes you straight to the right spot in Claude's settings, on claude.ai and in the Claude desktop app.\n\n**Explanations that fit you.** The first-run interview now asks how you like to learn something new, so your AI explains things your way from day one.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.2.3",
     "name": "CortexMind v4.2.3",
     "published_at": "2026-09-27T00:32:59Z",
