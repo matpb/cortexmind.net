@@ -397,7 +397,7 @@
   "connect.claude.s2": "Cliquez sur +, puis sur Ajouter un connecteur personnalisé.",
   "connect.claude.s3": "Nom : CortexMind. URL du serveur MCP distant : collez votre URL publique. Cliquez sur Ajouter.",
   "connect.claude.s4": "Cliquez sur Connecter à côté de CortexMind. Une page de connexion CortexMind s’ouvre : collez votre mot de passe CortexMind (le champ peut s’intituler Bearer Token) et cliquez sur Authorize.",
-  "connect.claude.s5": "Donnez-lui l’habitude : dans Paramètres, trouvez les instructions que Claude garde pour chaque conversation (« Instructions pour Claude », ou la question sur les préférences personnelles à prendre en compte). Collez les instructions pour l’IA, dans l’onglet Instructions des réglages de CortexMind, et enregistrez.",
+  "connect.claude.s5": "Donnez-lui l’habitude : ouvrez Paramètres > Compte et trouvez « Instructions pour Claude », les instructions que Claude garde pour chaque conversation (même endroit sur claude.ai et dans l’app pour ordinateur). Collez les instructions pour l’IA, dans l’onglet Instructions des réglages de CortexMind, et enregistrez.",
   "connect.claude.s6": "Faites un essai : lancez une nouvelle conversation, cliquez sur + en bas à gauche, ouvrez Connecteurs et vérifiez que CortexMind est activé. Demandez « Qu’est-ce que tu sais de moi ? » et autorisez CortexMind quand Claude le demande. Choisissez « Toujours autoriser » pour ne plus avoir à répondre.",
   "connect.trouble.title": "Si quelque chose ne fonctionne pas",
   "connect.trouble.q1": "Le connecteur refuse de se connecter.",
