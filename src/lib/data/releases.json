@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.3.0",
+    "name": "CortexMind v4.3.0",
+    "published_at": "2026-09-28T03:13:47Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.3.0",
+    "body": "## CortexMind 4.3.0\n\n**Change your password in one click.** The Connect tab has a new Rotate button. It issues a fresh CortexMind password, signs out every connected AI and web connector at once, and shows you the command to reconnect Claude Code.\n\n**Always on your fastest hardware.** After each update, CortexMind checks your graphics card and processor again and runs on whichever is faster.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.2.4",
     "name": "CortexMind v4.2.4",
     "published_at": "2026-09-27T03:33:58Z",
