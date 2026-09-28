@@ -1,19 +1,19 @@
 {
-  "version": "4.3.0",
-  "notes": "See https://github.com/matpb/cortexmind.net/releases/tag/v4.3.0 for full release notes.",
-  "pub_date": "2026-09-28T03:13:42Z",
+  "version": "4.3.1",
+  "notes": "See https://github.com/matpb/cortexmind.net/releases/tag/v4.3.1 for full release notes.",
+  "pub_date": "2026-09-28T13:24:10Z",
   "platforms": {
     "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSeXMzU2Y2cUFyM3Fhc2tWR3dVdWt0UXhIbzZtcWZDMi9MVUJKQTR0T1lVYWloMStGTU83WFl3K1BJbFZVK3R6a3NtNkJiVjhhM0EybGxaZHg5UFpMWk0vV1pIa1NPV1FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNTY1MjE4CWZpbGU6Q29ydGV4TWluZC5BcHBJbWFnZQpzWWd2Z1pzWTNYYVEzU0gwRUtBdmJUbUxWQm1oU25EaHkyYUFQMWtkdjBzeU1qUGdlZGx2TUc2VUNOY3loMDBjelgwbkJvZ1JYbDdIcFNnQndna0NEUT09Cg==",
-      "url": "https://github.com/matpb/cortexmind.net/releases/download/v4.3.0/CortexMind.AppImage"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSeXMzU2Y2cUFyM21KWEJHeEFuWXVKNngwRGlBbkVxNy9LRUpVWDE4NURFUDFBQkMwRndWdlZjVHFiVDlDYVc4MSt2ZGoydEpaSEFyeWxsOGwzZzdaNnNhTnFCRkI0Und3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNjAxODQ2CWZpbGU6Q29ydGV4TWluZC5BcHBJbWFnZQpDelJTWENYSHVRQzZSakxVbzRjT0QzNU10aVJ0all0TkRvcTBLb2FKQzcxcE0vc2pJMVNTdTQyeVVETDZZV0JsazM5RmFMaGhpMTQ5cG5vTVRuRXVDUT09Cg==",
+      "url": "https://github.com/matpb/cortexmind.net/releases/download/v4.3.1/CortexMind.AppImage"
     },
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSeXMzU2Y2cUFyM2hrYXA2MExLZDV5N0RreGJWZnE3ajYzS1VMeWpMVG1ET1JSZjZrZmpNVU5mNE1nZ0daMUJOcjBncksxaThWY3BWeDQ0S3MwN0s1K1VaYmpEdzRIUFF3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNTY1MjIwCWZpbGU6Q29ydGV4TWluZC5hcHAudGFyLmd6CllMZVYweHVZMFBSSG4xNGcxb3B2ZkYxNlVRQ0RSOFkxdDRSVEpSNUVjaW5OT3Z3c20yMnIrWmt6YTNxVVBzc0VvRXlNaUhVZHBUTUUxUnhEQWJIWUJnPT0K",
-      "url": "https://github.com/matpb/cortexmind.net/releases/download/v4.3.0/CortexMind.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSeXMzU2Y2cUFyM2dUTnJ1SmxIS2VRZmtkdWtNUzZTMXJBOEVWenlWUjhEK3dYeFBGelNzRXZXVmthT0dSQzNGYjZLckxqTzNwc2xBZDJZNlQ4VVp1UFpEcHJFd3lrZ3c0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNjAxODQ4CWZpbGU6Q29ydGV4TWluZC5hcHAudGFyLmd6CldjU044dTJxSFdmTmdMWCtFWmR1dStSeTFuNkRDVEY2NW0ySktvVkpWZnhkOWlvRkpNdjM3c0g0OGhpeSsveU1UR3RLNlNDSXdGYU1QSzl3djBnNkR3PT0K",
+      "url": "https://github.com/matpb/cortexmind.net/releases/download/v4.3.1/CortexMind.app.tar.gz"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSeXMzU2Y2cUFyM290NEkrTG1TZTdYYm1CRnNQcWU2bFNDUTE1TWp0b29FbVlZYmtFbUttc1hoc1FlYy9PY1BuMlFDOEFFa2FNVngyUUJBalRWckRPT2hrUUV2dDBYUFFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNTY1MjIxCWZpbGU6Q29ydGV4TWluZF80LjMuMF94NjQtc2V0dXAuZXhlCnRrWmZxbXBSQVEycks5RmxDbFNFTW40YnlhQVMwcDJRbFJTLzBSZGFGblMzdWRjejNIVFAxZ2FaY3JONktzMTZ2R01FdHEvSHA5bmR2bFBRekdlNUNRPT0K",
-      "url": "https://github.com/matpb/cortexmind.net/releases/download/v4.3.0/CortexMind_4.3.0_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSeXMzU2Y2cUFyM2t3K09HZFRqZmVoQjZKK2tCTFUwd1hVSDBBWWVINWZOSFEzZVNIOTdOTzZYQ0JXSnkrWnY2UnNBNTdsNUxZaWZHbkVwSTlMUHNUY1E2ZFpFR1hPVVFRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwNjAxODQ5CWZpbGU6Q29ydGV4TWluZF80LjMuMV94NjQtc2V0dXAuZXhlCnlXNm5YU3FJem40dVRKZjQ4bE92TkdKNTFWMzBWdnNMUm1xYmMzaldHWC9MR0IvVjF6MXNzV0VqRHZmZ1dVdU5hNlBvaU8yNE40ZWpGWDlCU3hubkRRPT0K",
+      "url": "https://github.com/matpb/cortexmind.net/releases/download/v4.3.1/CortexMind_4.3.1_x64-setup.exe"
     }
   }
 }

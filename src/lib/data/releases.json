@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.3.1",
+    "name": "CortexMind v4.3.1",
+    "published_at": "2026-09-28T13:24:16Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.3.1",
+    "body": "## CortexMind 4.3.1\n\n**Smoother updates on Windows.** Updates now install cleanly on the first try, including from older versions.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.3.0",
     "name": "CortexMind v4.3.0",
     "published_at": "2026-09-28T03:13:47Z",
