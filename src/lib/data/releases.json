@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.4.0",
+    "name": "CortexMind v4.4.0",
+    "published_at": "2026-10-01T12:30:34Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.4.0",
+    "body": "## CortexMind 4.4.0\n\n**Choose who can reach your memory.** A new Remote access switch in the Connect tab turns the hosted address off, so only apps on your own computer can reach CortexMind. It stays on unless you turn it off.\n\n**Your memory stays private to your account.** On Mac and Linux, CortexMind now keeps its memory files readable by your user account only.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.3.1",
     "name": "CortexMind v4.3.1",
     "published_at": "2026-09-28T13:24:16Z",
