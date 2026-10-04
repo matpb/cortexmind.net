@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.4.1",
+    "name": "CortexMind v4.4.1",
+    "published_at": "2026-10-04T14:42:54Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.4.1",
+    "body": "## CortexMind 4.4.1\n\n**Smoother memory lookups for AI agents.** When an agent opens a single memory, CortexMind now spells out exactly how to ask for it and points the agent to the right kind of record, so it lands on the memory it wanted on the next try.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.4.0",
     "name": "CortexMind v4.4.0",
     "published_at": "2026-10-01T12:30:34Z",
