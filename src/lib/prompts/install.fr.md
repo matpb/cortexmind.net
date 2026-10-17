@@ -47,7 +47,7 @@ CortexMind ouvre une fenêtre de configuration. Demande-moi d’y coller la clé
 
 Le fichier de configuration du service est ~/.cortexmind/config.toml (Windows : %USERPROFILE%\.cortexmind\config.toml). Lis-y la valeur de `mcp_bearer_token`. C’est la même valeur que l’application affiche sous « Mot de passe CortexMind », dans l’onglet Connexion de ses réglages. Enregistre ensuite le serveur MCP chez toi, en utilisant exactement la ligne qui correspond à ton agent :
 
-- Claude Code : exécute `claude mcp add --transport http --scope user cortexmind http://localhost:14200/mcp --header "Authorization: Bearer <token>"`
+- Claude Code : exécute `claude mcp add --transport http --scope user cortexmind http://localhost:14200/mcp --header "Authorization: Bearer <token>"`. Seulement si je demande de me connecter plutôt que d’enregistrer le jeton : exécute la même commande sans la partie `--header`, puis demande-moi de taper `/mcp`, de choisir cortexmind, puis Authenticate, et de coller le mot de passe CortexMind dans la page qui s’ouvre.
 - Codex (en ligne de commande, ou Codex dans l’application de bureau ChatGPT ; les deux lisent le même fichier) : ajoute ce bloc à ~/.codex/config.toml, en créant le fichier au besoin, avec le jeton écrit à sa place :
 
   ```toml
@@ -88,9 +88,10 @@ Sans cette sauvegarde, la conversation est perdue.
 Si j’utilise aussi ChatGPT sur le Web ou sur mon téléphone, claude.ai ou Claude Desktop, ils peuvent accéder à la même mémoire par l’adresse publique de l’application CortexMind. Explique-moi la marche à suivre, ne le fais pas toi-même :
 
 1. Dans l’application CortexMind, ouvre les réglages (Réglages… dans le menu de l’icône). Dans l’onglet Connexion, copie l’« URL publique » (elle ressemble à https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp).
-2. Dans l’autre application, ajoute un connecteur personnalisé nommé CortexMind avec cette URL. Dans ChatGPT sur le Web, les connecteurs personnalisés exigent d’abord le mode développeur : Paramètres, puis Applications (ou Connecteurs), puis Paramètres avancés, puis active le mode développeur.
-3. Si le connecteur demande un mot de passe, un jeton d’accès ou une clé d’API, colle le « Mot de passe CortexMind » du même onglet.
-4. Colle ensuite les « Instructions pour l’IA » de l’onglet Instructions des réglages (bouton Copier) dans les instructions personnalisées de cette application, puis ouvre une nouvelle conversation pour vérifier en demandant « Qu’est-ce que tu sais de moi ? ». La première fois, elle demande la permission d’utiliser CortexMind : accorde-la.
+2. ChatGPT (forfait payant) : sur chatgpt.com, le mode développeur doit d’abord être activé (Paramètres, puis Plugins ou Applications, puis Paramètres avancés). Ensuite, dans la barre latérale, ouvre Plugins, clique sur Ajouter (Add) et choisis « Ajouter un serveur MCP personnalisé » (Add custom MCP server). Nom : CortexMind. Connexion : URL du serveur, colle l’URL publique. Authentification : laisse OAuth. Coche la case qui confirme que tu comprends et veux continuer, clique sur « Créer comme plugin » (Create as a plugin), puis sur Connecter.
+3. claude.ai ou Claude Desktop : ouvre Personnaliser, puis Connecteurs, clique sur Ajouter, puis sur « Ajouter un connecteur personnalisé ». Nom : CortexMind. URL : l’URL publique. Clique sur Continuer, puis sur Connecter.
+4. Une page de connexion CortexMind s’ouvre dans le navigateur : colle le « Mot de passe CortexMind » du même onglet Connexion et clique sur Autoriser. L’application reste ensuite connectée, et elle apparaît dans la page Applications connectées du tableau de bord CortexMind, où on peut la déconnecter. La page Connexion de cortexmind.net reprend les mêmes étapes.
+5. Colle ensuite les « Instructions pour l’IA » de l’onglet Instructions des réglages (bouton Copier) dans les instructions personnalisées de cette application, puis ouvre une nouvelle conversation pour vérifier en demandant « Qu’est-ce que tu sais de moi ? ». La première fois, elle demande la permission d’utiliser CortexMind : accorde-la.
 
 ## 7. Charger le nouveau serveur
 

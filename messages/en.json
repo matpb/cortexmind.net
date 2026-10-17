@@ -395,7 +395,7 @@
   "connect.claude.plans": "Works on every plan. The Free plan allows one custom connector; Pro, Max, Team and Enterprise allow more.",
   "connect.claude.s1": "On claude.ai, open Customize, then Connectors. On older layouts it is under Settings, then Connectors.",
   "connect.claude.s2": "Click Add, then Add custom connector.",
-  "connect.claude.s3": "Name: CortexMind. Remote MCP server URL: paste your Public URL. Click Add.",
+  "connect.claude.s3": "Name: CortexMind. MCP server URL: paste your Public URL. Click Continue.",
   "connect.claude.s4": "Click Connect next to CortexMind. A CortexMind sign-in page opens: paste your CortexMind password and click Authorize.",
   "connect.claude.s5": "Teach it the habit: open Settings > Account and find “Instructions for Claude”, the instructions Claude keeps for every chat (same place on claude.ai and in the desktop app). Paste the AI instructions from the Instructions tab of CortexMind's settings and save.",
   "connect.claude.s6": "Test it: start a new chat, click + at the bottom left, open Connectors and make sure CortexMind is on. Ask “What do you know about me?” and allow CortexMind when Claude asks. Choose “Always allow” to skip the question next time.",

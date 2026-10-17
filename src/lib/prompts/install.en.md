@@ -47,7 +47,7 @@ CortexMind opens a setup window. Ask me to paste the license key there; the app 
 
 The daemon's config file is ~/.cortexmind/config.toml (Windows: %USERPROFILE%\.cortexmind\config.toml). Read the value of `mcp_bearer_token` from it. This is the same value the app shows as "CortexMind password" on the Connect tab of its settings. Then register the MCP server on yourself, using exactly the line for the agent you are:
 
-- Claude Code: run `claude mcp add --transport http --scope user cortexmind http://localhost:14200/mcp --header "Authorization: Bearer <token>"`
+- Claude Code: run `claude mcp add --transport http --scope user cortexmind http://localhost:14200/mcp --header "Authorization: Bearer <token>"`. Only if I ask to sign in instead of storing the token: run the same command without the `--header` part, then ask me to type `/mcp`, pick cortexmind, choose Authenticate and paste the CortexMind password on the page that opens.
 - Codex (the CLI, or Codex inside the ChatGPT desktop app; both read the same file): add this block to ~/.codex/config.toml, creating the file if needed, with the token written in place:
 
   ```toml
@@ -88,9 +88,10 @@ Without the save, the conversation is lost.
 If I also use ChatGPT on the web or on my phone, claude.ai or Claude Desktop, they can reach the same memory through the CortexMind app's public address. Tell me, do not do it yourself:
 
 1. In the CortexMind app, open the settings (Settings... in the tray menu). On the Connect tab, copy the "Public URL" (it looks like https://cm-xxxxxxxxxxxx.ethertunnel.com/mcp).
-2. In the other app, add a custom connector named CortexMind with that URL. In ChatGPT on the web, custom connectors first need Developer mode: Settings, then Apps (or Connectors), then Advanced, then turn on Developer mode.
-3. If the connector asks for a password, access token or API key, paste the "CortexMind password" from the same tab.
-4. Then paste the "AI instructions" from the Instructions tab of the app's settings (Copy button) into that app's custom instructions, and open a new conversation to test it by asking "What do you know about me?". The first time, it asks permission to use CortexMind: allow it.
+2. ChatGPT (paid plan): on chatgpt.com, Developer mode must be on first (Settings, then Plugins or Apps, then Advanced settings). Then, in the sidebar, open Plugins, click Add, and choose "Add custom MCP server". Name: CortexMind. Connection: Server URL, paste the Public URL. Authentication: leave OAuth. Tick "I understand and want to continue", click "Create as a plugin", then click Connect.
+3. claude.ai or Claude Desktop: open Customize, then Connectors, click Add, then "Add custom connector". Name: CortexMind. URL: the Public URL. Click Continue, then Connect.
+4. A CortexMind sign-in page opens in the browser: paste the "CortexMind password" from the same Connect tab and click Authorize. The app stays signed in from then on, and it appears on the Connected apps page of the CortexMind dashboard, where it can be disconnected. The Connect page on cortexmind.net has the same steps.
+5. Then paste the "AI instructions" from the Instructions tab of the app's settings (Copy button) into that app's custom instructions, and open a new conversation to test it by asking "What do you know about me?". The first time, it asks permission to use CortexMind: allow it.
 
 ## 7. Load the new server
 
