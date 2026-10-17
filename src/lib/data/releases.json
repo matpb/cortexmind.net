@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.6.0",
+    "name": "CortexMind v4.6.0",
+    "published_at": "2026-10-17T06:47:36Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.6.0",
+    "body": "## CortexMind 4.6.0\n\n**Stay connected.** ChatGPT and Claude now keep their connection to your memory signed in on their own, so you no longer have to reconnect them every month.\n\n**Easier setup on the web.** Connecting ChatGPT or Claude takes your CortexMind password once, on a sign-in page that speaks English or French.\n\n**Improved security.**\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.5.0",
     "name": "CortexMind v4.5.0",
     "published_at": "2026-10-17T05:29:33Z",
