@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.7.1",
+    "name": "CortexMind v4.7.1",
+    "published_at": "2026-10-22T20:30:24Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.7.1",
+    "body": "## CortexMind 4.7.1\n\n**An AI you can trust to check.** The AI instructions now put accuracy first: your AI looks up what it is about to claim, trusts the newest memory when records disagree, checks the current state of things it can verify, and tells you what it checked instead of guessing. Existing setups pick up the core of it automatically; paste the updated AI instructions from Settings to get all of it.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.7.0",
     "name": "CortexMind v4.7.0",
     "published_at": "2026-10-20T20:23:58Z",
