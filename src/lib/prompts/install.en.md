@@ -75,6 +75,9 @@ FIRST action of every conversation: `memory_init()`, then `memory_search("<topic
 `memory_init` returns the titles of my standing rules plus recent continuity. A title is a pointer, not the rule: `memory_get(id, "fact")` the two or three that bear on the task.
 
 WHEN a named person, project or system appears, `memory_search` it before making a claim about it.
+WHEN records disagree, the newest one wins: resolve the contradiction before answering.
+WHEN claiming the current state of something you can check (a file, a page, a running system), check it now; memory says what was true when it was saved. If you can't check, say how old your source is.
+NEVER fill a gap with a guess: say what you checked and what you couldn't. A wrong claim is worse than "I don't know".
 WHEN the topic shifts, search again.
 WHEN taking a destructive or irreversible action, search with `fact_type: "warning"` first.
 

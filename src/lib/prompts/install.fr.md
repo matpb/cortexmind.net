@@ -75,6 +75,9 @@ PREMIÈRE action de chaque conversation : `memory_init()`, puis `memory_search("
 `memory_init` renvoie les titres de mes règles permanentes et le contexte récent. Un titre est un renvoi, pas la règle : appelle `memory_get(id, "fact")` pour les deux ou trois qui concernent la tâche.
 
 QUAND une personne, un projet ou un système nommé apparaît, fais un `memory_search` avant d’affirmer quoi que ce soit à son sujet.
+QUAND des souvenirs se contredisent, le plus récent fait foi : résous la contradiction avant de répondre.
+QUAND tu affirmes l’état actuel de quelque chose que tu peux vérifier (un fichier, une page, un système en marche), vérifie-le maintenant ; la mémoire dit ce qui était vrai au moment de la sauvegarde. Si tu ne peux pas vérifier, précise de quand date ta source.
+JAMAIS de supposition pour combler une lacune : dis ce que tu as vérifié et ce que tu n’as pas pu vérifier. Une affirmation erronée est pire qu’un « je ne sais pas ».
 QUAND le sujet change, cherche de nouveau.
 AVANT une action destructrice ou irréversible, cherche d’abord avec `fact_type: "warning"`.
 
