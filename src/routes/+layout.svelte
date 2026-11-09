@@ -32,7 +32,9 @@
   $: metaTitleKey = base === '/connect' ? 'connect.meta.title' : base === '/compare' ? 'compare.meta.title' : `${metaPrefix}.meta.page_title`;
   $: pageTitle = $t(metaTitleKey as MessageKey);
   $: pageDescription = $t(`${metaPrefix}.meta.description` as MessageKey);
-  $: ogImage = SITE + ($locale === 'fr' ? '/og-fr.jpg' : '/og.jpg');
+  $: isCompare = base === '/compare';
+  $: ogImage = SITE + (isCompare ? ($locale === 'fr' ? '/og-compare-fr.jpg' : '/og-compare.jpg') : $locale === 'fr' ? '/og-fr.jpg' : '/og.jpg');
+  $: ogImageAlt = isCompare ? $t('compare.meta.og_alt') : $t('home.hero.title_line1') + ' ' + $t('home.hero.title_line2');
 
   $: structuredData = isHome
     ? {
@@ -48,7 +50,22 @@
         ],
         author: { '@type': 'Person', name: 'Mathieu-Philippe Bourgeois', url: 'https://matpb.com' }
       }
-    : null;
+    : isCompare
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: $t('compare.title'),
+          description: pageDescription,
+          image: ogImage,
+          url: canonical,
+          mainEntityOfPage: canonical,
+          inLanguage: $locale,
+          datePublished: '2026-11-09',
+          dateModified: '2026-11-09',
+          author: { '@type': 'Person', name: 'Mathieu-Philippe Bourgeois', url: 'https://matpb.com' },
+          publisher: { '@type': 'Organization', name: 'CortexMind', url: SITE }
+        }
+      : null;
 
   onMount(() => {
     if ($page.url.pathname === '/' && preferredLocale() === 'fr') void goto('/fr' + $page.url.search + $page.url.hash, { replaceState: true });
@@ -97,7 +114,8 @@
   <link rel="alternate" hreflang="en" href={enUrl} />
   <link rel="alternate" hreflang="fr" href={frUrl} />
   <link rel="alternate" hreflang="x-default" href={enUrl} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={isCompare ? 'article' : 'website'} />
+  {#if isCompare}<meta property="article:modified_time" content="2026-11-09" />{/if}
   <meta property="og:site_name" content="CortexMind" />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={pageTitle} />
@@ -105,13 +123,14 @@
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content={$t('home.hero.title_line1') + ' ' + $t('home.hero.title_line2')} />
+  <meta property="og:image:alt" content={ogImageAlt} />
   <meta property="og:locale" content={$locale === 'fr' ? 'fr_CA' : 'en_US'} />
   <meta property="og:locale:alternate" content={$locale === 'fr' ? 'en_US' : 'fr_CA'} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={pageDescription} />
   <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={ogImageAlt} />
   {#if structuredData}
     {@html jsonLdTag(structuredData)}
   {/if}
