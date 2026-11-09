@@ -218,7 +218,6 @@
   <div class="cta-overlay" aria-hidden="true"></div>
   <div class="wrap cta-content">
     <h2>{$t('home.cta.title')}</h2>
-    <p class="cta-lead">{$t('home.cta.lead')}</p>
     <a class="button" href={$href('/') + '#pricing'}>{$t('home.cta.button')}</a>
   </div>
 </section>
@@ -322,7 +321,6 @@
   .cta-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .cta-overlay { position: absolute; inset: 0; background: rgba(18, 22, 27, .68); }
   .cta-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-  .cta-lead { max-width: 480px; color: var(--text-2); }
 
   @media (max-width: 900px) {
     .split, .split.flip { grid-template-columns: minmax(0, 1fr); }
