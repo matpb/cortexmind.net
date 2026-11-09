@@ -57,7 +57,7 @@
   "home.how.step3.title": "Chaque conversation commence avec la mémoire",
   "home.how.step3.body": "L’agent démarre avec vos règles permanentes et les derniers échanges, interroge la mémoire à mesure que le sujet évolue et enregistre l’échange avant de terminer. Vous cessez de vous répéter.",
   "home.retrieval.title": "Trouve ce que vous vouliez dire, pas ce que vous avez tapé.",
-  "home.retrieval.p1": "La recherche se fait par mots-clés et par le sens en même temps. Un second modèle lit ensuite les meilleurs candidats en regard de votre question et place le bon passage en premier. L’importance que vous fixez et l’âge d’un souvenir départagent les égalités.",
+  "home.retrieval.p1": "La recherche se fait par mots-clés et par le sens en même temps. Un second modèle lit ensuite les meilleurs candidats en regard de votre question et classe les passages les plus proches en premier. L’importance que vous fixez et l’âge d’un souvenir départagent les égalités.",
   "home.retrieval.p2": "Aucun modèle de langage n’intervient à l’écriture. Ce que vous enregistrez est stocké tel quel, en entier, sur votre disque.",
   "home.retrieval.panel_heading": "memory_search",
   "home.retrieval.panel_sub": "un vrai résultat de notre test",

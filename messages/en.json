@@ -57,7 +57,7 @@
   "home.how.step3.title": "Every conversation starts with memory",
   "home.how.step3.body": "The agent boots with your standing rules and the last turns, searches memory as the topic moves, and saves the turn before it ends. You stop repeating yourself.",
   "home.retrieval.title": "Finds what you meant, not what you typed.",
-  "home.retrieval.p1": "It searches by keyword and by meaning at the same time. A second model then reads the best candidates against your question and puts the right passage first. The importance you set and the age of a memory settle the ties.",
+  "home.retrieval.p1": "It searches by keyword and by meaning at the same time. A second model then reads the best candidates against your question and ranks the closest matches first. The importance you set and the age of a memory settle the ties.",
   "home.retrieval.p2": "No language model sits in the write path. What you save is what gets stored, in full, on your disk.",
   "home.retrieval.panel_heading": "memory_search",
   "home.retrieval.panel_sub": "a real result from our test",
