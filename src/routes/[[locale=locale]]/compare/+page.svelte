@@ -33,6 +33,21 @@
       url: null
     }
   ];
+
+  const SIZE_ROWS: { size: MessageKey; loaded: MessageKey; b: string; c: string; bn: string; cn: string; br: string; cr: string }[] = [
+    { size: 'compare.test.size_150', loaded: 'compare.test.loaded_all', b: '35/40', c: '30/40', bn: '19/20', cn: '16/20', br: '16/20', cr: '14/20' },
+    { size: 'compare.test.size_352', loaded: 'compare.test.loaded_half', b: '33/40', c: '32/40', bn: '18/20', cn: '18/20', br: '15/20', cr: '14/20' },
+    { size: 'compare.test.size_3743', loaded: 'compare.test.loaded_5', b: '27/40', c: '29/40', bn: '11/20', cn: '16/20', br: '16/20', cr: '13/20' },
+    { size: 'compare.test.size_23305', loaded: 'compare.test.loaded_1', b: '27/40', c: '31/40', bn: '17/20', cn: '17/20', br: '10/20', cr: '14/20' }
+  ];
+
+  const MORE: { title: MessageKey; body: MessageKey }[] = [
+    { title: 'compare.more.item1.title', body: 'compare.more.item1.body' },
+    { title: 'compare.more.item2.title', body: 'compare.more.item2.body' },
+    { title: 'compare.more.item3.title', body: 'compare.more.item3.body' },
+    { title: 'compare.more.item4.title', body: 'compare.more.item4.body' },
+    { title: 'compare.more.item5.title', body: 'compare.more.item5.body' }
+  ];
 </script>
 
 <div class="wrap page-head prose-measure">
@@ -75,27 +90,91 @@
       <table>
         <thead>
           <tr>
+            <th>{$t('compare.test.col_size')}</th>
+            <th>{$t('compare.test.col_loaded')}</th>
+            <th>{$t('compare.test.col_builtin')}</th>
+            <th>{$t('compare.test.col_cortex')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each SIZE_ROWS as row (row.size)}
+            <tr>
+              <td>{$t(row.size)}</td>
+              <td>{$t(row.loaded)}</td>
+              <td>{row.b}</td>
+              <td>{row.c}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    </div>
+    <p>{$t('compare.test.read1')}</p>
+    <p>{$t('compare.test.read2')}</p>
+    <details>
+      <summary>{$t('compare.test.details_summary')}</summary>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>{$t('compare.test.col_size')}</th>
+              <th>{$t('compare.test.col_b_nat')}</th>
+              <th>{$t('compare.test.col_c_nat')}</th>
+              <th>{$t('compare.test.col_b_re')}</th>
+              <th>{$t('compare.test.col_c_re')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each SIZE_ROWS as row (row.size)}
+              <tr>
+                <td>{$t(row.size)}</td>
+                <td>{row.bn}</td>
+                <td>{row.cn}</td>
+                <td>{row.br}</td>
+                <td>{row.cr}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <h2>{$t('compare.more.title')}</h2>
+    <div class="more-grid">
+      {#each MORE as item (item.title)}
+        <div>
+          <h3>{$t(item.title)}</h3>
+          <p>{$t(item.body)}</p>
+        </div>
+      {/each}
+    </div>
+  </section>
+
+  <section>
+    <h2>{$t('compare.other.title')}</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
             <th>{$t('compare.test.col_test')}</th>
             <th>{$t('compare.test.col_builtin')}</th>
             <th>{$t('compare.test.col_cortex')}</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>{$t('compare.test.r_natural_150')}</td><td>19/20</td><td>16/20</td></tr>
-          <tr><td>{$t('compare.test.r_natural_352')}</td><td>19/20</td><td>18/20</td></tr>
-          <tr><td>{$t('compare.test.r_natural_3743')}</td><td>19/20</td><td>15/20</td></tr>
-          <tr><td>{$t('compare.test.r_para_150')}</td><td>16/20</td><td>14/20</td></tr>
-          <tr><td>{$t('compare.test.r_para_352')}</td><td>16/20</td><td>14/20</td></tr>
-          <tr><td>{$t('compare.test.r_para_3743')}</td><td>16/20</td><td>14/20</td></tr>
-          <tr><td>{$t('compare.test.r_absent')}</td><td>0</td><td>0</td></tr>
-          <tr><td>{$t('compare.test.r_correct')}</td><td>8/8</td><td>8/8</td></tr>
           <tr><td>{$t('compare.test.r_other')}</td><td>0/6</td><td>6/6</td></tr>
+          <tr><td>{$t('compare.test.r_correct')}</td><td>8/8</td><td>8/8</td></tr>
+          <tr><td>{$t('compare.test.r_absent')}</td><td>0</td><td>0</td></tr>
           <tr><td>{$t('compare.test.r_time')}</td><td>{$t('compare.test.time_builtin')}</td><td>{$t('compare.test.time_cortex')}</td></tr>
         </tbody>
       </table>
     </div>
-    <p>{$t('compare.test.read1')}</p>
-    <p>{$t('compare.test.read2')}</p>
+  </section>
+
+  <section>
+    <h2>{$t('compare.choose.title')}</h2>
+    <p>{$t('compare.choose.p')}</p>
   </section>
 
   <section>
@@ -107,13 +186,7 @@
       <li>{$t('compare.limits.l4')}</li>
       <li>{$t('compare.limits.l5')}</li>
       <li>{$t('compare.limits.l6')}</li>
-      <li>{$t('compare.limits.l7')}</li>
     </ul>
-  </section>
-
-  <section>
-    <h2>{$t('compare.choose.title')}</h2>
-    <p>{$t('compare.choose.p')}</p>
   </section>
 </div>
 
@@ -121,4 +194,9 @@
   .table-scroll { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
   th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  details { margin-top: 16px; }
+  summary { cursor: pointer; }
+  .more-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .more-grid h3 { margin-top: 0; }
+  @media (max-width: 720px) { .more-grid { grid-template-columns: 1fr; } }
 </style>
