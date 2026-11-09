@@ -81,6 +81,11 @@
     <h2>{$t('home.added.title')}</h2>
     <p class="added-lead">{$t('home.added.lead')}</p>
     <div class="added-grid">
+      <article class="added-item added-wide">
+        <h3>{$t('home.added.item5.title')}</h3>
+        <p>{$t('home.added.item5.body')}</p>
+        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item5.when')}</p>
+      </article>
       <article class="added-item">
         <h3>{$t('home.added.item1.title')}</h3>
         <p>{$t('home.added.item1.body')}</p>
@@ -440,6 +445,7 @@
   .added { padding: 96px 0; }
   .added-lead { color: var(--text-2); margin: 14px 0 40px; }
   .added-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .added-wide { grid-column: 1 / -1; }
   .added-item { border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
   .added-item h3 { margin-bottom: 8px; }
   .added-item p { color: var(--text-2); }

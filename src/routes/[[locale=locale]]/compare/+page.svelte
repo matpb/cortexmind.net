@@ -45,7 +45,6 @@
     { title: 'compare.more.item1.title', body: 'compare.more.item1.body' },
     { title: 'compare.more.item2.title', body: 'compare.more.item2.body' },
     { title: 'compare.more.item3.title', body: 'compare.more.item3.body' },
-    { title: 'compare.more.item4.title', body: 'compare.more.item4.body' },
     { title: 'compare.more.item5.title', body: 'compare.more.item5.body' }
   ];
 </script>
@@ -81,6 +80,31 @@
         </tbody>
       </table>
     </div>
+  </section>
+
+  <section>
+    <h2>{$t('compare.save.title')}</h2>
+    <p>{$t('compare.save.p1')}</p>
+    <p>{$t('compare.save.p2')}</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>{$t('compare.save.col_kind')}</th>
+            <th>{$t('compare.test.col_builtin')}</th>
+            <th>{$t('compare.test.col_cortex')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>{$t('compare.save.r_told')}</td><td>11/12</td><td>12/12</td></tr>
+          <tr><td>{$t('compare.save.r_passing')}</td><td>2/12</td><td>9/12</td></tr>
+          <tr><td>{$t('compare.save.r_detail')}</td><td>1/12</td><td>11/12</td></tr>
+          <tr><td><strong>{$t('compare.save.r_total')}</strong></td><td><strong>14/36</strong></td><td><strong>32/36</strong></td></tr>
+          <tr><td>{$t('compare.save.r_saves')}</td><td>13/48</td><td>46/48</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>{$t('compare.save.read')}</p>
   </section>
 
   <section>
@@ -186,6 +210,8 @@
       <li>{$t('compare.limits.l4')}</li>
       <li>{$t('compare.limits.l5')}</li>
       <li>{$t('compare.limits.l6')}</li>
+      <li>{$t('compare.limits.l7')}</li>
+      <li>{$t('compare.limits.l8')}</li>
     </ul>
   </section>
 </div>
