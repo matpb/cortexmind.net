@@ -41,10 +41,10 @@
     { label: 'compare.save.r_total', b: 39, c: 89, total: true }
   ];
 
-  const STAGES: { stage: MessageKey; result: MessageKey; b: number; c: number }[] = [
-    { stage: 'compare.test.stage_small', result: 'compare.test.result_small', b: 81, c: 81 },
-    { stage: 'compare.test.stage_serious', result: 'compare.test.result_serious', b: 68, c: 73 },
-    { stage: 'compare.test.stage_large', result: 'compare.test.result_large', b: 68, c: 78 }
+  const STAGES: { stage: MessageKey; result: MessageKey; n: number; b: number; c: number }[] = [
+    { stage: 'compare.test.stage_small', result: 'compare.test.result_small', n: 39, b: 81, c: 81 },
+    { stage: 'compare.test.stage_serious', result: 'compare.test.result_serious', n: 33, b: 68, c: 73 },
+    { stage: 'compare.test.stage_large', result: 'compare.test.result_large', n: 33, b: 68, c: 78 }
   ];
 
   const MORE: { title: MessageKey; body: MessageKey }[] = [
@@ -113,16 +113,19 @@
     <h2>{$t('compare.test.title')}</h2>
     <p>{$t('compare.test.p1')}</p>
     <p>{$t('compare.test.p2')}</p>
+    <p>{$t('compare.test.p3')}</p>
     <figure class="chart" aria-label={$t('compare.test.chart_alt')}>
       <div class="legend">
-        <span><i class="swatch b"></i>{$t('compare.test.col_builtin')}</span>
+        <span><i class="swatch n"></i>{$t('compare.test.legend_normal')}</span>
+        <span><i class="swatch h"></i>{$t('compare.test.legend_all')}</span>
         <span><i class="swatch c"></i>{$t('compare.test.col_cortex')}</span>
       </div>
       <div class="groups">
         {#each STAGES as row (row.stage)}
           <div class="group">
             <div class="plot" aria-hidden="true">
-              <div class="col b" style="height: {row.b}%" title={$t('compare.test.col_builtin')}></div>
+              <div class="col n" style="height: {row.n}%" title={$t('compare.test.legend_normal')}></div>
+              <div class="col b" style="height: {row.b}%" title={$t('compare.test.legend_all')}></div>
               <div class="col c" style="height: {row.c}%" title={$t('compare.test.col_cortex')}></div>
             </div>
             <p class="stage-name">{$t(row.stage)}</p>
@@ -161,7 +164,8 @@
   .bars { margin: 24px 0; max-width: 760px; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; margin-bottom: 16px; }
   .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; }
-  .swatch.b, .bar.b, .col.b { background: #4f86c6; }
+  .swatch.b, .swatch.n, .bar.b, .col.n { background: #4f86c6; }
+  .swatch.h, .col.b { background: repeating-linear-gradient(135deg, #4f86c6 0 4px, rgba(79, 134, 198, 0.35) 4px 8px); }
   .swatch.c, .bar.c, .col.c { background: #bd8a2b; }
   .bars-head { font-weight: 600; font-size: 15px; margin: 0 0 12px; }
   .bar-row { padding: 12px 0; border-top: 1px solid var(--line); }
@@ -172,7 +176,7 @@
   .chart { margin: 24px 0 0; max-width: 760px; }
   .groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 4vw, 40px); }
   .plot { height: 260px; display: flex; align-items: flex-end; justify-content: center; gap: 2px; border-bottom: 1px solid var(--line-2); }
-  .col { width: clamp(30px, 9vw, 64px); border-radius: 4px 4px 0 0; }
+  .col { width: clamp(22px, 6vw, 48px); border-radius: 4px 4px 0 0; }
   .stage-name { margin: 12px 0 2px; font-size: 15px; font-weight: 600; }
   .stage-result { margin: 0; font-size: 14px; color: var(--muted); }
   figcaption { margin-top: 16px; font-size: 13px; }
