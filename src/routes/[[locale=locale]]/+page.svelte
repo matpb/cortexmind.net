@@ -101,11 +101,6 @@
         <p>{$t('home.added.item4.body')}</p>
         <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item4.when')}</p>
       </article>
-      <article class="added-item">
-        <h3>{$t('home.added.item5.title')}</h3>
-        <p>{$t('home.added.item5.body')}</p>
-        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item5.when')}</p>
-      </article>
     </div>
     <div class="added-test">
       <h3>{$t('home.added.test_title')}</h3>
@@ -168,6 +163,7 @@
       <h2>{$t('home.retrieval.title')}</h2>
       <p>{$t('home.retrieval.p1')}</p>
       <p>{$t('home.retrieval.p2')}</p>
+      <p><a class="text-link" href={$href('/compare')}>{$t('home.retrieval.compare_link')}</a></p>
       <details class="retrieval-details"><summary>{$t('home.retrieval.details_summary')}</summary><p>{$t('home.retrieval.details_body')}</p></details>
     </div>
     <div class="retrieval-visual">
@@ -186,10 +182,6 @@
           <div class="transcript-hit">
             <p class="hit-meta">{$t('home.retrieval.hit2_meta')}</p>
             <p class="hit-text">{$t('home.retrieval.hit2_text')}</p>
-          </div>
-          <div class="transcript-hit">
-            <p class="hit-meta">{$t('home.retrieval.hit3_meta')}</p>
-            <p class="hit-text">{$t('home.retrieval.hit3_text')}</p>
           </div>
         </div>
       </div>
@@ -380,9 +372,11 @@
       <details><summary>{$t('home.faq.q6')}</summary><p>{$t('home.faq.a6')}</p></details>
       <details><summary>{$t('home.faq.q7')}</summary><p>{$t('home.faq.a7')}</p></details>
       <details><summary>{$t('home.faq.q8')}</summary><p>{$t('home.faq.a8')}</p></details>
-      <details><summary>{$t('home.faq.q9')}</summary><p>{$t('home.faq.a9')}</p></details>
+      <details><summary>{$t('home.faq.q9')}</summary><p>{$t('home.faq.a9')}</p><p><a class="text-link" href={$href('/compare')}>{$t('home.faq.compare_link')}</a></p></details>
       <details><summary>{$t('home.faq.q10')}</summary><p>{$t('home.faq.a10')}</p></details>
       <details><summary>{$t('home.faq.q11')}</summary><p>{$t('home.faq.a11')} <a class="text-link" href="https://ethertunnel.com" target="_blank" rel="noopener">{$t('home.faq.a11_link')}</a></p></details>
+      <details><summary>{$t('home.faq.q12')}</summary><p>{$t('home.faq.a12')}</p></details>
+      <details><summary>{$t('home.faq.q13')}</summary><p>{$t('home.faq.a13')}</p></details>
     </div>
   </div>
 </section>
@@ -445,7 +439,7 @@
   /* What CortexMind adds */
   .added { padding: 96px 0; }
   .added-lead { color: var(--text-2); margin: 14px 0 40px; }
-  .added-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .added-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .added-item { border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
   .added-item h3 { margin-bottom: 8px; }
   .added-item p { color: var(--text-2); }

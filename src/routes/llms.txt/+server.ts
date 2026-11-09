@@ -37,6 +37,7 @@ ${m['home.pricing.monthly.price']()} USD per month (${m['home.pricing.monthly.ta
 ## More
 
 - Changelog: https://cortexmind.net/changelog
+- Compare: https://cortexmind.net/compare
 - Privacy: https://cortexmind.net/privacy
 - Terms: https://cortexmind.net/terms
 - Downloads manifest: https://cortexmind.net/downloads.json

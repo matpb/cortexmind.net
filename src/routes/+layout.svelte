@@ -27,8 +27,9 @@
     base === '/changelog' ? 'changelog' :
     base === '/privacy' ? 'privacy' :
     base === '/terms' ? 'terms' :
+    base === '/compare' ? 'compare' :
     'layout';
-  $: metaTitleKey = base === '/connect' ? 'connect.meta.title' : `${metaPrefix}.meta.page_title`;
+  $: metaTitleKey = base === '/connect' ? 'connect.meta.title' : base === '/compare' ? 'compare.meta.title' : `${metaPrefix}.meta.page_title`;
   $: pageTitle = $t(metaTitleKey as MessageKey);
   $: pageDescription = $t(`${metaPrefix}.meta.description` as MessageKey);
   $: ogImage = SITE + ($locale === 'fr' ? '/og-fr.jpg' : '/og.jpg');
