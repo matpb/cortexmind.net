@@ -179,6 +179,19 @@
   .col { width: clamp(22px, 6vw, 48px); border-radius: 4px 4px 0 0; }
   .stage-name { margin: 12px 0 2px; font-size: 15px; font-weight: 600; }
   .stage-result { margin: 0; font-size: 14px; color: var(--muted); }
-  figcaption { margin-top: 16px; font-size: 13px; }
+  figcaption { margin-top: 24px; font-size: 13px; }
+  .page-head h1 { margin: 14px 0 20px; }
+  .page-head p + p { margin-top: 20px; }
+  section h2 { margin-bottom: 28px; }
+  section > p + p { margin-top: 18px; }
+  .more-grid { gap: 44px 56px; }
+  .more-grid h3 { margin: 0 0 12px; }
+  .bars { margin: 40px 0; }
+  .legend { margin-bottom: 24px; }
+  .bars-head { margin: 0 0 16px; }
+  .bar-row { padding: 18px 0; }
+  .bar-label { margin: 0 0 10px; }
+  .chart { margin: 40px 0 0; }
+  .stage-name { margin: 16px 0 4px; }
   @media (max-width: 720px) { .more-grid { grid-template-columns: 1fr; } .plot { height: 200px; } }
 </style>
