@@ -34,11 +34,17 @@
     }
   ];
 
-  const SIZE_ROWS: { size: MessageKey; loaded: MessageKey; b: string; c: string; bn: string; cn: string; br: string; cr: string }[] = [
-    { size: 'compare.test.size_150', loaded: 'compare.test.loaded_all', b: '35/40', c: '30/40', bn: '19/20', cn: '16/20', br: '16/20', cr: '14/20' },
-    { size: 'compare.test.size_352', loaded: 'compare.test.loaded_half', b: '33/40', c: '32/40', bn: '18/20', cn: '18/20', br: '15/20', cr: '14/20' },
-    { size: 'compare.test.size_3743', loaded: 'compare.test.loaded_5', b: '27/40', c: '29/40', bn: '11/20', cn: '16/20', br: '16/20', cr: '13/20' },
-    { size: 'compare.test.size_23305', loaded: 'compare.test.loaded_1', b: '27/40', c: '31/40', bn: '17/20', cn: '17/20', br: '10/20', cr: '14/20' }
+  const SAVE_ROWS: { label: MessageKey; b: number; c: number; total?: boolean }[] = [
+    { label: 'compare.save.r_told', b: 92, c: 100 },
+    { label: 'compare.save.r_passing', b: 17, c: 75 },
+    { label: 'compare.save.r_detail', b: 8, c: 92 },
+    { label: 'compare.save.r_total', b: 39, c: 89, total: true }
+  ];
+
+  const STAGES: { stage: MessageKey; result: MessageKey }[] = [
+    { stage: 'compare.test.stage_small', result: 'compare.test.result_small' },
+    { stage: 'compare.test.stage_serious', result: 'compare.test.result_serious' },
+    { stage: 'compare.test.stage_large', result: 'compare.test.result_large' }
   ];
 
   const MORE: { title: MessageKey; body: MessageKey }[] = [
@@ -86,23 +92,19 @@
     <h2>{$t('compare.save.title')}</h2>
     <p>{$t('compare.save.p1')}</p>
     <p>{$t('compare.save.p2')}</p>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>{$t('compare.save.col_kind')}</th>
-            <th>{$t('compare.test.col_builtin')}</th>
-            <th>{$t('compare.test.col_cortex')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>{$t('compare.save.r_told')}</td><td>11/12</td><td>12/12</td></tr>
-          <tr><td>{$t('compare.save.r_passing')}</td><td>2/12</td><td>9/12</td></tr>
-          <tr><td>{$t('compare.save.r_detail')}</td><td>1/12</td><td>11/12</td></tr>
-          <tr><td><strong>{$t('compare.save.r_total')}</strong></td><td><strong>14/36</strong></td><td><strong>32/36</strong></td></tr>
-          <tr><td>{$t('compare.save.r_saves')}</td><td>13/48</td><td>46/48</td></tr>
-        </tbody>
-      </table>
+    <div class="bars">
+      <div class="legend">
+        <span><i class="swatch b"></i>{$t('compare.test.col_builtin')}</span>
+        <span><i class="swatch c"></i>{$t('compare.test.col_cortex')}</span>
+      </div>
+      <p class="bars-head">{$t('compare.save.col_kind')}</p>
+      {#each SAVE_ROWS as row (row.label)}
+        <div class="bar-row" class:total={row.total}>
+          <p class="bar-label">{$t(row.label)}</p>
+          <div class="bar-line"><div class="bar b" style="width: {row.b}%"></div><span>{row.b}%</span></div>
+          <div class="bar-line"><div class="bar c" style="width: {row.c}%"></div><span>{row.c}%</span></div>
+        </div>
+      {/each}
     </div>
     <p>{$t('compare.save.read')}</p>
   </section>
@@ -110,57 +112,25 @@
   <section>
     <h2>{$t('compare.test.title')}</h2>
     <p>{$t('compare.test.p1')}</p>
+    <p>{$t('compare.test.p2')}</p>
     <div class="table-scroll">
       <table>
         <thead>
           <tr>
-            <th>{$t('compare.test.col_size')}</th>
-            <th>{$t('compare.test.col_loaded')}</th>
-            <th>{$t('compare.test.col_builtin')}</th>
-            <th>{$t('compare.test.col_cortex')}</th>
+            <th>{$t('compare.test.col_stage')}</th>
+            <th>{$t('compare.test.col_result')}</th>
           </tr>
         </thead>
         <tbody>
-          {#each SIZE_ROWS as row (row.size)}
+          {#each STAGES as row (row.stage)}
             <tr>
-              <td>{$t(row.size)}</td>
-              <td>{$t(row.loaded)}</td>
-              <td>{row.b}</td>
-              <td>{row.c}</td>
+              <td>{$t(row.stage)}</td>
+              <td>{$t(row.result)}</td>
             </tr>
           {/each}
         </tbody>
       </table>
     </div>
-    <p>{$t('compare.test.read1')}</p>
-    <p>{$t('compare.test.read2')}</p>
-    <details>
-      <summary>{$t('compare.test.details_summary')}</summary>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>{$t('compare.test.col_size')}</th>
-              <th>{$t('compare.test.col_b_nat')}</th>
-              <th>{$t('compare.test.col_c_nat')}</th>
-              <th>{$t('compare.test.col_b_re')}</th>
-              <th>{$t('compare.test.col_c_re')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each SIZE_ROWS as row (row.size)}
-              <tr>
-                <td>{$t(row.size)}</td>
-                <td>{row.bn}</td>
-                <td>{row.cn}</td>
-                <td>{row.br}</td>
-                <td>{row.cr}</td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    </details>
   </section>
 
   <section>
@@ -176,43 +146,8 @@
   </section>
 
   <section>
-    <h2>{$t('compare.other.title')}</h2>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>{$t('compare.test.col_test')}</th>
-            <th>{$t('compare.test.col_builtin')}</th>
-            <th>{$t('compare.test.col_cortex')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>{$t('compare.test.r_other')}</td><td>0/6</td><td>6/6</td></tr>
-          <tr><td>{$t('compare.test.r_correct')}</td><td>8/8</td><td>8/8</td></tr>
-          <tr><td>{$t('compare.test.r_absent')}</td><td>0</td><td>0</td></tr>
-          <tr><td>{$t('compare.test.r_time')}</td><td>{$t('compare.test.time_builtin')}</td><td>{$t('compare.test.time_cortex')}</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <h2>{$t('compare.choose.title')}</h2>
-    <p>{$t('compare.choose.p')}</p>
-  </section>
-
-  <section>
-    <h2>{$t('compare.limits.title')}</h2>
-    <ul>
-      <li>{$t('compare.limits.l1')}</li>
-      <li>{$t('compare.limits.l2')}</li>
-      <li>{$t('compare.limits.l3')}</li>
-      <li>{$t('compare.limits.l4')}</li>
-      <li>{$t('compare.limits.l5')}</li>
-      <li>{$t('compare.limits.l6')}</li>
-      <li>{$t('compare.limits.l7')}</li>
-      <li>{$t('compare.limits.l8')}</li>
-    </ul>
+    <h2>{$t('compare.note.title')}</h2>
+    <p class="muted">{$t('compare.note.p')}</p>
   </section>
 </div>
 
@@ -220,9 +155,18 @@
   .table-scroll { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
   th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  details { margin-top: 16px; }
-  summary { cursor: pointer; }
   .more-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .more-grid h3 { margin-top: 0; }
+  .bars { margin: 24px 0; max-width: 760px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; margin-bottom: 16px; }
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; }
+  .swatch.b, .bar.b { background: #6b7280; }
+  .swatch.c, .bar.c { background: #d9a441; }
+  .bars-head { font-weight: 600; font-size: 15px; margin: 0 0 12px; }
+  .bar-row { padding: 12px 0; border-top: 1px solid var(--line); }
+  .bar-row.total .bar-label { font-weight: 600; }
+  .bar-label { margin: 0 0 8px; font-size: 15px; }
+  .bar-line { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 14px; }
+  .bar { height: 12px; border-radius: 3px; flex: 0 1 auto; min-width: 3px; max-width: calc(100% - 56px); }
   @media (max-width: 720px) { .more-grid { grid-template-columns: 1fr; } }
 </style>
