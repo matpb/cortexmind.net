@@ -76,6 +76,45 @@
   </div>
 </section>
 
+<section class="added" id="what-it-adds">
+  <div class="wrap">
+    <h2>{$t('home.added.title')}</h2>
+    <p class="added-lead">{$t('home.added.lead')}</p>
+    <div class="added-grid">
+      <article class="added-item">
+        <h3>{$t('home.added.item1.title')}</h3>
+        <p>{$t('home.added.item1.body')}</p>
+        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item1.when')}</p>
+      </article>
+      <article class="added-item">
+        <h3>{$t('home.added.item2.title')}</h3>
+        <p>{$t('home.added.item2.body')}</p>
+        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item2.when')}</p>
+      </article>
+      <article class="added-item">
+        <h3>{$t('home.added.item3.title')}</h3>
+        <p>{$t('home.added.item3.body')}</p>
+        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item3.when')}</p>
+      </article>
+      <article class="added-item">
+        <h3>{$t('home.added.item4.title')}</h3>
+        <p>{$t('home.added.item4.body')}</p>
+        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item4.when')}</p>
+      </article>
+      <article class="added-item">
+        <h3>{$t('home.added.item5.title')}</h3>
+        <p>{$t('home.added.item5.body')}</p>
+        <p class="added-when"><span class="added-when-label">{$t('home.added.when_label')}</span> {$t('home.added.item5.when')}</p>
+      </article>
+    </div>
+    <div class="added-test">
+      <h3>{$t('home.added.test_title')}</h3>
+      <p>{$t('home.added.test_body')}</p>
+    </div>
+    <p class="added-note muted">{$t('home.added.note')}</p>
+  </div>
+</section>
+
 <section class="problem">
   <div class="wrap problem-grid">
     <img src="/media/card.jpg" alt={$t('home.problem.image_alt')} class="problem-image" width="1792" height="1008" loading="lazy" />
@@ -129,6 +168,7 @@
       <h2>{$t('home.retrieval.title')}</h2>
       <p>{$t('home.retrieval.p1')}</p>
       <p>{$t('home.retrieval.p2')}</p>
+      <details class="retrieval-details"><summary>{$t('home.retrieval.details_summary')}</summary><p>{$t('home.retrieval.details_body')}</p></details>
     </div>
     <div class="retrieval-visual">
       <img src="/media/panes.jpg" alt={$t('home.retrieval.image_alt')} class="retrieval-image" width="1792" height="1008" loading="lazy" />
@@ -402,6 +442,18 @@
   .clients { padding: 40px 0; }
   .clients-row { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 14px; color: var(--text-2); }
 
+  /* What CortexMind adds */
+  .added { padding: 96px 0; }
+  .added-lead { color: var(--text-2); margin: 14px 0 40px; }
+  .added-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .added-item { border: 1px solid var(--line); border-radius: 10px; padding: 24px; }
+  .added-item h3 { margin-bottom: 8px; }
+  .added-item p { color: var(--text-2); }
+  .added-when { margin-top: 12px; font-size: 14px; }
+  .added-when-label { color: var(--gold-text); font-weight: 600; }
+  .added-test { margin-top: 32px; border-left: 3px solid var(--gold-text); padding-left: 20px; }
+  .added-note { margin-top: 16px; }
+
   /* Problem photo band */
   .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
   .problem-image { width: 100%; height: auto; border-radius: 10px; display: block; }
@@ -444,6 +496,8 @@
   .retrieval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
   .retrieval-text p { color: var(--text-2); margin-top: 16px; }
   .retrieval-text h2 { margin-bottom: 8px; }
+  .retrieval-details { margin-top: 16px; }
+  .retrieval-details summary { cursor: pointer; color: var(--gold-text); }
   .retrieval-visual { position: relative; }
   .retrieval-image { width: 100%; height: auto; border-radius: 10px; display: block; }
   .transcript {
@@ -560,9 +614,10 @@
   .cta-content .lead { max-width: 480px; }
 
   @media (max-width: 800px) {
-    .problem-grid, .retrieval-grid, .boot-grid, .steps-grid, .local-grid, .plans, .platforms, .dashboard-text {
+    .problem-grid, .retrieval-grid, .boot-grid, .steps-grid, .local-grid, .plans, .platforms, .dashboard-text, .added-grid {
       grid-template-columns: 1fr;
     }
+    .added { padding: 60px 0; }
     .transcript { margin: 24px 0 0; width: 100%; }
     .dashboard-frame { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .dashboard-scroll { width: 1100px; }
