@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t, type MessageKey } from '$lib/i18n';
+  import { t, href, type MessageKey } from '$lib/i18n';
 
   const MEMORY_ROWS: { name: MessageKey; where: MessageKey; find: MessageKey; url: string | null }[] = [
     {
@@ -213,6 +213,16 @@
   </div>
 </section>
 
+<section class="cta-band">
+  <img src="/media/knot.jpg" alt={$t('home.cta.image_alt')} class="cta-image" loading="lazy" width="1792" height="1008" />
+  <div class="cta-overlay" aria-hidden="true"></div>
+  <div class="wrap cta-content">
+    <h2>{$t('home.cta.title')}</h2>
+    <p class="cta-lead">{$t('home.cta.lead')}</p>
+    <a class="button" href={$href('/') + '#pricing'}>{$t('home.cta.button')}</a>
+  </div>
+</section>
+
 <style>
   .on-art { --text: #EEE8DA; --text-2: #CFC7B6; --muted: #A8A294; color: var(--text); }
 
@@ -300,6 +310,19 @@
   .note-inner { text-align: center; }
   .note h2 { font-size: 22px; margin-bottom: 14px; }
   .note p { margin: 0 auto; color: var(--muted); }
+
+  .cta-band {
+    position: relative; overflow: hidden; padding: 120px 0; text-align: center; border-bottom: none;
+    color-scheme: dark;
+    --bg: #12161B; --panel: #1A1F26; --panel-2: #222831; --text: #EEE8DA; --text-2: #CFC7B6;
+    --muted: #9A9486; --muted-2: #7C776B; --line: #2B323B; --line-2: #3A424D;
+    --gold-text: #E4B454; --gold-soft: #2B2519;
+    background: var(--bg); color: var(--text);
+  }
+  .cta-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cta-overlay { position: absolute; inset: 0; background: rgba(18, 22, 27, .68); }
+  .cta-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cta-lead { max-width: 480px; color: var(--text-2); }
 
   @media (max-width: 900px) {
     .split, .split.flip { grid-template-columns: minmax(0, 1fr); }

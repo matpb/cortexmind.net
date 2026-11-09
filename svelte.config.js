@@ -17,7 +17,7 @@ export default {
         'style-src': ['self', 'unsafe-inline'],
         'connect-src': ['self'],
         'font-src': ['self'],
-        'script-src': ['self', 'sha256-nJbFvIqkHivoSiKe76VQtIGuQ6GBSvXLE/kmkMtswPg='],
+        'script-src': ['self', 'https://static.cloudflareinsights.com', 'sha256-nJbFvIqkHivoSiKe76VQtIGuQ6GBSvXLE/kmkMtswPg='],
         'object-src': ['none'],
         'base-uri': ['self'],
         'form-action': ['self']
