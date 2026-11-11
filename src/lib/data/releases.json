@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v4.8.0",
+    "name": "CortexMind v4.8.0",
+    "published_at": "2026-11-11T22:52:27Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v4.8.0",
+    "body": "## CortexMind 4.8.0\n\n**Memory that tidies itself while you sleep.** Once a day, CortexMind looks for memories that repeat each other, or that were saved unfinished and finished later. It runs entirely on your computer and uses no AI tokens. It only flags them: the next time you talk with your AI, it asks whether you want to review them, proposes one change per group, and changes nothing until you say yes. Pick the time, or turn it off, in Settings > General.\n\n**Undo a replaced memory.** If a memory was replaced by mistake, your AI or the dashboard's Restore button brings it back.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.7.1",
     "name": "CortexMind v4.7.1",
     "published_at": "2026-10-22T20:30:24Z",
