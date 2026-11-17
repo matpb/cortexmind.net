@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { t, fmtDate, href, locale } from '$lib/i18n';
+  import { t, fmtDate, href, locale, type MessageKey } from '$lib/i18n';
   import { get } from 'svelte/store';
   import { macUrl, windowsUrl, linuxUrl, version, pubDate } from '$lib/releases';
 
@@ -41,6 +41,29 @@
     if (/Mac OS X|Macintosh/.test(ua)) detected = 'mac';
     else if (/Windows/.test(ua)) detected = 'windows';
     else if (/Linux/.test(ua)) detected = 'linux';
+  }
+
+  type DashboardView = { id: string; src: string; alt: MessageKey; text: MessageKey; label: MessageKey };
+  const dashboardViews: DashboardView[] = [
+    { id: 'upload', src: '/media/dashboard-upload-v5.png', alt: 'home.dashboard.image_alt', text: 'home.upload.p1', label: 'home.dashboard.tab_upload' },
+    { id: 'files', src: '/media/dashboard-files-v5.png', alt: 'home.upload.image_alt', text: 'home.dashboard.files_text', label: 'home.dashboard.tab_files' },
+    { id: 'search', src: '/media/dashboard-search-v5.png', alt: 'home.dashboard.search_alt', text: 'home.dashboard.search_text', label: 'home.dashboard.tab_search' }
+  ];
+  let activeView = 0;
+  let dashTabs: HTMLButtonElement[] = [];
+
+  // Arrow keys wrap, Home and End jump to the ends; the newly selected tab takes focus.
+  function onDashTabKey(event: KeyboardEvent, index: number) {
+    const last = dashboardViews.length - 1;
+    let next = -1;
+    if (event.key === 'ArrowRight') next = index === last ? 0 : index + 1;
+    else if (event.key === 'ArrowLeft') next = index === 0 ? last : index - 1;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = last;
+    if (next === -1) return;
+    event.preventDefault();
+    activeView = next;
+    dashTabs[next].focus();
   }
 </script>
 
@@ -239,33 +262,47 @@
   </div>
 </section>
 
-<section class="upload">
+<section class="dashboard" id="dashboard">
   <div class="wrap">
-    <div class="upload-frame">
-      <a href="/media/dashboard-files-1440.png" target="_blank" rel="noopener" class="upload-scroll">
-        <img src="/media/dashboard-files-1440.png" alt={$t('home.upload.image_alt')} loading="lazy" decoding="async" width="2880" height="1800" />
-      </a>
+    <div class="dashboard-head">
+      <span class="release-pill dashboard-eyebrow">{$t('home.upload.eyebrow')}</span>
+      <h2>{$t('home.dashboard.title')}</h2>
     </div>
-    <div class="upload-text">
-      <span class="release-pill upload-eyebrow">{$t('home.upload.eyebrow')}</span>
-      <h2>{$t('home.upload.title')}</h2>
-      <p>{$t('home.upload.p1')}</p>
-      <p>{$t('home.upload.p2')}</p>
+    <div class="dashboard-tabs" role="tablist" aria-label={$t('home.dashboard.tabs_label')}>
+      {#each dashboardViews as view, i (view.id)}
+        <button
+          type="button"
+          role="tab"
+          id="dash-tab-{view.id}"
+          class="dashboard-tab"
+          aria-selected={activeView === i ? 'true' : 'false'}
+          aria-controls="dash-panel-{view.id}"
+          tabindex={activeView === i ? 0 : -1}
+          bind:this={dashTabs[i]}
+          on:click={() => (activeView = i)}
+          on:keydown={(event) => onDashTabKey(event, i)}
+        >{$t(view.label)}</button>
+      {/each}
     </div>
-  </div>
-</section>
-
-<section class="dashboard">
-  <div class="wrap">
     <div class="dashboard-frame">
-      <a href="/media/dashboard-1440.png" target="_blank" rel="noopener" class="dashboard-scroll">
-        <img src="/media/dashboard-1440.png" alt={$t('home.dashboard.image_alt')} loading="eager" decoding="async" width="1440" height="900" />
-      </a>
+      {#each dashboardViews as view, i (view.id)}
+        <a
+          class="dashboard-scroll"
+          role="tabpanel"
+          id="dash-panel-{view.id}"
+          aria-labelledby="dash-tab-{view.id}"
+          hidden={activeView !== i}
+          href={view.src}
+          target="_blank"
+          rel="noopener"
+        >
+          <img src={view.src} alt={$t(view.alt)} width="2880" height="1800" loading={activeView === i ? 'eager' : 'lazy'} decoding="async" />
+        </a>
+      {/each}
     </div>
     <div class="dashboard-text">
-      <h2>{$t('home.dashboard.title')}</h2>
-      <p>{$t('home.dashboard.p1')}</p>
-      <p>{$t('home.dashboard.p2')}</p>
+      <p>{$t(dashboardViews[activeView].text)}</p>
+      <p>{$t('home.dashboard.private')}</p>
     </div>
   </div>
 </section>
@@ -541,27 +578,25 @@
   .boot-card-rules li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
   .boot-card-recent { font-size: 13px; margin: 0 0 6px; }
 
-  /* Dashboard */
+  /* Dashboard: one frame, three tabs. Inactive panels are hidden, not removed. */
+  .dashboard-head { display: grid; justify-items: start; gap: 12px; margin-bottom: 32px; }
+  .dashboard-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+  .dashboard-tab {
+    padding: 8px 16px; border: 1px solid var(--line-2); border-radius: 999px; background: transparent;
+    color: var(--text-2); font-size: 14px; font-weight: 600; line-height: 1.3;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .dashboard-tab:hover { color: var(--gold-text); border-color: var(--gold-line); }
+  .dashboard-tab[aria-selected="true"] { background: var(--gold-soft); color: var(--gold-text); border-color: var(--gold-line); }
   .dashboard-frame {
     border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
     box-shadow: 0 25px 70px rgba(0,0,0,.35);
   }
   .dashboard-frame img { display: block; width: 100%; height: auto; }
   .dashboard-scroll { display: block; }
+  .dashboard-scroll[hidden] { display: none; }
   .dashboard-text { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; }
   .dashboard-text p { color: var(--text-2); max-width: none; }
-
-  /* Upload */
-  .upload-frame {
-    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
-    box-shadow: 0 25px 70px rgba(0,0,0,.35);
-  }
-  .upload-frame img { display: block; width: 100%; height: auto; }
-  .upload-scroll { display: block; }
-  .upload-text { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 48px; margin-top: 40px; }
-  .upload-eyebrow { grid-column: 1 / -1; justify-self: start; }
-  .upload-text h2 { grid-column: 1 / -1; margin-bottom: 8px; }
-  .upload-text p { color: var(--text-2); max-width: none; }
 
   /* Local */
   .local h2 { margin-bottom: 40px; }
@@ -640,7 +675,7 @@
   .cta-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px; }
 
   @media (max-width: 800px) {
-    .problem-grid, .retrieval-grid, .boot-grid, .steps-grid, .local-grid, .plans, .platforms, .dashboard-text, .upload-text, .added-grid {
+    .problem-grid, .retrieval-grid, .boot-grid, .steps-grid, .local-grid, .plans, .platforms, .dashboard-text, .added-grid {
       grid-template-columns: 1fr;
     }
     .added { padding: 60px 0; }
@@ -648,9 +683,6 @@
     .dashboard-frame { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .dashboard-scroll { width: 1100px; }
     .dashboard-frame img { width: 1100px; max-width: none; }
-    .upload-frame { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .upload-scroll { width: 1100px; }
-    .upload-frame img { width: 1100px; max-width: none; }
     .local-col { border-left: none; border-top: 1px solid var(--line); padding: 24px 0 0; }
     .local-col:first-child { border-top: none; padding-top: 0; }
     .hero-content { padding-top: 120px; }
