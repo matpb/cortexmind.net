@@ -1,5 +1,13 @@
 [
   {
+    "tag_name": "v5.0.0",
+    "name": "CortexMind v5.0.0",
+    "published_at": "2026-11-17T01:29:03Z",
+    "html_url": "https://github.com/matpb/cortexmind.net/releases/tag/v5.0.0",
+    "body": "## CortexMind 5.0.0\n\n**Upload your files into memory.** Drop files onto the dashboard, or use the new Upload files button, and your AI can search what is inside them. PDF, Word, PowerPoint, spreadsheets, EPUB, email, web pages, Markdown and plain text are supported, up to 50 MB each. Everything is read on your computer; nothing is sent anywhere.\n\n**You decide how much each file matters.** Set an importance when you upload and change it at any time. A file you already uploaded is recognized, so you can skip it or replace the earlier copy.\n\n**A Files tab for everything you uploaded.** See each file, how it was split, and archive or restore it in one click. Search results name the file and the part they come from.\n\n**Dashboard search goes deeper.** Searches reach many more results, and you can sort them by relevance, date or importance.\n\nFull changelog: https://cortexmind.net/changelog\n\nSigned updater artifacts are attached. Existing installs update automatically.\n",
+    "prerelease": false
+  },
+  {
     "tag_name": "v4.8.0",
     "name": "CortexMind v4.8.0",
     "published_at": "2026-11-11T22:52:27Z",
