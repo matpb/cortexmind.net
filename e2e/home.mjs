@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Usage: node e2e/home.mjs — serves build/ on 4180, drives the home page with Playwright.
+// Usage: node e2e/home.mjs. Serves build/ on 4180 and drives the home page with Playwright.
 import { mkdirSync } from 'node:fs';
 import { chromium } from 'playwright';
 import { createBuildServer } from './serve-build.mjs';
@@ -21,6 +21,10 @@ const DASHBOARD_TEXT = {
   search: 'Search the way your agents do, by keyword and by meaning. Results name the file and the part they come from, and you can sort them by relevance, date or importance.'
 };
 const DASHBOARD_PRIVATE = 'A private dashboard on your machine. Only your own computer can open it, and nothing on it is sent anywhere.';
+const FILM_FILE = 'cortexmind-film-v1.mp4';
+const FILM_POSTER = '/media/cortexmind-film-poster-v1.jpg';
+const FILM_LABEL_EN = 'Watch the film (1:39)';
+const FILM_LABEL_FR = 'Voir le film (1 min 39, en anglais)';
 
 let failed = false;
 function check(name, ok) {
@@ -124,6 +128,98 @@ async function checkDashboard(page, name) {
 
   const noOverflow = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
   check(`${name}: no horizontal overflow after switching dashboard tabs`, noOverflow);
+}
+
+async function noOverflow(page) {
+  return page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
+}
+
+// Checks the hero film button, the modal film player, every close path and the player layout.
+async function checkFilm(browser, viewport) {
+  const name = viewport.name;
+  const context = await browser.newContext({ viewport: { width: viewport.w, height: viewport.h }, colorScheme: 'dark' });
+  const page = await context.newPage();
+  page.setDefaultTimeout(5000);
+  const filmRequests = [];
+  page.on('request', (req) => {
+    if (req.url().includes(FILM_FILE)) filmRequests.push(req.url());
+  });
+  await page.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
+
+  const button = page.locator('.hero .hero-film-button');
+  const dialog = page.locator('.film-dialog');
+  const video = dialog.locator('video');
+  const closeButton = dialog.locator('.film-close');
+  const dialogOpen = () => dialog.evaluate((el) => el.open);
+  // A wait timeout leaves the state unchanged, so the check that follows reports the failure.
+  const waitForOpen = (open) =>
+    page.waitForFunction((want) => document.querySelector('.film-dialog').open === want, open, { timeout: 5000 }).catch(() => {});
+  // The close event that pauses the film is queued after open turns false, so wait for the paused state.
+  const waitForPaused = () =>
+    page.waitForFunction(() => document.querySelector('.film-dialog video').paused === true, null, { timeout: 5000 }).catch(() => {});
+
+  check(`${name}: EN hero film button reads "${FILM_LABEL_EN}"`, (await button.textContent()).trim() === FILM_LABEL_EN);
+  check(`${name}: hero film button declares aria-haspopup="dialog"`, (await button.getAttribute('aria-haspopup')) === 'dialog');
+  check(`${name}: on load the film file was not requested`, filmRequests.length === 0);
+  check(`${name}: on load the film dialog is not open`, (await dialogOpen()) === false);
+  check(`${name}: dialog closed: no horizontal overflow`, await noOverflow(page));
+
+  await button.click();
+  await waitForOpen(true);
+  check(`${name}: clicking the film button opens the dialog`, (await dialogOpen()) === true);
+  check(`${name}: film dialog is labelled "CortexMind film"`, (await dialog.getAttribute('aria-label')) === 'CortexMind film');
+  check(`${name}: film video has controls and the film poster`, (await video.evaluate((v) => v.controls)) === true && (await video.getAttribute('poster')) === FILM_POSTER);
+  check(`${name}: close button is labelled "Close the film"`, (await closeButton.getAttribute('aria-label')) === 'Close the film');
+
+  const layout = await page.evaluate(() => {
+    const dialogEl = document.querySelector('.film-dialog');
+    const videoBox = dialogEl.querySelector('video').getBoundingClientRect();
+    const closeBox = dialogEl.querySelector('.film-close').getBoundingClientRect();
+    return { videoWidth: videoBox.width, videoHeight: videoBox.height, closeWidth: closeBox.width, closeHeight: closeBox.height, innerWidth: window.innerWidth, innerHeight: window.innerHeight };
+  });
+  check(`${name}: film video rendered width is at most the viewport width`, layout.videoWidth <= layout.innerWidth);
+  check(`${name}: film video is at most 86vh tall`, layout.videoHeight <= 0.86 * layout.innerHeight);
+  check(`${name}: film video keeps 16:10`, Math.abs(layout.videoWidth / layout.videoHeight - 1.6) < 0.01);
+  check(`${name}: close button is at least 40x40 px`, layout.closeWidth >= 40 && layout.closeHeight >= 40);
+  if (name === '390') {
+    check('390: film video is full width minus 16 px gutters', Math.abs(layout.videoWidth - (layout.innerWidth - 32)) < 0.5);
+  }
+  check(`${name}: dialog open: no horizontal overflow`, await noOverflow(page));
+
+  await page.keyboard.press('Escape');
+  await waitForOpen(false);
+  await waitForPaused();
+  check(`${name}: Escape closes the film dialog`, (await dialogOpen()) === false);
+  check(`${name}: Escape leaves the film video paused`, (await video.evaluate((v) => v.paused)) === true);
+  check(`${name}: dialog closed again: no horizontal overflow`, await noOverflow(page));
+
+  await button.click();
+  await waitForOpen(true);
+  await closeButton.click();
+  await waitForOpen(false);
+  await waitForPaused();
+  check(`${name}: close button closes the film dialog`, (await dialogOpen()) === false);
+  check(`${name}: close button leaves the film video paused`, (await video.evaluate((v) => v.paused)) === true);
+
+  await button.click();
+  await waitForOpen(true);
+  await page.mouse.click(4, 4);
+  await waitForOpen(false);
+  await waitForPaused();
+  check(`${name}: click on the backdrop closes the film dialog`, (await dialogOpen()) === false);
+  check(`${name}: backdrop close leaves the film video paused`, (await video.evaluate((v) => v.paused)) === true);
+
+  await page.goto(BASE_URL + '/fr/', { waitUntil: 'networkidle' });
+  const frButton = page.locator('.hero .hero-film-button');
+  check(`${name}: FR hero film button reads "${FILM_LABEL_FR}"`, (await frButton.textContent()).trim() === FILM_LABEL_FR);
+  await frButton.click();
+  await waitForOpen(true);
+  check(`${name}: FR film dialog is labelled "Film CortexMind"`, (await page.locator('.film-dialog').getAttribute('aria-label')) === 'Film CortexMind');
+  check(`${name}: FR close button is labelled "Fermer le film"`, (await page.locator('.film-dialog .film-close').getAttribute('aria-label')) === 'Fermer le film');
+  await page.keyboard.press('Escape');
+  await waitForOpen(false);
+
+  await context.close();
 }
 
 mkdirSync(OUT_DIR, { recursive: true });
@@ -239,6 +335,7 @@ try {
     await checkDashboard(page, viewport.name);
 
     await context.close();
+    await checkFilm(browser, viewport);
   }
 
   const frContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });

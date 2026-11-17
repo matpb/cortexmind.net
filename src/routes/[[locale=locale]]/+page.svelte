@@ -65,12 +65,38 @@
     activeView = next;
     dashTabs[next].focus();
   }
+
+  let heroVideo: HTMLVideoElement;
+  let filmDialog: HTMLDialogElement;
+  let filmVideo: HTMLVideoElement;
+
+  // Opens the full film in a modal and pauses the ambient loop behind it.
+  function openFilm() {
+    filmDialog.showModal();
+    heroVideo.pause();
+    // A rejected play() (autoplay policy) leaves the player paused for the visitor to start.
+    filmVideo.play().catch(() => {});
+  }
+
+  function closeFilm() {
+    filmDialog.close();
+  }
+
+  // Runs for every close path (button, Escape, backdrop) and resumes the ambient loop unless reduced motion is set.
+  function onFilmClose() {
+    filmVideo.pause();
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) heroVideo.play().catch(() => {});
+  }
+
+  function onFilmBackdrop(event: MouseEvent) {
+    if (event.target === filmDialog) closeFilm();
+  }
 </script>
 
 <section class="hero">
   <div class="hero-media" aria-hidden="true">
     <img src="/media/hero-poster.jpg" alt="" class="hero-poster" />
-    <video autoplay muted loop playsinline poster="/media/hero-poster.jpg" aria-label={$t('home.hero.video_aria')}>
+    <video bind:this={heroVideo} autoplay muted loop playsinline poster="/media/hero-poster.jpg" aria-label={$t('home.hero.video_aria')}>
       <source src="/media/hero.mp4" type="video/mp4" />
     </video>
     <div class="hero-gradient"></div>
@@ -81,9 +107,19 @@
     <div class="hero-actions">
       <a class="button" href="#pricing">{$t('home.hero.primary')}</a>
       <a class="button secondary" href="#how-it-works">{$t('home.hero.secondary')}</a>
+      <button type="button" class="button secondary hero-film-button" on:click={openFilm} aria-haspopup="dialog">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" /></svg>
+        {$t('home.hero.film')}
+      </button>
     </div>
     <p class="fine muted">{$t('home.hero.fine')}</p>
   </div>
+  <dialog class="film-dialog" bind:this={filmDialog} aria-label={$t('home.hero.film_aria')} on:close={onFilmClose} on:click={onFilmBackdrop}>
+    <button type="button" class="film-close" on:click={closeFilm} aria-label={$t('home.hero.film_close')}>×</button>
+    <video bind:this={filmVideo} controls playsinline preload="none" poster="/media/cortexmind-film-poster-v1.jpg" width="1440" height="900">
+      <source src="/media/cortexmind-film-v1.mp4" type="video/mp4" />
+    </video>
+  </dialog>
 </section>
 
 <section class="clients">
@@ -483,6 +519,26 @@
   .hero-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
   .hero .lead { margin-top: 22px; }
   .hero .fine { margin-top: 18px; font-size: 13px; }
+
+  /* Film dialog: stays dark in both themes and is sized to the video. */
+  .film-dialog {
+    inset: 0; margin: auto; width: fit-content; height: fit-content;
+    max-width: none; max-height: none; padding: 0; border: 0; overflow: visible;
+    background: transparent; color: var(--text); color-scheme: dark;
+    --text: #EEE8DA; --line-2: #3A424D; --gold-text: #E4B454; --code-bg: #0C0F13;
+  }
+  .film-dialog::backdrop { background: rgba(5,7,10,.86); }
+  .film-dialog video {
+    display: block; height: auto; aspect-ratio: 16 / 10; background: var(--code-bg);
+    width: min(92vw, calc(100vw - 32px), 1200px, calc(80vh * 1.6));
+  }
+  .film-close {
+    position: absolute; top: -52px; right: 0; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0; border: 1px solid var(--line-2); border-radius: 6px;
+    background: rgba(5,7,10,.86); color: var(--text); font-size: 28px; line-height: 1;
+  }
+  .film-close:hover { color: var(--gold-text); }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-media video { display: none; }
