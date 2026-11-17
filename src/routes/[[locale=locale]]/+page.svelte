@@ -239,6 +239,22 @@
   </div>
 </section>
 
+<section class="upload">
+  <div class="wrap">
+    <div class="upload-frame">
+      <a href="/media/dashboard-files-1440.png" target="_blank" rel="noopener" class="upload-scroll">
+        <img src="/media/dashboard-files-1440.png" alt={$t('home.upload.image_alt')} loading="lazy" decoding="async" width="2880" height="1800" />
+      </a>
+    </div>
+    <div class="upload-text">
+      <span class="release-pill upload-eyebrow">{$t('home.upload.eyebrow')}</span>
+      <h2>{$t('home.upload.title')}</h2>
+      <p>{$t('home.upload.p1')}</p>
+      <p>{$t('home.upload.p2')}</p>
+    </div>
+  </div>
+</section>
+
 <section class="dashboard">
   <div class="wrap">
     <div class="dashboard-frame">
@@ -535,6 +551,18 @@
   .dashboard-text { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 40px; }
   .dashboard-text p { color: var(--text-2); max-width: none; }
 
+  /* Upload */
+  .upload-frame {
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0,0,0,.35);
+  }
+  .upload-frame img { display: block; width: 100%; height: auto; }
+  .upload-scroll { display: block; }
+  .upload-text { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 48px; margin-top: 40px; }
+  .upload-eyebrow { grid-column: 1 / -1; justify-self: start; }
+  .upload-text h2 { grid-column: 1 / -1; margin-bottom: 8px; }
+  .upload-text p { color: var(--text-2); max-width: none; }
+
   /* Local */
   .local h2 { margin-bottom: 40px; }
   .compound h2 { margin-bottom: 16px; }
@@ -612,7 +640,7 @@
   .cta-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px; }
 
   @media (max-width: 800px) {
-    .problem-grid, .retrieval-grid, .boot-grid, .steps-grid, .local-grid, .plans, .platforms, .dashboard-text, .added-grid {
+    .problem-grid, .retrieval-grid, .boot-grid, .steps-grid, .local-grid, .plans, .platforms, .dashboard-text, .upload-text, .added-grid {
       grid-template-columns: 1fr;
     }
     .added { padding: 60px 0; }
@@ -620,6 +648,9 @@
     .dashboard-frame { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .dashboard-scroll { width: 1100px; }
     .dashboard-frame img { width: 1100px; max-width: none; }
+    .upload-frame { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .upload-scroll { width: 1100px; }
+    .upload-frame img { width: 1100px; max-width: none; }
     .local-col { border-left: none; border-top: 1px solid var(--line); padding: 24px 0 0; }
     .local-col:first-child { border-top: none; padding-top: 0; }
     .hero-content { padding-top: 120px; }
